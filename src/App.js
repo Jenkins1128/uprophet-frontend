@@ -1,11 +1,13 @@
 import React from 'react';
-import Logo from './features/Logo/Logo';
+import Header from './features/Header/Header';
+import Topquotes from './features/Topquotes/Topquotes';
 import './App.css';
 
 function App() {
 	return (
 		<div className='App'>
-			<Logo />
+			<Header />
+			<Topquotes />
 		</div>
 	);
 }

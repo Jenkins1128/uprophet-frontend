@@ -4,7 +4,7 @@ import Tilt from 'react-parallax-tilt';
 
 const Logo = () => {
 	return (
-		<div className='flex pa4'>
+		<div className='flex ma3'>
 			<Tilt tiltMaxAngleX='50' tiltMaxAngleY='50'>
 				<img className='br-100 ba bw2 b--white h3 w3' src={logo} alt='Logo' />
 			</Tilt>
