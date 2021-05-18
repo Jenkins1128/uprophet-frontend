@@ -7,12 +7,12 @@ const Navigation = () => {
 			<Link to='/about' class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib light-silver'>
 				About
 			</Link>
-			<a class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib dark-green' href='#0'>
+			<Link to='/signin' class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib dark-green'>
 				Sign in
-			</a>
-			<a class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib light-green' href='#0'>
+			</Link>
+			<Link to='/signup' class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib light-green'>
 				Sign up
-			</a>
+			</Link>
 			<a class='f6 grow no-underline br-pill ba bw1 ph3 mh3 pv2 mb2 dib light-silver' rel='noopener noreferrer' href='https://youtu.be/Z7YR0zwMtTk?list=TLGGTOFWbVS80XMxODA1MjAyMQ' target='_blank'>
 				Video
 			</a>

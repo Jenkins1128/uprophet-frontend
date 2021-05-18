@@ -6,6 +6,7 @@ import FBLikeButton from '../FBLikeButton/FBLikeButton';
 const Topquotes = () => {
 	return (
 		<div className=' mh2'>
+			<div className='ma4'></div>
 			<FBLikeButton />
 			<h1 className='moon-gray'>Express yourself freely</h1>
 			<div className='flex-wrap overflow-y-scroll'>
