@@ -7,8 +7,13 @@ import Navigation from './features/presentationals/Navigation/Navigation';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signup from './features/containers/Signup/Signup';
 import Signin from './features/containers/Signin/Signin';
+import Terms from './features/presentationals/Terms/Terms';
+import { useSelector } from 'react-redux';
+import Home from './features/containers/Home/Home';
+import { selectSigninState } from './features/containers/Signin/signinSlice';
 
 function App() {
+	const isSignedIn = useSelector(selectSigninState);
 	return (
 		<Router>
 			<div className='App'>
@@ -16,7 +21,7 @@ function App() {
 				<Navigation />
 				<Switch>
 					<Route exact path='/'>
-						<Topquotes />
+						{isSignedIn ? <Home /> : <Topquotes />}
 					</Route>
 					<Route exact path='/about'>
 						<About />
@@ -26,6 +31,9 @@ function App() {
 					</Route>
 					<Route exact path='/signin'>
 						<Signin />
+					</Route>
+					<Route exact path='/terms'>
+						<Terms />
 					</Route>
 				</Switch>
 			</div>

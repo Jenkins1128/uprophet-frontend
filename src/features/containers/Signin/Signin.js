@@ -1,6 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signin } from './signinSlice';
 
 function Signin() {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	return (
 		<div>
 			<article className='br2 ba dark-gray b--black-10 br4 mv4 w-40 mw6 shadow-5 center'>
@@ -15,7 +20,7 @@ function Signin() {
 							</div>
 						</fieldset>
 						<div className='lh-copy mt3'>
-							<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign in' />
+							<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign in' onClick={() => dispatch(signin(history))} />
 						</div>
 					</div>
 				</main>

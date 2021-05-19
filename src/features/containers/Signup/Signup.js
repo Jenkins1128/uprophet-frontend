@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Signup() {
 	return (
@@ -19,6 +20,13 @@ function Signup() {
 							</div>
 							<div className='mv3'>
 								<input className='b pa2 input-reset ba br4 bg-transparent hover-white w-75' placeholder='Password' type='password' name='password' id='password' />
+							</div>
+							<div className='mv3'>
+								<input className='b pa2 ba br4 bg-transparent hover-white' type='radio' name='terms' id='terms' />
+								<p>I READ & UNDERSTAND the </p>
+								<Link to='/terms' className='no-underline dark-green'>
+									Terms of Uprophet.
+								</Link>
 							</div>
 						</fieldset>
 						<div className='lh-copy mt3'>
