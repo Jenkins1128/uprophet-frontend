@@ -18,7 +18,7 @@ function App() {
 		<Router>
 			<div className='App'>
 				<Header />
-				<Navigation />
+				<Navigation isSignedIn={isSignedIn} />
 				<Switch>
 					<Route exact path='/'>
 						{isSignedIn ? <Home /> : <Topquotes />}
