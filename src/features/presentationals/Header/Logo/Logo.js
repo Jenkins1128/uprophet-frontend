@@ -1,17 +1,15 @@
 import React from 'react';
 import logo from './upicon.png';
-import Tilt from 'react-parallax-tilt';
 import { Link } from 'react-router-dom';
 
 const Logo = () => {
 	return (
-		<div className='flex justify-center pa3 pointer:hover: pointer'>
+		<article className='flex items-center'>
 			<Link to='/'>
-				<Tilt tiltMaxAngleX='50' tiltMaxAngleY='50'>
-					<img className='br-100 ba bw2 b--white h3 w3' src={logo} alt='Logo' />
-				</Tilt>
+				<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={logo} alt='Logo' />
 			</Link>
-		</div>
+			<p className='f4 b white'>Uprophet</p>
+		</article>
 	);
 };
 

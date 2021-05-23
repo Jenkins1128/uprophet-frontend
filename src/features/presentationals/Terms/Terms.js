@@ -2,7 +2,7 @@ import React from 'react';
 
 const Terms = () => {
 	return (
-		<div>
+		<section>
 			<h1 className='moon-gray'>Terms</h1>
 			<div className='mt3 '>
 				<ul className='ma3 pv3 ph7 light-green b f3'>
@@ -14,7 +14,7 @@ const Terms = () => {
 					</li>
 				</ul>
 			</div>
-		</div>
+		</section>
 	);
 };
 

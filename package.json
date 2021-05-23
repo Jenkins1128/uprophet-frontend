@@ -12,6 +12,7 @@
     "react-facebook": "^8.1.4",
     "react-parallax-tilt": "^1.5.11",
     "react-redux": "^7.2.4",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "tachyons": "^4.12.0"
