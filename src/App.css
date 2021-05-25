@@ -43,6 +43,10 @@ header {
 }
 
 .sidenav {
+	display: flex;
+	align-items: flex-start;
+
+	flex-direction: column;
 	height: 100%;
 	width: 0%;
 	position: fixed;
@@ -82,7 +86,11 @@ header {
 	cursor: pointer;
 	color: #f1f1f1;
 }
-
+.innerNavTopLeft {
+	position: absolute;
+	top: -0.5rem;
+	left: -1.75rem;
+}
 .menuIconSize {
 	font-size: 36px;
 }

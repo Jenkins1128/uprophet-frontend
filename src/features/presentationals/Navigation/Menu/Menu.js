@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from './upicon.png';
 
 const Menu = () => {
 	const openNav = () => {
@@ -12,20 +13,24 @@ const Menu = () => {
 
 	return (
 		<>
-			<div id='mySidenav' class='sidenav'>
+			<div id='mySidenav' className='sidenav'>
 				<button className='closebtn' onClick={closeNav}>
 					&times;
 				</button>
-				<Link to='/about' onClick={closeNav} className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib light-silver'>
+
+				<Link to='/' onClick={closeNav} className='f6 grow b'>
+					<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={Logo} alt='Logo' />
+				</Link>
+				<Link to='/about' onClick={closeNav} className='f6 grow b'>
 					About
 				</Link>
-				<Link to='/signin' onClick={closeNav} className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib dark-green'>
+				<Link to='/signin' onClick={closeNav} className='f6 grow b'>
 					Sign in
 				</Link>
-				<Link to='/signup' onClick={closeNav} className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib white'>
+				<Link to='/signup' onClick={closeNav} className='f6 grow b'>
 					Sign up
 				</Link>
-				<a onClick={closeNav} className='f6 grow no-underline b--none b ba bw1 ph3 mh3 dib light-silver' rel='noopener noreferrer' href='https://youtu.be/Z7YR0zwMtTk?list=TLGGTOFWbVS80XMxODA1MjAyMQ' target='_blank'>
+				<a onClick={closeNav} className='f6 grow b' rel='noopener noreferrer' href='https://youtu.be/Z7YR0zwMtTk?list=TLGGTOFWbVS80XMxODA1MjAyMQ' target='_blank'>
 					Video
 				</a>
 			</div>
