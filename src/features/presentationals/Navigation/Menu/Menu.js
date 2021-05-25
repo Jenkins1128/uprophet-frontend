@@ -14,7 +14,7 @@ const Menu = () => {
 	return (
 		<>
 			<div id='mySidenav' className='sidenav'>
-				<button className='closebtn' onClick={closeNav}>
+				<button className='closebtn mt1 mr2 pr0' onClick={closeNav}>
 					&times;
 				</button>
 
@@ -34,7 +34,7 @@ const Menu = () => {
 					Video
 				</a>
 			</div>
-			<button className='menuIconSize mr2 pointer:hover: pointer b--none bg-transparent hover-white' onClick={openNav}>
+			<button className='menuIconSize mr2 pr0 pointer:hover: pointer b--none bg-transparent hover-white' onClick={openNav}>
 				&#9776;
 			</button>
 		</>
