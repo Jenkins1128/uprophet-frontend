@@ -5,8 +5,8 @@ function Signup() {
 	return (
 		<section className='pt6'>
 			<h1 className='moon-gray'>Join Uprophet today.</h1>
-			<article className='br2 ba dark-gray b--black-10 br4 mv4 w-40 mw6 shadow-5 center'>
-				<div className='measure pa4 black-80'>
+			<article className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>
+				<div className='measure pa3 black-80'>
 					<fieldset id='sign_up' className='ba b--transparent ph0 mh0'>
 						<div className='mt3'>
 							<input className='pa2 input-reset ba br4 bg-transparent hover-white w-75' placeholder='Name' type='text' name='name' id='name' />
