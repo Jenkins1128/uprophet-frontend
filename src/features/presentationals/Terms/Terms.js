@@ -2,10 +2,10 @@ import React from 'react';
 
 const Terms = () => {
 	return (
-		<section>
+		<section className='mt6'>
 			<h1 className='moon-gray'>Terms</h1>
-			<div className='mt3 '>
-				<ul className='ma3 pv3 ph7 light-green b f3'>
+			<div className='mt3'>
+				<ul className='mv3 mh4 pv3 ph5-l ph4-m ph3-ns light-green b f3'>
 					<li>
 						<strong>Please remember that this is a chill site.</strong> Join and start sharing your inspiration with your friends, express yourself and always be U.{' '}
 					</li>
