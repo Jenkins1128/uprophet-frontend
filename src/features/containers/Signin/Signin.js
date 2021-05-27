@@ -9,7 +9,7 @@ function Signin() {
 	return (
 		<section className='pt7 '>
 			<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
-				<div className='measure pa3 black-80'>
+				<div className='measure center pa3 black-80'>
 					<fieldset id='sign_in' className='ba b--transparent ph0 mh0'>
 						<div className='mt3'>
 							<input className='pa2 input-reset ba br4 bg-transparent hover-white w-75' placeholder='Username' type='text' name='name' id='name' />

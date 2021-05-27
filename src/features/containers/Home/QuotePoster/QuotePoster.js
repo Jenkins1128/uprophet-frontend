@@ -2,22 +2,20 @@ import React from 'react';
 
 const QuotePoster = () => {
 	return (
-		<article className='justify-center br2 ba dark-gray b--black-10 br4 mt4  w-40 mw6 shadow-5 center'>
-			<main className='pa4 black-80'>
-				<div className='measure center'>
-					<fieldset id='sign_in' className='ba b--transparent ph0 mh0'>
-						<div className='mt3'>
-							<strong className='f2 mr3 moon-gray'>"</strong>
-							<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-75 h-75' placeholder='Enter a quote. Quotation marks set! :)' type='text' name='quote' id='quote' />
-							<strong className='f2 ml3 moon-gray'>"</strong>
-						</div>
+		<section className='pt3'>
+			<article className=' br2 ba pa4-l pa3-m pa4-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+				<div className='measure center pa3 ph1 black-80'>
+					<fieldset id='sign_in' className='flex ba b--transparent '>
+						<strong className='f2 mr2 moon-gray'>"</strong>
+						<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Enter a quote. Marks set! :)' type='text' name='quote' id='quote' />
+						<strong className='f2 ml2 moon-gray'>"</strong>
 					</fieldset>
-					<div className='lh-copy mt3'>
-						<input className='b ph3 pv2 input-reset ba br4 bw1 b--moon-gray light-green bg-transparent grow pointer f6 dib' type='submit' value='Post' />
+					<div className='lh-copy mt1'>
+						<input className='b ph3 pv2 input-reset ba bw1 br4 b--moon-gray moon-gray bg-transparent grow pointer f6 dib' type='submit' value='Post' />
 					</div>
 				</div>
-			</main>
-		</article>
+			</article>
+		</section>
 	);
 };
 
