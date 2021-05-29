@@ -27,25 +27,25 @@ const Menu = ({ isSignedIn }) => {
 					</Link>
 
 					<Link to='#0' onClick={closeNav} className='f6 grow b'>
-						<div class='flex items-center'>
+						<div className='flex items-center'>
 							<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
 							&nbsp;{'Notifications'}
 						</div>
 					</Link>
-					<Link to='#0' onClick={closeNav} className='f6 grow b'>
-						<div class='flex items-center'>
+					<Link to='/explore' onClick={closeNav} className='f6 grow b'>
+						<div className='flex items-center'>
 							<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
 							&nbsp;{'Explore'}
 						</div>
 					</Link>
-					<Link to='#0' onClick={closeNav} className='f6 grow b '>
-						<div class='flex items-center'>
-							<img title='Profile' className='br-100 w1 h1 ba bw1 pv2 ph2 b--white' src={DefaultProfilePic} alt='Profile' />
+					<Link to='/icjenkins' onClick={closeNav} className='f6 grow b '>
+						<div className='flex items-center'>
+							<img title='Profile' className='br-100 w1 h1 ba bw1 pv2 ph2 b--white bg-white' src={DefaultProfilePic} alt='Profile' />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>
 					<Link to='#0' onClick={closeNav} className='f6 grow b'>
-						<div class='flex items-center'>
+						<div className='flex items-center'>
 							<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
 							&nbsp;{'Logout'}
 						</div>

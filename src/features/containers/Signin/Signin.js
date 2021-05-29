@@ -1,11 +1,23 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signin } from './signinSlice';
+import { loginAsync } from './signinSlice';
 
 function Signin() {
-	const dispatch = useDispatch();
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	const submitLogin = () => {
+		dispatch(loginAsync('https://jsonplaceholder.typicode.com/todos/1')).then((res) => {
+			// do additional work
+			console.log(res.meta.requestStatus);
+			//console.log(res.meta.requestStatus);
+			if (res.meta.requestStatus === 'fulfilled') {
+				history.push('/');
+			}
+		});
+	};
+
 	return (
 		<section className='pt7 '>
 			<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
@@ -19,7 +31,7 @@ function Signin() {
 						</div>
 					</fieldset>
 					<div className='lh-copy mt1'>
-						<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign in' onClick={() => dispatch(signin(history))} />
+						<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign in' onClick={submitLogin} />
 					</div>
 				</div>
 			</article>
