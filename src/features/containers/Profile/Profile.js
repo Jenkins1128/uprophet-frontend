@@ -8,24 +8,22 @@ function Profile() {
 		<section className='mt6 mh2 f7'>
 			<div className='flex flex-column'>
 				<button className='self-end w-10 b--none br3 bg-white moon-gray grow pointer:hover: pointer'>Edit Profile</button>
-				<h1 className='flex ml4'>{location.pathname.substring(1)}</h1>
+				<h1 className='flex ml4 light-green'>{location.pathname.substring(1)}</h1>
 
 				<div className='flex justify-center'>
 					<img className='br-100 ml3 mr4 mt4 ba bw2 b--white bg-white h4 w4' src={DefaultProfilePic} alt='Logo' />
 					<div className='flex flex-column'>
-						<div className='mt4'>
-							<Link to='#0' className='ml3 no-underline moon-gray b f5-l f6-m'>
-								0 quotes
-							</Link>
-							<Link to='#0' className='ml4 no-underline moon-gray b f5-l f6-m'>
+						<div className='flex mt4'>
+							<p className='ml3 mt0 moon-gray b f5-l f6-m'>0 quotes</p>
+							<Link to='/followers' className='ml4 no-underline moon-gray b f5-l f6-m'>
 								0 followers
 							</Link>
-							<Link to='#0' className='ml4 no-underline moon-gray b f5-l f6-m'>
+							<Link to='/following' className='ml4 no-underline moon-gray b f5-l f6-m'>
 								0 following
 							</Link>
 						</div>
-						<div>
-							<p>I am quote master.</p>
+						<div className='mt3'>
+							<p className='tc'>I am quote master.</p>
 						</div>
 					</div>
 				</div>

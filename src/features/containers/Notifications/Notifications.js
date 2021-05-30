@@ -1,7 +1,7 @@
 import React from 'react';
 import Notification from './Notification/Notification';
 
-function Explore() {
+function Notifications() {
 	return (
 		<section className='mt6 mh2 f7'>
 			<h1 className='flex ml4 moon-gray'>Notifications</h1>
@@ -14,4 +14,4 @@ function Explore() {
 	);
 }
 
-export default Explore;
+export default Notifications;

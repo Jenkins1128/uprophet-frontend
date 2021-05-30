@@ -13,6 +13,8 @@ import { selectSigninState } from './features/containers/Signin/signinSlice';
 import Profile from './features/containers/Profile/Profile';
 import Explore from './features/containers/Explore/Explore';
 import Notifications from './features/containers/Notifications/Notifications';
+import Following from './features/containers/Following/Following';
+import Followers from './features/containers/Followers/Followers';
 
 function App() {
 	const isSignedIn = useSelector(selectSigninState);
@@ -38,6 +40,15 @@ function App() {
 							<Notifications />
 						</Route>
 						<Route exact path='/explore'>
+							<Explore />
+						</Route>
+						<Route exact path='/followers'>
+							<Followers />
+						</Route>
+						<Route exact path='/following'>
+							<Following />
+						</Route>
+						<Route exact path='/edit'>
 							<Explore />
 						</Route>
 						<Route path='/'>
