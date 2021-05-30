@@ -1,5 +1,5 @@
 import React from 'react';
-import QuotePost from '../../presentationals/QuotePost/QuotePost';
+import QuotePost from '../QuotePost/QuotePost';
 
 function Explore() {
 	return (

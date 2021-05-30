@@ -12,6 +12,7 @@ import Home from './features/containers/Home/Home';
 import { selectSigninState } from './features/containers/Signin/signinSlice';
 import Profile from './features/containers/Profile/Profile';
 import Explore from './features/containers/Explore/Explore';
+import Notifications from './features/containers/Notifications/Notifications';
 
 function App() {
 	const isSignedIn = useSelector(selectSigninState);
@@ -34,7 +35,7 @@ function App() {
 							<Signin />
 						</Route>
 						<Route exact path='/notifications'>
-							<Signin />
+							<Notifications />
 						</Route>
 						<Route exact path='/explore'>
 							<Explore />

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuotePost from '../../presentationals/QuotePost/QuotePost';
+import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
 
 function Home() {

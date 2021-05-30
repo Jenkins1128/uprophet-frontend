@@ -24,7 +24,7 @@ const Navigation = ({ isSignedIn }) => {
 					{!(isTabletOrMobile || isPortrait) ? (
 						isSignedIn ? (
 							<>
-								<Link to='#0' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
+								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
 									<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
 								</Link>
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>

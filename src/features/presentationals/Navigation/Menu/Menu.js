@@ -26,7 +26,7 @@ const Menu = ({ isSignedIn }) => {
 						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={Logo} alt='Logo' />
 					</Link>
 
-					<Link to='#0' onClick={closeNav} className='f6 grow b'>
+					<Link to='/notifications' onClick={closeNav} className='f6 grow b'>
 						<div className='flex items-center'>
 							<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
 							&nbsp;{'Notifications'}
