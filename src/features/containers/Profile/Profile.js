@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DefaultProfilePic from './defaultProfilePic.png';
 import QuotePost from '../QuotePost/QuotePost';
+import { TestQuotes } from './TestQuotes';
+
 function Profile() {
 	const location = useLocation();
 	return (
@@ -31,11 +33,9 @@ function Profile() {
 				</div>
 				<div className=' mt3'>
 					<h1 className='flex pl6-l pl5-m light-green'>Quotes</h1>
-					<QuotePost />
-					<QuotePost />
-					<QuotePost />
-					<QuotePost />
-					<QuotePost />
+					{TestQuotes.map((quote, i) => {
+						return <QuotePost key={i} userName={quote.userName} quote={quote.quote} />;
+					})}
 				</div>
 			</div>
 		</section>
