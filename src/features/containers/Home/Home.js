@@ -1,6 +1,7 @@
 import React from 'react';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
+import { TestQuotes } from './TestQuotes';
 
 function Home() {
 	return (
@@ -8,11 +9,9 @@ function Home() {
 			<h1 className='flex ml4 moon-gray'>Home</h1>
 			<QuotePoster />
 			<div className='mt5'>
-				<QuotePost />
-				<QuotePost />
-				<QuotePost />
-				<QuotePost />
-				<QuotePost />
+				{TestQuotes.map((quote, i) => {
+					return <QuotePost key={i} userName={quote.userName} quote={quote.quote} />;
+				})}
 			</div>
 		</section>
 	);
