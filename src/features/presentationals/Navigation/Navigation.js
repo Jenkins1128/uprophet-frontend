@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import Bell from './bell.png';
 import Compass from './compass.png';
 import DefaultProfilePic from './defaultProfilePic.png';
+import Home from './home.png';
 import Logout from './logout.png';
 import Menu from './Menu/Menu';
 
@@ -24,6 +25,9 @@ const Navigation = ({ isSignedIn }) => {
 					{!(isTabletOrMobile || isPortrait) ? (
 						isSignedIn ? (
 							<>
+								<Link to='/' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
+									<img title='Home' className='w2 h2' alt='Home' src={Home} />
+								</Link>
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
 									<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
 								</Link>

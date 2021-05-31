@@ -15,6 +15,7 @@ import Explore from './features/containers/Explore/Explore';
 import Notifications from './features/containers/Notifications/Notifications';
 import Following from './features/containers/Following/Following';
 import Followers from './features/containers/Followers/Followers';
+import EditProfile from './features/containers/EditProfile/EditProfile';
 
 function App() {
 	const isSignedIn = useSelector(selectSigninState);
@@ -49,7 +50,7 @@ function App() {
 							<Following />
 						</Route>
 						<Route exact path='/edit'>
-							<Explore />
+							<EditProfile />
 						</Route>
 						<Route path='/'>
 							<Profile />

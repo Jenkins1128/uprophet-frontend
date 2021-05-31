@@ -31,7 +31,7 @@ function Signin() {
 						</div>
 					</fieldset>
 					<div className='lh-copy mt1'>
-						<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign in' onClick={submitLogin} />
+						<input className='b ph3 pv2 input-reset ba br4 b--black bg-light-green grow pointer f6 dib' type='submit' value='Sign in' onClick={submitLogin} />
 					</div>
 				</div>
 			</article>

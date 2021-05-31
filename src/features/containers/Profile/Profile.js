@@ -7,11 +7,13 @@ function Profile() {
 	return (
 		<section className='mt6 mh2 f7'>
 			<div className='flex flex-column'>
-				<button className='self-end w-10 b--none br3 bg-white moon-gray grow pointer:hover: pointer'>Edit Profile</button>
+				<Link to='/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
+					Edit Profile
+				</Link>
 				<h1 className='flex ml4 light-green'>{location.pathname.substring(1)}</h1>
 
 				<div className='flex justify-center'>
-					<img className='br-100 ml3 mr4 mt4 ba bw2 b--white bg-white h4 w4' src={DefaultProfilePic} alt='Logo' />
+					<img className='br-100 ml3 mr4 mt4 ba bw2 b--white bg-white h4 w4 pointer' src={DefaultProfilePic} alt='Logo' />
 					<div className='flex flex-column'>
 						<div className='flex mt4'>
 							<p className='ml3 mt0 moon-gray b f5-l f6-m'>0 quotes</p>

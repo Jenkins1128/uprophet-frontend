@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Signup() {
 	return (
 		<section className='pt6'>
-			<h1 className='moon-gray'>Join Uprophet today.</h1>
+			<h1 className='moon-gray'>Join Uprophet today!</h1>
 			<article className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>
 				<div className='measure pa3 black-80'>
 					<fieldset id='sign_up' className='ba b--transparent ph0 mh0'>
@@ -29,7 +29,7 @@ function Signup() {
 						</div>
 					</fieldset>
 					<div className='lh-copy mt3'>
-						<input className='b ph3 pv2 input-reset ba br4 b--black bg-transparent grow pointer f6 dib' type='submit' value='Sign up' />
+						<input className='b ph3 pv2 input-reset ba br4 b--black bg-light-green grow pointer f6 dib' type='submit' value='Sign up' />
 					</div>
 				</div>
 			</article>

@@ -11,7 +11,7 @@ const QuotePoster = () => {
 						<strong className='f2 ml2 moon-gray'>"</strong>
 					</fieldset>
 					<div className='lh-copy mt1'>
-						<input className='b ph3 pv2 input-reset ba bw1 br4 b--moon-gray moon-gray bg-transparent grow pointer f6 dib' type='submit' value='Post' />
+						<input className='b ph3 pv2 input-reset ba bw1 br4 bg-light-green grow pointer f6 dib' type='submit' value='Post' />
 					</div>
 				</div>
 			</article>

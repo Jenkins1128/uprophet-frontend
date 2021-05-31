@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { submitLogin } from './signinAPI';
 
 const initialState = {
 	isSignedIn: false,

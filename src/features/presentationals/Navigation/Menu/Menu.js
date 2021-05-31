@@ -4,6 +4,7 @@ import Logo from './upicon.png';
 import Bell from '../bell.png';
 import Compass from '../compass.png';
 import DefaultProfilePic from '../defaultProfilePic.png';
+import Home from '../home.png';
 import Logout from '../logout.png';
 
 const Menu = ({ isSignedIn }) => {
@@ -23,9 +24,14 @@ const Menu = ({ isSignedIn }) => {
 						&times;
 					</button>
 					<Link to='/' onClick={closeNav} className='f6 grow b'>
-						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={Logo} alt='Logo' />
+						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
-
+					<Link to='/' onClick={closeNav} className='f6 grow b'>
+						<div className='flex items-center'>
+							<img title='Home' className='w2 h2' alt='Home' src={Home} />
+							&nbsp;{'Home'}
+						</div>
+					</Link>
 					<Link to='/notifications' onClick={closeNav} className='f6 grow b'>
 						<div className='flex items-center'>
 							<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
@@ -58,7 +64,7 @@ const Menu = ({ isSignedIn }) => {
 					</button>
 
 					<Link to='/' onClick={closeNav} className='f6 grow b'>
-						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={Logo} alt='Logo' />
+						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
 					<Link to='/about' onClick={closeNav} className='f6 grow b'>
 						About
@@ -75,7 +81,7 @@ const Menu = ({ isSignedIn }) => {
 				</div>
 			)}
 
-			<button className='menuIconSize mr2 pr0 pointer:hover: pointer b--none bg-transparent hover-white' onClick={openNav}>
+			<button className='menuIconSize mr2 pr0 pointer b--none bg-transparent hover-white' onClick={openNav}>
 				&#9776;
 			</button>
 		</>
