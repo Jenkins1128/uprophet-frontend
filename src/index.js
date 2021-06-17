@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</React.StrictMode>,
+	<CookiesProvider>
+		<React.StrictMode>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</React.StrictMode>
+	</CookiesProvider>,
 	document.getElementById('root')
 );
 
