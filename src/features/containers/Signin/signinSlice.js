@@ -11,19 +11,23 @@ const initialState = {
 // typically used to make async requests.
 export const loginAsync = createAsyncThunk('signin/status', async (data, { rejectWithValue }) => {
 	const { url, username, password } = data;
-
+	console.log(url, username, password);
 	try {
 		const response = await fetch(url, {
 			method: 'POST',
 			credentials: 'include',
-			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				username,
 				password
 			})
 		});
+
+		if (response.status === 401) {
+			throw new Error('Username or password is incorrect.');
+		}
 		// The value we return becomes the `fulfilled` action payload
-		return response.data;
+		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
 	}

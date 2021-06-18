@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
 import { TestQuotes } from './TestQuotes';
-import { homeAsync, selectResCodeState } from './homeSlice';
+import { homeAsync } from './homeSlice';
 
 function Home() {
-	const resState = useSelector(selectResCodeState);
+	const [latestQuotes, setLatestQuotes] = useState([]);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -18,18 +18,19 @@ function Home() {
 
 			//console.log(res.meta.requestStatus);
 			if (res.meta.requestStatus === 'fulfilled') {
-				console.log('ok');
+				//console.log(res.status);
+				setLatestQuotes(res.payload);
 			}
 		});
 	}, [dispatch]);
 
-	return resState === 200 ? (
+	return latestQuotes.length ? (
 		<section className='mt6 mh2 f7'>
 			<h1 className='flex ml4 moon-gray'>Home</h1>
 			<QuotePoster />
 			<div className='mt5'>
-				{TestQuotes.map((quote, i) => {
-					return <QuotePost key={i} userName={quote.userName} quote={quote.quote} />;
+				{latestQuotes.map((quote, i) => {
+					return i < latestQuotes.length - 1 && <QuotePost key={quote.id} userName={quote.user_name} quote={`"${quote.quote}"`} />;
 				})}
 			</div>
 		</section>

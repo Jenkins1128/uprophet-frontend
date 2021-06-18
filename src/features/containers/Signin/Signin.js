@@ -26,7 +26,7 @@ function Signin() {
 		dispatch(loginAsync({ url: 'http://localhost:3001/signin', username, password })).then((res) => {
 			// do additional work
 			console.log(res);
-			console.log(res.meta.requestStatus);
+			//console.log(res.meta.requestStatus);
 
 			//console.log(res.meta.requestStatus);
 			if (res.meta.requestStatus === 'fulfilled') {

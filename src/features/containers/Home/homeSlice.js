@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	res: 500,
 	status: 'idle'
 };
 
@@ -18,7 +17,7 @@ export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWit
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
 		// The value we return becomes the `fulfilled` action payload
-		return response.data;
+		return await response.json();
 	} catch (err) {
 		return rejectWithValue(err.response.data);
 	}
@@ -46,7 +45,6 @@ export const homeSlice = createSlice({
 			})
 			.addCase(homeAsync.fulfilled, (state) => {
 				state.status = 'success';
-				state.res = 200;
 			})
 			.addCase(homeAsync.rejected, (state) => {
 				state.status = 'rejected';
@@ -59,6 +57,6 @@ export const homeSlice = createSlice({
 // The function below is called a selector and allows us to select a isSignedIn from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.isSignedIn)`
-export const selectResCodeState = (state) => state.home.resCode;
+// export const selectResCodeState = (state) => state.home.res;
 
 export default homeSlice.reducer;
