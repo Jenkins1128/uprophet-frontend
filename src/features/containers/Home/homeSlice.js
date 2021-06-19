@@ -10,16 +10,22 @@ const initialState = {
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWithValue }) => {
+	let errorCode;
 	try {
 		const response = await fetch(url, {
 			method: 'GET',
 			credentials: 'include',
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
+
+		if (response.status > 400 && response.status < 500) {
+			errorCode = response.status;
+		}
+
 		// The value we return becomes the `fulfilled` action payload
 		return await response.json();
 	} catch (err) {
-		return rejectWithValue(err.response.data);
+		return rejectWithValue([errorCode]);
 	}
 });
 

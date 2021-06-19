@@ -8,6 +8,7 @@ import { homeAsync } from './homeSlice';
 
 function Home() {
 	const [latestQuotes, setLatestQuotes] = useState([]);
+	const [requestStatus, setRequestStatus] = useState('rejected');
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -15,7 +16,7 @@ function Home() {
 			// do additional work
 			console.log(res);
 			console.log(res.meta.requestStatus);
-
+			setRequestStatus(res.meta.requestStatus);
 			//console.log(res.meta.requestStatus);
 			if (res.meta.requestStatus === 'fulfilled') {
 				//console.log(res.status);
@@ -24,7 +25,7 @@ function Home() {
 		});
 	}, [dispatch]);
 
-	return latestQuotes.length ? (
+	return requestStatus === 'fulfilled' ? (
 		<section className='mt6 mh2 f7'>
 			<h1 className='flex ml4 moon-gray'>Home</h1>
 			<QuotePoster />

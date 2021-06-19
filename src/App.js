@@ -28,7 +28,7 @@ function App() {
 	// useEffect(() => {
 	// 	checkSignedIn();
 	// }, [checkSignedIn]);
-
+	// console.log('APPPPPP');
 	return (
 		<Router>
 			<div className='App'>
