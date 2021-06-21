@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Bell from './bell.png';
 import Compass from './compass.png';
@@ -7,6 +7,8 @@ import DefaultProfilePic from './defaultProfilePic.png';
 import Home from './home.png';
 import Logout from './logout.png';
 import Menu from './Menu/Menu';
+import { useDispatch } from 'react-redux';
+import { logoutAsync } from './navSlice';
 
 const Navigation = ({ isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
@@ -18,6 +20,24 @@ const Navigation = ({ isSignedIn }) => {
 	});
 	const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
 
+	const dispatch = useDispatch();
+	const history = useHistory();
+
+	const logout = () => {
+		dispatch(logoutAsync('http://localhost:3001/logout')).then((res) => {
+			if (res.meta.requestStatus === 'fulfilled') {
+				console.log(res);
+				history.push('/signin', {
+					pathname: '/signin',
+					state: {
+						// location state
+						isIn: false
+					}
+				});
+			}
+		});
+	};
+
 	return (
 		<nav className='flex items-center'>
 			{(isDesktopOrLaptop || isTabletOrMobileDevice) && (
@@ -25,7 +45,15 @@ const Navigation = ({ isSignedIn }) => {
 					{!(isTabletOrMobile || isPortrait) ? (
 						isSignedIn ? (
 							<>
-								<Link to='/' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
+								<Link
+									to={{
+										pathname: '/',
+										state: {
+											isIn: true
+										}
+									}}
+									className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'
+								>
 									<img title='Home' className='w2 h2' alt='Home' src={Home} />
 								</Link>
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
@@ -37,9 +65,9 @@ const Navigation = ({ isSignedIn }) => {
 								<Link to='/icjenkins' className='f6 grow no-underline br-100 ba bw1 mh3 pv3 ph3 mb2 dib  b--white bg-white'>
 									<img title='Profile' className='br-100 w1 h1' src={DefaultProfilePic} alt='Profile' />
 								</Link>
-								<Link to='#0' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent'>
+								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent'>
 									<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
-								</Link>
+								</button>
 							</>
 						) : (
 							<>
@@ -58,7 +86,7 @@ const Navigation = ({ isSignedIn }) => {
 							</>
 						)
 					) : (
-						<Menu isSignedIn={isSignedIn} />
+						<Menu isSignedIn={isSignedIn} logout={logout} />
 					)}
 				</>
 			)}

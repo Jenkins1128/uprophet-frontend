@@ -68,7 +68,8 @@ header {
 	transition: 0.3s;
 }
 
-.sidenav a:hover {
+.sidenav a:hover,
+button:hover {
 	color: #f1f1f1;
 }
 

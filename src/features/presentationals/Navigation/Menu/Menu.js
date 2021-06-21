@@ -7,13 +7,18 @@ import DefaultProfilePic from '../defaultProfilePic.png';
 import Home from '../home.png';
 import Logout from '../logout.png';
 
-const Menu = ({ isSignedIn }) => {
+const Menu = ({ isSignedIn, logout }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
 
 	const closeNav = () => {
 		document.getElementById('mySidenav').style.width = '0';
+	};
+
+	const signout = () => {
+		logout();
+		closeNav();
 	};
 
 	return (
@@ -23,10 +28,28 @@ const Menu = ({ isSignedIn }) => {
 					<button className='closebtn mt1 mr2 pr0' onClick={closeNav}>
 						&times;
 					</button>
-					<Link to='/' onClick={closeNav} className='f6 grow b'>
+					<Link
+						to={{
+							pathname: '/',
+							state: {
+								isIn: true
+							}
+						}}
+						onClick={closeNav}
+						className='f6 grow b'
+					>
 						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
-					<Link to='/' onClick={closeNav} className='f6 grow b'>
+					<Link
+						to={{
+							pathname: '/',
+							state: {
+								isIn: true
+							}
+						}}
+						onClick={closeNav}
+						className='f6 grow b'
+					>
 						<div className='flex items-center'>
 							<img title='Home' className='w2 h2' alt='Home' src={Home} />
 							&nbsp;{'Home'}
@@ -50,12 +73,12 @@ const Menu = ({ isSignedIn }) => {
 							&nbsp;{'Profile'}
 						</div>
 					</Link>
-					<Link to='#0' onClick={closeNav} className='f6 grow b'>
-						<div className='flex items-center'>
+					<button onClick={signout} className='f6 grow bg-transparent b--none mt2 relative left-2 pointer'>
+						<div className='flex f3 b items-center'>
 							<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
 							&nbsp;{'Logout'}
 						</div>
-					</Link>
+					</button>
 				</div>
 			) : (
 				<div id='mySidenav' className='sidenav'>
@@ -63,7 +86,16 @@ const Menu = ({ isSignedIn }) => {
 						&times;
 					</button>
 
-					<Link to='/' onClick={closeNav} className='f6 grow b'>
+					<Link
+						to={{
+							pathname: '/',
+							state: {
+								isIn: false
+							}
+						}}
+						onClick={closeNav}
+						className='f6 grow b'
+					>
 						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
 					<Link to='/about' onClick={closeNav} className='f6 grow b'>
