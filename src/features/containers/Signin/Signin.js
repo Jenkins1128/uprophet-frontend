@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { loginAsync } from './signinSlice';
 import Header from '../../presentationals/Header/Header';
 
@@ -60,6 +60,14 @@ function Signin() {
 							<button className='b ph3 pv2 input-reset ba br4 b--black bg-light-green grow pointer f6 dib' type='submit' onClick={submitLogin}>
 								Sign in
 							</button>
+						</div>
+						<div className='flex justify-between relative top-2 '>
+							<Link to='/changepassword' className='no-underline b light-green hover-black grow pointer'>
+								Change Password
+							</Link>
+							<Link to='/forgotpassword' className='no-underline b light-green hover-black grow pointer'>
+								Forgot Password
+							</Link>
 						</div>
 					</form>
 				</article>

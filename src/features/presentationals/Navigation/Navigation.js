@@ -65,7 +65,7 @@ const Navigation = ({ isSignedIn }) => {
 								<Link to='/icjenkins' className='f6 grow no-underline br-100 ba bw1 mh3 pv3 ph3 mb2 dib  b--white bg-white'>
 									<img title='Profile' className='br-100 w1 h1' src={DefaultProfilePic} alt='Profile' />
 								</Link>
-								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent'>
+								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent pointer'>
 									<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
 								</button>
 							</>
