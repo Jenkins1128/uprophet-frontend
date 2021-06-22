@@ -24,7 +24,6 @@ function ForgotPassword() {
 		setEmail(value);
 	};
 
-	//TODO ADD EMAIL and get nodemail to work
 	const initCheckEmailForm = (event) => {
 		event.preventDefault();
 		setResponse(false);
