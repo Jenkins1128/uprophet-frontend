@@ -13,6 +13,7 @@ import Following from './features/containers/Following/Following';
 import Followers from './features/containers/Followers/Followers';
 import EditProfile from './features/containers/EditProfile/EditProfile';
 import ChangePassword from './features/containers/ChangePassword/ChangePassword';
+import ForgotPassword from './features/containers/ForgotPassword/ForgotPassword';
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						<Route exact path='/following' component={Following} />
 						<Route exact path='/editprofile' component={EditProfile} />
 						<Route exact path='/changepassword' component={ChangePassword} />
+						<Route exact path='/forgotpassword' component={ForgotPassword} />
 						<Route path='/profile' component={Profile} />
 						<Route exact path='/terms' component={Terms} />
 					</Switch>
