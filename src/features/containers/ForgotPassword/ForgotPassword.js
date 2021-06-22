@@ -10,6 +10,7 @@ function ForgotPassword() {
 	const dispatch = useDispatch();
 
 	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [checkEmailForm, setCheckEmailForm] = useState(false);
 	const [response, setResponse] = useState(true);
 
@@ -18,10 +19,16 @@ function ForgotPassword() {
 		setUsername(value);
 	};
 
+	const handleEmailOnchange = (event) => {
+		const { value } = event.target;
+		setEmail(value);
+	};
+
+	//TODO ADD EMAIL and get nodemail to work
 	const initCheckEmailForm = (event) => {
 		event.preventDefault();
 		setResponse(false);
-		dispatch(forgotPasswordAsync({ url: 'http://localhost:3001/forgotPassword', username })).then((res) => {
+		dispatch(forgotPasswordAsync({ url: 'http://localhost:3001/forgotPassword', username, email })).then((res) => {
 			console.log(res);
 			setResponse(true);
 			if (res.meta.requestStatus === 'fulfilled') {
@@ -43,8 +50,11 @@ function ForgotPassword() {
 							<form className='measure center pa3 black-80'>
 								<fieldset id='change_password_signin' className='ba b--transparent ph0 mh0'>
 									<div className='mt3'>
-										<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' name='name' id='name' onChange={handleUsernameOnchange} />
+										<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' name='username' id='username' onChange={handleUsernameOnchange} />
 									</div>
+									<div className='mv3'>
+										<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='text' name='email' id='email' onChange={handleEmailOnchange} />
+							     	</div>
 								</fieldset>
 								<div className='lh-copy mt1'>
 									<button className='b ph3 pv2 input-reset ba br4 b--black bg-light-green grow pointer f6 dib' type='submit' onClick={initCheckEmailForm}>

@@ -5,15 +5,16 @@ const initialState = {
 };
 
 export const forgotPasswordAsync = createAsyncThunk('forgotPassword/status', async (data, { rejectWithValue }) => {
-	const { url, username } = data;
-	console.log(url, username);
+	const { url, username, email } = data;
+	console.log(url, username, email);
 	try {
 		const response = await fetch(url, {
 			method: 'POST',
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				username
+				username,
+				email
 			})
 		});
 
