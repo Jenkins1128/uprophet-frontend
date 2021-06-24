@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	status: 'idle'
+	status: 'idle',
+	isIn: false
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -55,6 +56,7 @@ export const signinSlice = createSlice({
 			})
 			.addCase(loginAsync.fulfilled, (state) => {
 				state.status = 'success';
+				state.isIn = true;
 			})
 			.addCase(loginAsync.rejected, (state) => {
 				state.status = 'rejected';
@@ -62,11 +64,11 @@ export const signinSlice = createSlice({
 	}
 });
 
-//export const { isStillSignedIn } = signinSlice.actions;
+// export const { isStillSignedIn } = signinSlice.actions;
 
 // The function below is called a selector and allows us to select a isSignedIn from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.isSignedIn)`
-export const selectSigninState = (state) => state.signin.isSignedIn;
+export const selectIsInState = (state) => state.signin.isIn;
 
 export default signinSlice.reducer;

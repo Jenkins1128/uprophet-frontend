@@ -9,8 +9,9 @@ import Logout from './logout.png';
 import Menu from './Menu/Menu';
 import { useDispatch } from 'react-redux';
 import { logoutAsync } from './navSlice';
+import Userphoto from '../../containers/Userphoto/Userphoto';
 
-const Navigation = ({ isSignedIn }) => {
+const Navigation = ({ currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
 		query: '(min-device-width: 1224px)'
 	});
@@ -62,8 +63,8 @@ const Navigation = ({ isSignedIn }) => {
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>
 									<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
 								</Link>
-								<Link to='/icjenkins' className='f6 grow no-underline br-100 ba bw1 mh3 pv3 ph3 mb2 dib  b--white bg-white'>
-									<img title='Profile' className='br-100 w1 h1' src={DefaultProfilePic} alt='Profile' />
+								<Link to='/icjenkins' className='f6 grow no-underline mh3 mb2 dib'>
+									<Userphoto size={'header'} username={currentUser} />
 								</Link>
 								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent pointer'>
 									<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />

@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	status: 'idle'
+	status: 'idle',
+	isIn: false
 };
 
 export const signUpAsync = createAsyncThunk('signUpAsync/status', async (data, { rejectWithValue }) => {
@@ -37,6 +38,7 @@ export const signUpSlice = createSlice({
 			})
 			.addCase(signUpAsync.fulfilled, (state) => {
 				state.status = 'success';
+				state.isIn = true;
 			})
 			.addCase(signUpAsync.rejected, (state) => {
 				state.status = 'rejected';

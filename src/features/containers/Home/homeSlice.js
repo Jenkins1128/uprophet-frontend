@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	status: 'idle'
+	status: 'idle',
+	latestQuotes: [],
+	notificationCount: 0
 };
 
 export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWithValue }) => {
@@ -27,25 +29,25 @@ export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWit
 export const homeSlice = createSlice({
 	name: 'home',
 	initialState,
-	reducers: {
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(homeAsync.pending, (state) => {
-				state.status = 'loading';
+				state.status = 'pending';
 			})
-			.addCase(homeAsync.fulfilled, (state) => {
-				state.status = 'success';
+			.addCase(homeAsync.fulfilled, (state, { payload }) => {
+				state.status = 'fulfilled';
+				console.log('PAYLOAD: ' + payload);
+				const newQuotes = payload;
+				const notifications = newQuotes.pop().notificationCount;
+				state.latestQuotes = newQuotes.reverse();
+				state.notificationCount = notifications;
 			})
 			.addCase(homeAsync.rejected, (state) => {
 				state.status = 'rejected';
 			});
 	}
 });
-
-const initialState2 = {
-	status: 'idle'
-};
 
 export const postQuoteAsync = createAsyncThunk('postQuote/status', async (data, { rejectWithValue }) => {
 	const { url, title, quote } = data;
@@ -70,21 +72,54 @@ export const postQuoteAsync = createAsyncThunk('postQuote/status', async (data, 
 
 export const postQuoteSlice = createSlice({
 	name: 'postQuote',
-	initialState2,
-	reducers: {
-	},
+	initialState,
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(postQuoteAsync.pending, (state) => {
-				state.status = 'loading';
+			.addCase(postQuoteAsync.pending, () => {})
+			.addCase(postQuoteAsync.fulfilled, (state, { payload }) => {
+				//delete your current quote from latestQutoes arr if exists
+				const latestQuotes = state.latestQuotes.some((quote, i) => {
+					if (quote.user_name === payload.user_name) {
+						latestQuotes.splice(i, i, payload);
+					}
+					return quote.user_name === payload.user_name;
+				});
+				//add new quote
+				state.latestQuotes = [...latestQuotes];
 			})
-			.addCase(postQuoteAsync.fulfilled, (state) => {
-				state.status = 'success';
-			})
-			.addCase(postQuoteAsync.rejected, (state) => {
-				state.status = 'rejected';
-			});
+			.addCase(postQuoteAsync.rejected, () => {});
 	}
 });
+
+export const getUserAsync = createAsyncThunk('getUser/status', async (url, { rejectWithValue }) => {
+	try {
+		const response = await fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+			headers: { Accept: '*/*' }
+		});
+		// The value we return becomes the `fulfilled` action payload
+		return response.status;
+	} catch (err) {
+		return rejectWithValue(err.response.data);
+	}
+});
+
+export const getUserSlice = createSlice({
+	name: 'getUser',
+	initialState,
+	reducers: {},
+	extraReducers: (builder) => {
+		builder
+			.addCase(getUserAsync.pending, () => {})
+			.addCase(getUserAsync.fulfilled, () => {})
+			.addCase(getUserAsync.rejected, () => {});
+	}
+});
+
+export const selectLatestQuotes = (state) => state.home.latestQuotes;
+export const selectNotificationCount = (state) => state.home.notificationCount;
+export const selectSecondRequestStatus = (state) => state.home.status;
 
 export default homeSlice.reducer;
