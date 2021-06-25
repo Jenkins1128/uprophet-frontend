@@ -29,7 +29,11 @@ export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWit
 export const homeSlice = createSlice({
 	name: 'home',
 	initialState,
-	reducers: {},
+	reducers: {
+		updateLatestQuotes: (state, { payload }) => {
+			state.latestQuotes = [...state.latestQuotes, payload];
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(homeAsync.pending, (state) => {
@@ -121,5 +125,7 @@ export const getUserSlice = createSlice({
 export const selectLatestQuotes = (state) => state.home.latestQuotes;
 export const selectNotificationCount = (state) => state.home.notificationCount;
 export const selectSecondRequestStatus = (state) => state.home.status;
+
+export const { updateLatestQuotes } = homeSlice.actions;
 
 export default homeSlice.reducer;

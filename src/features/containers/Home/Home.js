@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
-import { getUserAsync, homeAsync, postQuoteAsync, selectLatestQuotes, selectNotificationCount, selectSecondRequestStatus } from './homeSlice';
+import { getUserAsync, homeAsync, postQuoteAsync, selectLatestQuotes, selectNotificationCount, selectSecondRequestStatus, updateLatestQuotes } from './homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import { useLocation } from 'react-router-dom';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
@@ -66,7 +66,7 @@ function Home() {
 							<QuotePoster postQuote={postQuote} onQuoteChange={onQuoteChange} onTitleChange={onTitleChange} />
 							<div className='mt5'>
 								{latestQuotes.map((quote, i) => {
-									return <QuotePost key={quote.id} userName={quote.user_name} quote={`"${quote.quote}"`} />;
+									return <QuotePost key={quote.id} quoteId={quote.id} username={quote.user_name} title={quote.title} quote={`"${quote.quote}"`} likeCount={quote.likeCount} didLike={quote.didLike} date={quote.date_posted} />;
 								})}
 							</div>
 						</section>
