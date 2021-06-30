@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Bell from './bell.png';
 import Compass from './compass.png';
-import DefaultProfilePic from './defaultProfilePic.png';
 import Home from './home.png';
 import Logout from './logout.png';
 import Menu from './Menu/Menu';
@@ -87,7 +86,7 @@ const Navigation = ({ currentUser, isSignedIn }) => {
 							</>
 						)
 					) : (
-						<Menu isSignedIn={isSignedIn} logout={logout} />
+						<Menu isSignedIn={isSignedIn} logout={logout} currentUser={currentUser} />
 					)}
 				</>
 			)}

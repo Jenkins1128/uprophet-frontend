@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "javascript-time-ago": "^2.3.7",
+    "js-ago": "^1.1.0",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",
@@ -17,8 +20,11 @@
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-time-ago": "^7.0.0",
+    "react-timeago": "^6.2.1",
     "sfcookies": "^1.0.2",
-    "tachyons": "^4.12.0"
+    "tachyons": "^4.12.0",
+    "timeago-react": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

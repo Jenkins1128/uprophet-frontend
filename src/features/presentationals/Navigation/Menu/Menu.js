@@ -6,8 +6,9 @@ import Compass from '../compass.png';
 import DefaultProfilePic from '../defaultProfilePic.png';
 import Home from '../home.png';
 import Logout from '../logout.png';
+import Userphoto from '../../../containers/Userphoto/Userphoto';
 
-const Menu = ({ isSignedIn, logout }) => {
+const Menu = ({ isSignedIn, logout, currentUser }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
@@ -69,7 +70,7 @@ const Menu = ({ isSignedIn, logout }) => {
 					</Link>
 					<Link to='/icjenkins' onClick={closeNav} className='f6 grow b '>
 						<div className='flex items-center'>
-							<img title='Profile' className='br-100 w1 h1 ba bw1 pv2 ph2 b--white bg-white' src={DefaultProfilePic} alt='Profile' />
+							<Userphoto size={'header'} username={currentUser} />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>

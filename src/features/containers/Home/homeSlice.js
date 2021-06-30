@@ -2,8 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
 	status: 'idle',
-	latestQuotes: [],
-	notificationCount: 0
+	latestQuotes: []
 };
 
 export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWithValue }) => {
@@ -29,11 +28,7 @@ export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWit
 export const homeSlice = createSlice({
 	name: 'home',
 	initialState,
-	reducers: {
-		updateLatestQuotes: (state, { payload }) => {
-			state.latestQuotes = [...state.latestQuotes, payload];
-		}
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(homeAsync.pending, (state) => {
@@ -41,11 +36,8 @@ export const homeSlice = createSlice({
 			})
 			.addCase(homeAsync.fulfilled, (state, { payload }) => {
 				state.status = 'fulfilled';
-				console.log('PAYLOAD: ' + payload);
 				const newQuotes = payload;
-				const notifications = newQuotes.pop().notificationCount;
 				state.latestQuotes = newQuotes.reverse();
-				state.notificationCount = notifications;
 			})
 			.addCase(homeAsync.rejected, (state) => {
 				state.status = 'rejected';
@@ -55,7 +47,6 @@ export const homeSlice = createSlice({
 
 export const postQuoteAsync = createAsyncThunk('postQuote/status', async (data, { rejectWithValue }) => {
 	const { url, title, quote } = data;
-	console.log(url, title, quote);
 	try {
 		const response = await fetch(url, {
 			method: 'POST',
@@ -82,6 +73,7 @@ export const postQuoteSlice = createSlice({
 		builder
 			.addCase(postQuoteAsync.pending, () => {})
 			.addCase(postQuoteAsync.fulfilled, (state, { payload }) => {
+				console.log('postQuote p: ', payload);
 				//delete your current quote from latestQutoes arr if exists
 				const latestQuotes = state.latestQuotes.some((quote, i) => {
 					if (quote.user_name === payload.user_name) {
@@ -122,10 +114,37 @@ export const getUserSlice = createSlice({
 	}
 });
 
-export const selectLatestQuotes = (state) => state.home.latestQuotes;
-export const selectNotificationCount = (state) => state.home.notificationCount;
-export const selectSecondRequestStatus = (state) => state.home.status;
+export const getNotificationCountAsync = createAsyncThunk('getNotificationCount/status', async (url, { rejectWithValue }) => {
+	try {
+		const response = await fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
+		});
+		// The value we return becomes the `fulfilled` action payload
+		const resjson = await response.json();
+		// const json = JSON.stringify(resjson);
+		console.log(resjson);
 
-export const { updateLatestQuotes } = homeSlice.actions;
+		return resjson;
+	} catch (err) {
+		return rejectWithValue(err.response.data);
+	}
+});
+
+export const getNotificationCountSlice = createSlice({
+	name: 'getNotificationCount',
+	initialState,
+	reducers: {},
+	extraReducers: (builder) => {
+		builder
+			.addCase(getNotificationCountAsync.pending, () => {})
+			.addCase(getNotificationCountAsync.fulfilled, () => {})
+			.addCase(getNotificationCountAsync.rejected, () => {});
+	}
+});
+
+export const selectLatestQuotes = (state) => state.home.latestQuotes;
+export const selectSecondRequestStatus = (state) => state.home.status;
 
 export default homeSlice.reducer;

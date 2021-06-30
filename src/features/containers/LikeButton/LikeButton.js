@@ -31,7 +31,7 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 	};
 
 	return (
-		<div className='flex'>
+		<div className='flex pv1'>
 			<p className='f4'>{getLikeCount.current ? getLikeCount.current : 0}</p>
 			{console.log(getDidLike)}
 			{getDidLike ? (
