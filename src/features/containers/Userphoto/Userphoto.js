@@ -16,8 +16,6 @@ const Userphoto = ({ size, username }) => {
 	}, [dispatch, username]);
 
 	const getSize = () => {
-		console.log(size);
-
 		switch (size) {
 			case 'header':
 				return 'h2 w2';

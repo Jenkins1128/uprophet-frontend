@@ -2,20 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Logo from './Logo/Logo';
 
 import Navigation from '../Navigation/Navigation';
-import { useDispatch } from 'react-redux';
-import { getUserAsync } from './headerSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserAsync, selectCurrentUser, selectFirstRequestStatus } from './getUserSlice';
 
 const Header = ({ isSignedIn }) => {
-	const [currentUser, setCurrentUser] = useState('');
 	const dispatch = useDispatch();
+	const currentUser = useSelector(selectCurrentUser);
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser')).then((res) => {
-			console.log(res);
-			if (res.meta.requestStatus === 'fulfilled') {
-				setCurrentUser(res.payload);
-			}
-		});
+		dispatch(getUserAsync('http://localhost:3001/currentUser'));
 	}, [dispatch]);
 
 	return (

@@ -6,7 +6,6 @@ const initialState = {
 
 export const userPhotoAsync = createAsyncThunk('userPhoto/status', async (data, { rejectWithValue }) => {
 	const { url, username } = data;
-	console.log(url, username);
 	try {
 		const response = await fetch(url, {
 			method: 'POST',

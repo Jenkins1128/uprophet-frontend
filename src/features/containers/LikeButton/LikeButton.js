@@ -33,7 +33,6 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 	return (
 		<div className='flex pv1'>
 			<p className='f4'>{getLikeCount.current ? getLikeCount.current : 0}</p>
-			{console.log(getDidLike)}
 			{getDidLike ? (
 				<button className='grow pointer b--none bg-transparent' onClick={unlike}>
 					<img className='h2 w2' alt='like' src={Like} />

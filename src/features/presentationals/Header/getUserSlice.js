@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	status: 'idle'
+	requestStatus: 'idle',
+	currentUser: ''
 };
 
 export const getUserAsync = createAsyncThunk('getUser/status', async (url, { rejectWithValue }) => {
@@ -25,13 +26,18 @@ export const getUserSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUserAsync.pending, (state) => {
-				state.status = 'loading';
+				state.requestStatus = 'pending';
 			})
-			.addCase(getUserAsync.fulfilled, (state) => {
-				state.status = 'success';
+			.addCase(getUserAsync.fulfilled, (state, { payload }) => {
+				state.requestStatus = 'fulfilled';
+				state.currentUser = payload;
 			})
 			.addCase(getUserAsync.rejected, (state) => {
-				state.status = 'rejected';
+				state.requestStatus = 'rejected';
 			});
 	}
 });
+
+export const selectFirstRequestStatus = (state) => state.getUser.requestStatus;
+export const selectCurrentUser = (state) => state.getUser.currentUser;
+export default getUserSlice.reducer;

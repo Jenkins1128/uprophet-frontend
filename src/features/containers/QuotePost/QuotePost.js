@@ -46,7 +46,6 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 					)}
 				</div>
 				<div>
-					{console.log('date', offsetDate(date))}
 					<ReactTimeAgo date={new Date(offsetDate(date))} locale='en' timeStyle='mini-minute-now' />
 				</div>
 			</div>

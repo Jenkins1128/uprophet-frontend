@@ -1,49 +1,46 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
-import { getNotificationCountAsync, getUserAsync, homeAsync, postQuoteAsync, selectLatestQuotes, selectNotificationCount, selectSecondRequestStatus } from './homeSlice';
+import { homeAsync, selectLatestQuotes, selectSecondRequestStatus } from './homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Header from '../../presentationals/Header/Header';
+import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 
 function Home() {
+	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
 	const [title, setTitle] = useState('');
 	const [quote, setQuote] = useState('');
 
-	const latestQuotes = useSelector(selectLatestQuotes);
-	const [notificationCount, setNotificationCount] = useState(0);
+	const getlatestQuotes = useSelector(selectLatestQuotes);
+	const getAddedLatestQuotes = useSelector(selectAddedLatestQuotes);
 
-	const requestStatus1 = useRef('idle');
+	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectSecondRequestStatus);
 
 	const dispatch = useDispatch();
 	// const location = useLocation();
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser')).then((res) => {
-			if (res.meta.requestStatus === 'fulfilled') {
-				requestStatus1.current = 'fulfilled';
-				dispatch(homeAsync('http://localhost:3001/'));
-			} else {
-				requestStatus1.current = 'idle';
-			}
-		});
+		dispatch(getUserAsync('http://localhost:3001/currentUser'));
 	}, [dispatch]);
-
-	const setNotifications = (res) => {
-		setNotificationCount(res.payload.notificationCount);
-	};
 
 	useEffect(() => {
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount')).then((res) => {
-			console.log(res);
-			if (res.meta.requestStatus === 'fulfilled') {
-				setNotifications(res);
-			}
-		});
-	}, [dispatch]);
+		if (requestStatus1 === 'fulfilled') {
+			dispatch(homeAsync('http://localhost:3001/'));
+		}
+	}, [dispatch, requestStatus1]);
+
+	useEffect(() => {
+		setLatestQuotes({ quotes: [...getlatestQuotes] });
+	}, [getlatestQuotes]);
+
+	useEffect(() => {
+		setLatestQuotes({ quotes: [...getAddedLatestQuotes] });
+	}, [getAddedLatestQuotes]);
 
 	const postQuote = (event) => {
 		event.preventDefault();
@@ -64,12 +61,12 @@ function Home() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1.current === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
+			<Header isSignedIn={requestStatus1 === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
 			<>
-				{/* {console.log('notificationCount', notificationCount)} */}
-				{requestStatus1.current === 'idle' ? (
+				{console.log(requestStatus1, requestStatus2)}
+				{requestStatus1 === 'pending' ? (
 					<Loading />
-				) : requestStatus1.current === 'fulfilled' ? (
+				) : requestStatus1 === 'fulfilled' ? (
 					requestStatus2 === 'pending' ? (
 						<Loading />
 					) : requestStatus2 === 'fulfilled' ? (
@@ -77,8 +74,7 @@ function Home() {
 							<h1 className='flex ml4 moon-gray'>Home</h1>
 							<QuotePoster postQuote={postQuote} onQuoteChange={onQuoteChange} onTitleChange={onTitleChange} />
 							<div className='mt5'>
-								{latestQuotes.map((quote, i) => {
-									console.log(quote);
+								{latestQuotes.quotes.map((quote) => {
 									return (
 										<QuotePost
 											key={quote.id}

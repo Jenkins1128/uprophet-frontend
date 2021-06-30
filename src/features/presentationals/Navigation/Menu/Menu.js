@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Logo from './upicon.png';
 import Bell from '../bell.png';
 import Compass from '../compass.png';
-import DefaultProfilePic from '../defaultProfilePic.png';
 import Home from '../home.png';
 import Logout from '../logout.png';
 import Userphoto from '../../../containers/Userphoto/Userphoto';

@@ -1,53 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAsync, getNotificationCountAsync } from '../Home/homeSlice';
 
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Header from '../../presentationals/Header/Header';
-import { useLocation, useParams } from 'react-router-dom';
-import { getCommentsAsync, getQuotePostAsync, selectLatestComments, selectSecondRequestStatus } from './quoteCommentsSlice';
+import { useParams } from 'react-router-dom';
+import { getCommentsAsync, selectLatestComments, selectSecondRequestStatus } from './quoteCommentsSlice';
 import CommentPoster from './CommentPoster/CommentPoster';
 import QuoteComment from './QuoteComment/QuoteComment';
 import QuotePost from '../QuotePost/QuotePost';
 import { postCommentAsync, selectAddedComment } from './postCommentSlice';
+import { getQuotePostAsync, selectQuotePost } from './getQuotePostSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 
 function QuoteComments() {
-	const [notificationCount, setNotificationCount] = useState(0);
-	const [comment, setComment] = useState('');
 	const { quoteId } = useParams();
-
 	const [latestComments, setLatestComments] = useState({ comments: [] });
+	const [comment, setComment] = useState('');
 
 	const getlatestComments = useSelector(selectLatestComments);
 	const getAddedComment = useSelector(selectAddedComment);
+	const quotePost = useSelector(selectQuotePost);
 
-	const [quotePost, setQuotePost] = useState({});
-	const requestStatus1 = useRef('idle');
+	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectSecondRequestStatus);
 
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getQuotePostAsync({ url: 'http://localhost:3001/getQuotePost', quoteId })).then((res) => {
-			console.log(res);
-			if (res.meta.requestStatus === 'fulfilled') {
-				setQuotePost(res.payload);
-			}
-		});
-	}, [dispatch, quoteId]);
-
-	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser')).then((res) => {
-			console.log('HOME: ', res.meta.requestStatus);
-			if (res.meta.requestStatus === 'fulfilled') {
-				requestStatus1.current = 'fulfilled';
-				dispatch(getCommentsAsync({ url: 'http://localhost:3001/getComments', quoteId }));
-			} else {
-				requestStatus1.current = 'idle';
-			}
-		});
-	}, [dispatch, quoteId]);
 
 	const isEmpty = (obj) => {
 		for (const x in obj) {
@@ -56,26 +34,34 @@ function QuoteComments() {
 		return true;
 	};
 
+	//get quote post
+	useEffect(() => {
+		dispatch(getQuotePostAsync({ url: 'http://localhost:3001/getQuotePost', quoteId }));
+	}, [dispatch, quoteId]);
+
+	//get current user status
+	useEffect(() => {
+		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+	}, [dispatch]);
+
+	//get comments
+	useEffect(() => {
+		if (requestStatus1 === 'fulfilled') {
+			dispatch(getCommentsAsync({ url: 'http://localhost:3001/getComments', quoteId }));
+		}
+	}, [dispatch, requestStatus1, quoteId]);
+
+	//listen for get latest comments
 	useEffect(() => {
 		setLatestComments({ comments: [...getlatestComments] });
-		console.log('GET COMMENTS');
 	}, [getlatestComments]);
 
+	//listen for an added comment
 	useEffect(() => {
 		if (!isEmpty(getAddedComment)) {
-			console.log('ADDED COMMENT');
 			setLatestComments({ comments: [...getlatestComments, getAddedComment] });
 		}
 	}, [getAddedComment, getlatestComments]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount')).then((res) => {
-			console.log(res);
-			if (res.meta.requestStatus === 'fulfilled') {
-				setNotificationCount(res.payload.notificationCount);
-			}
-		});
-	}, [dispatch]);
 
 	const postComment = (event) => {
 		event.preventDefault();
@@ -91,11 +77,11 @@ function QuoteComments() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1.current === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
+			<Header isSignedIn={requestStatus1 === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
 			<>
-				{requestStatus1.current === 'idle' ? (
+				{requestStatus1 === 'idle' ? (
 					<Loading />
-				) : requestStatus1.current === 'fulfilled' ? (
+				) : requestStatus1 === 'fulfilled' ? (
 					requestStatus2 === 'pending' ? (
 						<Loading />
 					) : requestStatus2 === 'fulfilled' ? (
