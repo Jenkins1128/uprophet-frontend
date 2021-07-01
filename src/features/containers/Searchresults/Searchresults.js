@@ -15,15 +15,14 @@ const Searchresults = () => {
 	const results = useSelector(selectResults);
 
 	useEffect(() => {
-		console.log(searchtext);
-		dispatch(searchAsync({ url: 'http://localhost:3001/search', search: searchtext }));
+		if (searchtext && searchtext.trim() !== '') {
+			dispatch(searchAsync({ url: 'http://localhost:3001/search', search: searchtext }));
+		}
 	}, [dispatch, searchtext]);
 
 	return (
 		<>
-			{console.log('hiiii')}
-			{console.log(requestStatus)}
-			<Header isSignedIn={requestStatus === 'fulfilled' ? true : false} />
+			<Header isSignedIn={requestStatus === 'fulfilled' || requestStatus === 'idle' ? true : false} />
 			<>
 				{requestStatus === 'pending' ? (
 					<Loading />
@@ -35,6 +34,11 @@ const Searchresults = () => {
 								return <ResultCard key={result.id} username={result.user_name} didFavorite={result.didFavorite} />;
 							})}
 						</div>
+					</section>
+				) : requestStatus === 'idle' ? (
+					<section className='mt6 mh2 f7'>
+						<h1 className='flex ml4 moon-gray'>Search Results for ""</h1>
+						<div className='mt5'></div>
 					</section>
 				) : (
 					<PleaseSignin />

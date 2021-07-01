@@ -62,7 +62,7 @@ const Navigation = ({ currentUser, isSignedIn }) => {
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>
 									<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
 								</Link>
-								<Link to='/icjenkins' className='f6 grow no-underline mh3 mb2 dib'>
+								<Link to={`/${currentUser}`} className='f6 grow no-underline mh3 mb2 dib'>
 									<Userphoto size={'header'} username={currentUser} />
 								</Link>
 								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent pointer'>

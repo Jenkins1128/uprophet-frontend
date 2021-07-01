@@ -12,8 +12,9 @@ const Search = () => {
 
 	const submitSearch = (event) => {
 		event.preventDefault();
-		console.log(searchtext);
-		history.push(`/search/${searchtext}`);
+		if (searchtext.trim() !== '') {
+			history.push(`/search/${searchtext}`);
+		}
 	};
 
 	return (

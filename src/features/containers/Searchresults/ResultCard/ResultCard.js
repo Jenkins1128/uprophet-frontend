@@ -1,10 +1,10 @@
 import React from 'react';
+import FavoriteButton from '../../FavoriteButton/FavoriteButton';
 import Userphoto from '../../Userphoto/Userphoto';
-import defaultProfilePic from './defaultProfilePic.png';
 
 const ResultCard = ({ username, didFavorite }) => {
 	return (
-		<article className='dt w-100 bb b--black-05 pb2 mt2' href='#0'>
+		<article className='flex justify-between dt w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
 				<div className='dtc w2 w3-ns v-mid'>
 					<Userphoto username={username} />
@@ -14,18 +14,8 @@ const ResultCard = ({ username, didFavorite }) => {
 				</div>
 			</div>
 
-			<div className='dtc v-mid'>
-				<form className='w-100 tr'>
-					{!didFavorite ? (
-						<button className='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='submit'>
-							Favorite
-						</button>
-					) : (
-						<button className='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='submit'>
-							UnFavorite
-						</button>
-					)}
-				</form>
+			<div className='self-center'>
+				<FavoriteButton username={username} didFavorite={didFavorite} />
 			</div>
 		</article>
 	);

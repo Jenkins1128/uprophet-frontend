@@ -29,15 +29,16 @@ function App() {
 						<Route exact path='/signin' component={Signin} />
 						<Route exact path='/notifications' component={Notifications} />
 						<Route exact path='/explore' component={Explore} />
-						<Route exact path='/followers' component={Followers} />
-						<Route exact path='/following' component={Following} />
+						{/* <Route exact path='/followers' component={Followers} />
+						<Route exact path='/following' component={Following} /> */}
 						<Route exact path='/editprofile' component={EditProfile} />
 						<Route exact path='/changepassword' component={ChangePassword} />
 						<Route exact path='/forgotpassword' component={ForgotPassword} />
-						<Route exact path='/search/:searchtext' component={Searchresults} />
+						{/* <Route exact path='/search/' component={Searchresults} /> */}
 						<Route exact path='/quote/:quoteId' component={QuoteComments} />
-						<Route path='/profile' component={Profile} />
 						<Route exact path='/terms' component={Terms} />
+						<Route exact path={['/search', '/search/:searchtext']} component={Searchresults} />
+						<Route path='/:username' component={Profile} />
 					</Switch>
 				</main>
 			</div>
