@@ -24,23 +24,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 				<div className='flex items-center'>
 					<LikeButton quoteId={quoteId} likeCount={likeCount} didLike={didLike} />
 					{hasComments && (
-						<Link
-							to={{
-								pathname: `quote/${quoteId}`,
-								state: {
-									quoteObj: {
-										id: quoteId,
-										user_name: username,
-										title: title,
-										quote: quote,
-										likeCount: likeCount,
-										didLike: didLike,
-										date_posted: date
-									}
-								}
-							}}
-							className='ml4 no-underline f5 b light-green grow '
-						>
+						<Link to={`quote/${quoteId}`} className='ml4 no-underline f5 b light-green grow '>
 							Comments
 						</Link>
 					)}

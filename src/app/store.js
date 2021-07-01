@@ -9,6 +9,7 @@ import postQuoteReducer from '../features/containers/Home/postQuoteSlice';
 import getUserReducer from '../features/presentationals/Header/getUserSlice';
 import getNotificationCountReducer from '../features/presentationals/Header/getNotificationCountSlice';
 import exploreQuotesReducer from '../features/containers/Explore/exploreQuotesSlice';
+import searchReducer from '../features/containers/Searchresults/searchSlice';
 //import changePasswordReducer from '../features/containers/ChangePassword/changePasswordSlice';
 export const store = configureStore({
 	reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
 		postQuote: postQuoteReducer,
 		getUser: getUserReducer,
 		notificationCount: getNotificationCountReducer,
-		exploreQuotes: exploreQuotesReducer
+		exploreQuotes: exploreQuotesReducer,
+		search: searchReducer
 
 		//changePassword: changePasswordReducer
 	}

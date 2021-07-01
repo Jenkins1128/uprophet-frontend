@@ -6,6 +6,8 @@ import { getExploreQuotesAsync, selectExploreQuotes } from './exploreQuotesSlice
 import Header from '../../presentationals/Header/Header';
 import { useHistory } from 'react-router-dom';
 import refreshIcon from './refresh.png';
+import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
+import Loading from '../../presentationals/Loading/Loading';
 function Explore() {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -30,18 +32,37 @@ function Explore() {
 	return (
 		<>
 			<Header isSignedIn={requestStatus === 'fulfilled' ? true : false} />
-			<section className='mt6 mh2 f7'>
-				<button className='bg-transparent b--none pointer grow' onClick={refresh}>
-					<img alt='refresh' className='h1 w1' src={refreshIcon} />
-				</button>
-				<h1 className='flex ml4 moon-gray'>Explore</h1>
-
-				<div className='mt5'>
-					{exploreQuotes.map((quote) => {
-						return <QuotePost key={quote.id} quoteId={quote.id} username={quote.user_name} title={quote.title} quote={`"${quote.quote}"`} likeCount={quote.likeCount} didLike={quote.didLike} date={quote.date_posted} hasComments={true} />;
-					})}
-				</div>
-			</section>
+			<>
+				{requestStatus === 'pending' ? (
+					<Loading />
+				) : requestStatus === 'fulfilled' ? (
+					<section className='mt6 mh2 f7'>
+						<button className='bg-transparent b--none pointer grow' onClick={refresh}>
+							<img alt='refresh' className='h1 w1' src={refreshIcon} />
+						</button>
+						<h1 className='flex ml4 moon-gray'>Explore</h1>
+						<div className='mt5'>
+							{exploreQuotes.map((quote) => {
+								return (
+									<QuotePost
+										key={quote.id}
+										quoteId={quote.id}
+										username={quote.user_name}
+										title={quote.title}
+										quote={`"${quote.quote}"`}
+										likeCount={quote.likeCount}
+										didLike={quote.didLike}
+										date={quote.date_posted}
+										hasComments={true}
+									/>
+								);
+							})}
+						</div>
+					</section>
+				) : (
+					<PleaseSignin />
+				)}
+			</>
 		</>
 	);
 }

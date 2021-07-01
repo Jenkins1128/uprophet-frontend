@@ -15,6 +15,7 @@ import EditProfile from './features/containers/EditProfile/EditProfile';
 import ChangePassword from './features/containers/ChangePassword/ChangePassword';
 import ForgotPassword from './features/containers/ForgotPassword/ForgotPassword';
 import QuoteComments from './features/containers/QuoteComments/QuoteComments';
+import Searchresults from './features/containers/Searchresults/Searchresults';
 
 function App() {
 	return (
@@ -33,6 +34,7 @@ function App() {
 						<Route exact path='/editprofile' component={EditProfile} />
 						<Route exact path='/changepassword' component={ChangePassword} />
 						<Route exact path='/forgotpassword' component={ForgotPassword} />
+						<Route exact path='/search/:searchtext' component={Searchresults} />
 						<Route exact path='/quote/:quoteId' component={QuoteComments} />
 						<Route path='/profile' component={Profile} />
 						<Route exact path='/terms' component={Terms} />
