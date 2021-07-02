@@ -9,13 +9,13 @@ import Home from './features/containers/Home/Home';
 import Profile from './features/containers/Profile/Profile';
 import Explore from './features/containers/Explore/Explore';
 import Notifications from './features/containers/Notifications/Notifications';
-import Following from './features/containers/Following/Following';
-import Followers from './features/containers/Followers/Followers';
 import EditProfile from './features/containers/EditProfile/EditProfile';
 import ChangePassword from './features/containers/ChangePassword/ChangePassword';
 import ForgotPassword from './features/containers/ForgotPassword/ForgotPassword';
 import QuoteComments from './features/containers/QuoteComments/QuoteComments';
 import Searchresults from './features/containers/Searchresults/Searchresults';
+import Favoriters from './features/containers/Favoriters/Favoriters';
+import Favoriting from './features/containers/Favoriting/Favoriting';
 
 function App() {
 	return (
@@ -29,15 +29,14 @@ function App() {
 						<Route exact path='/signin' component={Signin} />
 						<Route exact path='/notifications' component={Notifications} />
 						<Route exact path='/explore' component={Explore} />
-						{/* <Route exact path='/followers' component={Followers} />
-						<Route exact path='/following' component={Following} /> */}
 						<Route exact path='/editprofile' component={EditProfile} />
 						<Route exact path='/changepassword' component={ChangePassword} />
 						<Route exact path='/forgotpassword' component={ForgotPassword} />
-						{/* <Route exact path='/search/' component={Searchresults} /> */}
 						<Route exact path='/quote/:quoteId' component={QuoteComments} />
 						<Route exact path='/terms' component={Terms} />
 						<Route exact path={['/search', '/search/:searchtext']} component={Searchresults} />
+						<Route path='/:username/favoriters' component={Favoriters} />
+						<Route path='/:username/favoriting' component={Favoriting} />
 						<Route path='/:username' component={Profile} />
 					</Switch>
 				</main>

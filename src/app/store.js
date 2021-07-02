@@ -10,6 +10,10 @@ import getUserReducer from '../features/presentationals/Header/getUserSlice';
 import getNotificationCountReducer from '../features/presentationals/Header/getNotificationCountSlice';
 import exploreQuotesReducer from '../features/containers/Explore/exploreQuotesSlice';
 import searchReducer from '../features/containers/Searchresults/searchSlice';
+import profileReducer from '../features/containers/Profile/profileSlice';
+import userInfoReducer from '../features/containers/Profile/userInfoSlice';
+import favoritersReducer from '../features/containers/Favoriters/favoritersSlice';
+import favoritingReducer from '../features/containers/Favoriting/favoritingSlice';
 //import changePasswordReducer from '../features/containers/ChangePassword/changePasswordSlice';
 export const store = configureStore({
 	reducer: {
@@ -23,7 +27,11 @@ export const store = configureStore({
 		getUser: getUserReducer,
 		notificationCount: getNotificationCountReducer,
 		exploreQuotes: exploreQuotesReducer,
-		search: searchReducer
+		search: searchReducer,
+		profile: profileReducer,
+		userInfo: userInfoReducer,
+		favoriters: favoritersReducer,
+		favoriting: favoritingReducer
 
 		//changePassword: changePasswordReducer
 	}

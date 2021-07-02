@@ -3,7 +3,7 @@ import Logo from './Logo/Logo';
 
 import Navigation from '../Navigation/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAsync, selectCurrentUser, selectFirstRequestStatus } from './getUserSlice';
+import { getUserAsync, selectCurrentUser } from './getUserSlice';
 
 const Header = ({ isSignedIn }) => {
 	const dispatch = useDispatch();
