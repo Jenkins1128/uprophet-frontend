@@ -6,8 +6,9 @@ import Compass from '../compass.png';
 import Home from '../home.png';
 import Logout from '../logout.png';
 import Userphoto from '../../../containers/Userphoto/Userphoto';
+import RedDot from '../reddot.png';
 
-const Menu = ({ isSignedIn, logout, currentUser }) => {
+const Menu = ({ isSignedIn, hasNotifications, logout, currentUser }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
@@ -57,7 +58,10 @@ const Menu = ({ isSignedIn, logout, currentUser }) => {
 					</Link>
 					<Link to='/notifications' onClick={closeNav} className='f6 grow b'>
 						<div className='flex items-center'>
-							<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
+							<div className='relative'>
+								<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
+								{hasNotifications && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
+							</div>
 							&nbsp;{'Notifications'}
 						</div>
 					</Link>

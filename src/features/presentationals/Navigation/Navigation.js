@@ -9,8 +9,9 @@ import Menu from './Menu/Menu';
 import { useDispatch } from 'react-redux';
 import { logoutAsync } from './navSlice';
 import Userphoto from '../../containers/Userphoto/Userphoto';
+import RedDot from './reddot.png';
 
-const Navigation = ({ currentUser, isSignedIn }) => {
+const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
 		query: '(min-device-width: 1224px)'
 	});
@@ -57,7 +58,10 @@ const Navigation = ({ currentUser, isSignedIn }) => {
 									<img title='Home' className='w2 h2' alt='Home' src={Home} />
 								</Link>
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
-									<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
+									<div className='relative'>
+										<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
+										{hasNotifications && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
+									</div>
 								</Link>
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>
 									<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
@@ -86,7 +90,7 @@ const Navigation = ({ currentUser, isSignedIn }) => {
 							</>
 						)
 					) : (
-						<Menu isSignedIn={isSignedIn} logout={logout} currentUser={currentUser} />
+						<Menu isSignedIn={isSignedIn} hasNotifications={hasNotifications} logout={logout} currentUser={currentUser} />
 					)}
 				</>
 			)}

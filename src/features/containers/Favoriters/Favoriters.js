@@ -23,7 +23,7 @@ function Favoriters() {
 				<div className='mt5'>
 					{favoriters.length > 0 &&
 						favoriters.map((favoriter, i) => {
-							return <FavoritersCard key={i} username={favoriter.from_user} didFavorite={favoriter.didFavorite} />;
+							return <FavoritersCard key={i} currentUser={favoriter.currentUser} username={favoriter.from_user} didFavorite={favoriter.didFavorite} />;
 						})}
 				</div>
 			</section>

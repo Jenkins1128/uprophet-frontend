@@ -9,6 +9,7 @@ import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { selectUserInfo, userInfoAsync } from './userInfoSlice';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 function Profile() {
 	const { username } = useParams();
@@ -17,7 +18,7 @@ function Profile() {
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectRequestStatus);
 	const profileQuotes = useSelector(selectProfileQuotes);
-	const useInfo = useSelector(selectUserInfo);
+	const userInfo = useSelector(selectUserInfo);
 	//TODO - HANDLE IF USER DOESN"T EXIST
 
 	useEffect(() => {
@@ -36,7 +37,7 @@ function Profile() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
+			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} />
 			<>
 				{requestStatus1 === 'pending' ? (
 					<Loading />
@@ -46,9 +47,16 @@ function Profile() {
 					) : requestStatus2 === 'fulfilled' ? (
 						<section className='mt6 mh2 f7'>
 							<div className='flex flex-column'>
-								<Link to='/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
-									Edit Profile
-								</Link>
+								{userInfo.currentUser === username ? (
+									<Link to='/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
+										Edit Profile
+									</Link>
+								) : (
+									<div className='self-end'>
+										<FavoriteButton username={username} didFavorite={userInfo.didFavorite} />
+									</div>
+								)}
+
 								<h1 className='flex ml4 light-green'>{username}</h1>
 
 								<div className='flex justify-center'>
@@ -57,14 +65,14 @@ function Profile() {
 										<div className='flex mt4'>
 											<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.length} quotes</p>
 											<Link to={`/${username}/favoriters`} className='ml4 no-underline moon-gray b f5-l f6-m'>
-												{useInfo.favoriters} favoriters
+												{userInfo.favoriters} favoriters
 											</Link>
 											<Link to={`/${username}/favoriting`} className='ml4 no-underline moon-gray b f5-l f6-m'>
-												{useInfo.favoriting} favoriting
+												{userInfo.favoriting} favoriting
 											</Link>
 										</div>
 										<div className='mt3'>
-											<p className='tc'>{useInfo.bio}</p>
+											<p className='tc'>{userInfo.bio}</p>
 										</div>
 									</div>
 								</div>

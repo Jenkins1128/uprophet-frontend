@@ -23,7 +23,7 @@ function Favoriting() {
 				<div className='mt5'>
 					{favoriting.length > 0 &&
 						favoriting.map((favoriter, i) => {
-							return <FavoritingCard key={i} username={favoriter.to_user} didFavorite={favoriter.didFavorite} />;
+							return <FavoritingCard key={i} currentUser={favoriter.currentUser} username={favoriter.to_user} didFavorite={favoriter.didFavorite} />;
 						})}
 				</div>
 			</section>

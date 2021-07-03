@@ -31,7 +31,7 @@ const Searchresults = () => {
 						<h1 className='flex ml4 moon-gray'>Search Results for "{searchtext}"</h1>
 						<div className='mt5'>
 							{results.map((result) => {
-								return <ResultCard key={result.id} username={result.user_name} didFavorite={result.didFavorite} />;
+								return <ResultCard key={result.id} currentUser={result.currentUser} username={result.user_name} didFavorite={result.didFavorite} />;
 							})}
 						</div>
 					</section>

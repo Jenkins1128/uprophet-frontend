@@ -14,6 +14,7 @@ import profileReducer from '../features/containers/Profile/profileSlice';
 import userInfoReducer from '../features/containers/Profile/userInfoSlice';
 import favoritersReducer from '../features/containers/Favoriters/favoritersSlice';
 import favoritingReducer from '../features/containers/Favoriting/favoritingSlice';
+import notificationsReducer from '../features/containers/Notifications/notificationsSlice';
 //import changePasswordReducer from '../features/containers/ChangePassword/changePasswordSlice';
 export const store = configureStore({
 	reducer: {
@@ -31,7 +32,8 @@ export const store = configureStore({
 		profile: profileReducer,
 		userInfo: userInfoReducer,
 		favoriters: favoritersReducer,
-		favoriting: favoritingReducer
+		favoriting: favoritingReducer,
+		notifications: notificationsReducer
 
 		//changePassword: changePasswordReducer
 	}
