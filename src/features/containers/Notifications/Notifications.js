@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import Notification from './Notification/Notification';
-import { selectNotifications, selectRequestStatus } from './notificationsSlice';
+import { getNotificationsAsync, selectNotifications, selectRequestStatus } from './notificationsSlice';
 import Header from '../../presentationals/Header/Header';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import Loading from '../../presentationals/Loading/Loading';
@@ -19,12 +18,13 @@ function Notifications() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getNotificationCountAsync('http://localhost:3001/notifications'));
+		dispatch(getNotificationsAsync('http://localhost:3001/notifications'));
 	}, [dispatch]);
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} />
+			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} notiDotOff={true} />
 			<>
+				{console.log(notifications)}
 				{requestStatus1 === 'pending' ? (
 					<Loading />
 				) : requestStatus1 === 'fulfilled' ? (
@@ -34,8 +34,14 @@ function Notifications() {
 						<section className='mt6 mh2 f7'>
 							<h1 className='flex ml4 moon-gray'>Notifications</h1>
 							<div className='mt5'>
-								{notifications.map((notification, i) => {
-									return <Notification key={i} username={notification.username} notification={notification.notification} />;
+								{notifications.map((notification) => {
+									let currentUser;
+									if (notification.to_user) {
+										currentUser = notification.to_user;
+									} else if (notification.user_name) {
+										currentUser = notification.user_name;
+									}
+									return <Notification key={notification.id} username={notification.notice.split(' ')[0]} notice={notification.notice} currentUser={currentUser} quotesId={notification.quotes_id} date={notification.date} />;
 								})}
 							</div>
 						</section>

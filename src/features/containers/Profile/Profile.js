@@ -48,7 +48,7 @@ function Profile() {
 						<section className='mt6 mh2 f7'>
 							<div className='flex flex-column'>
 								{userInfo.currentUser === username ? (
-									<Link to='/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
+									<Link to='/account/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
 										Edit Profile
 									</Link>
 								) : (

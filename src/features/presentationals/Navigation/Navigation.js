@@ -11,7 +11,7 @@ import { logoutAsync } from './navSlice';
 import Userphoto from '../../containers/Userphoto/Userphoto';
 import RedDot from './reddot.png';
 
-const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
+const Navigation = ({ hasNotifications, notiDotOff, currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
 		query: '(min-device-width: 1224px)'
 	});
@@ -60,7 +60,7 @@ const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
 									<div className='relative'>
 										<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
-										{hasNotifications && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
+										{hasNotifications && !notiDotOff && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
 									</div>
 								</Link>
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>
@@ -90,7 +90,7 @@ const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
 							</>
 						)
 					) : (
-						<Menu isSignedIn={isSignedIn} hasNotifications={hasNotifications} logout={logout} currentUser={currentUser} />
+						<Menu isSignedIn={isSignedIn} hasNotifications={hasNotifications} notiDotOff={notiDotOff} logout={logout} currentUser={currentUser} />
 					)}
 				</>
 			)}

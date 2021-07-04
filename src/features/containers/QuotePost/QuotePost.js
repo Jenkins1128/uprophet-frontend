@@ -11,7 +11,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 		return newDate.toISOString();
 	};
 	return (
-		<article className='tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
+		<article id={quoteId} className='tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
 			<div className='flex absolute top-1 left-1'>
 				<Link to={`/${username}`}>
 					<Userphoto username={username} />
@@ -28,7 +28,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 				<div className='flex items-center'>
 					<LikeButton quoteId={quoteId} likeCount={likeCount} didLike={didLike} />
 					{hasComments && (
-						<Link to={`quote/${quoteId}`} className='ml4 no-underline f5 b light-green grow '>
+						<Link to={`/quote/${quoteId}`} className='ml4 no-underline f5 b light-green grow '>
 							Comments
 						</Link>
 					)}

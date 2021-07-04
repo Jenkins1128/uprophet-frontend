@@ -8,7 +8,7 @@ import Logout from '../logout.png';
 import Userphoto from '../../../containers/Userphoto/Userphoto';
 import RedDot from '../reddot.png';
 
-const Menu = ({ isSignedIn, hasNotifications, logout, currentUser }) => {
+const Menu = ({ isSignedIn, hasNotifications, notiDotOff, logout, currentUser }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
@@ -60,7 +60,7 @@ const Menu = ({ isSignedIn, hasNotifications, logout, currentUser }) => {
 						<div className='flex items-center'>
 							<div className='relative'>
 								<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
-								{hasNotifications && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
+								{hasNotifications && !notiDotOff && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
 							</div>
 							&nbsp;{'Notifications'}
 						</div>

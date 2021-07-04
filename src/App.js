@@ -9,7 +9,7 @@ import Home from './features/containers/Home/Home';
 import Profile from './features/containers/Profile/Profile';
 import Explore from './features/containers/Explore/Explore';
 import Notifications from './features/containers/Notifications/Notifications';
-import EditProfile from './features/containers/EditProfile/EditProfile';
+import EditProfile from './features/containers/Profile/EditProfile/EditProfile';
 import ChangePassword from './features/containers/ChangePassword/ChangePassword';
 import ForgotPassword from './features/containers/ForgotPassword/ForgotPassword';
 import QuoteComments from './features/containers/QuoteComments/QuoteComments';
@@ -29,7 +29,6 @@ function App() {
 						<Route exact path='/signin' component={Signin} />
 						<Route exact path='/notifications' component={Notifications} />
 						<Route exact path='/explore' component={Explore} />
-						<Route exact path='/editprofile' component={EditProfile} />
 						<Route exact path='/changepassword' component={ChangePassword} />
 						<Route exact path='/forgotpassword' component={ForgotPassword} />
 						<Route exact path='/quote/:quoteId' component={QuoteComments} />
@@ -37,6 +36,7 @@ function App() {
 						<Route exact path={['/search', '/search/:searchtext']} component={Searchresults} />
 						<Route path='/:username/favoriters' component={Favoriters} />
 						<Route path='/:username/favoriting' component={Favoriting} />
+						<Route exact path='/account/edit' component={EditProfile} />
 						<Route path='/:username' component={Profile} />
 					</Switch>
 				</main>

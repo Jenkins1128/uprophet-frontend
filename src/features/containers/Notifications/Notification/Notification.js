@@ -2,27 +2,41 @@ import React from 'react';
 import forward from './forward2.png';
 import { Link } from 'react-router-dom';
 import Userphoto from '../../Userphoto/Userphoto';
+import { HashLink } from 'react-router-hash-link';
+import ReactTimeAgo from 'react-time-ago';
 
-const Notification = ({ username, notification }) => {
+const Notification = ({ username, notice, currentUser, quotesId, date }) => {
+	const offsetDate = (date) => {
+		var newDate = new Date(date);
+		newDate.setHours(newDate.getHours() - 7);
+		return newDate.toISOString();
+	};
 	return (
-		<article class='dt w-100 bb b--black-05 pb2 mt2' href='#0'>
+		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
-				<div class='dtc w2 w3-ns v-mid'>
+				<div className='dtc w2 w3-ns v-mid'>
 					<Link to={`/${username}`}>
 						<Userphoto username={username} />
 					</Link>
 				</div>
-				<div class='dtc v-mid pl3'>
-					<h1 class='f6 f5-ns fw6 lh-title light-green mv0'>{notification}</h1>
+				<div className='dtc v-mid pl3'>
+					<h1 className='f6 f5-ns fw6 lh-title light-green mv0'>{notice}</h1>
+					<div>
+						<ReactTimeAgo date={new Date(offsetDate(date))} locale='en' timeStyle='mini-minute-now' />
+					</div>
 				</div>
 			</div>
 
-			<div class='dtc v-mid'>
-				<form class='w-100 tr'>
-					<button class=' button-reset bg-transparent b--none dim pointer pv1 black-60' type='submit'>
+			<div className='self-center'>
+				{!quotesId ? (
+					<Link to={`/${username}`}>
 						<img src={forward} alt='forward' className='w2  h2 bg-light-green br-100' />
-					</button>
-				</form>
+					</Link>
+				) : (
+					<HashLink smooth to={`/${currentUser}/#${quotesId}`}>
+						<img src={forward} alt='forward' className='w2  h2 bg-light-green br-100' />
+					</HashLink>
+				)}
 			</div>
 		</article>
 	);
