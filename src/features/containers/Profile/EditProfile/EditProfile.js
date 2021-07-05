@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Userphoto from '../../Userphoto/Userphoto';
-import Header from '../../../presentationals/Header/Header';
 import PleaseSignin from '../../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../../presentationals/Loading/Loading';
 import { getUserAsync, selectFirstRequestStatus } from '../../../presentationals/Header/getUserSlice';

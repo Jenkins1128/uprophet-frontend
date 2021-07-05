@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Logo from './Logo/Logo';
 
 import Navigation from '../Navigation/Navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserAsync, selectCurrentUser } from './getUserSlice';
-import { getNotificationCountAsync, selectNotificationCount } from './getNotificationCountSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from './getUserSlice';
+import { selectNotificationCount } from './getNotificationCountSlice';
 
 const Header = ({ notiDotOff }) => {
 	const currentUser = useSelector(selectCurrentUser);

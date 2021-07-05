@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Header from '../../presentationals/Header/Header';
 import { changePasswordAsync, changePasswordSignInAsync } from './changePasswordSlice';
 import ChangePasswordForm from './ChangePasswordForm';
 
@@ -66,7 +65,6 @@ function ChangePassword() {
 
 	return (
 		<>
-			<Header isSignedIn={false} />
 			<section className='pt6 '>
 				<h1 className='moon-gray'>Change Password?</h1>
 

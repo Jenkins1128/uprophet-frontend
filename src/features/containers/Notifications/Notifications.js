@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from './Notification/Notification';
 import { getNotificationsAsync, selectNotifications, selectRequestStatus } from './notificationsSlice';
-import Header from '../../presentationals/Header/Header';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
@@ -6,7 +6,6 @@ import QuotePoster from './QuotePoster/QuotePoster';
 import { homeAsync, selectLatestQuotes, selectSecondRequestStatus } from './homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import Header from '../../presentationals/Header/Header';
 import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
@@ -23,7 +22,14 @@ function Home() {
 	const requestStatus2 = useSelector(selectSecondRequestStatus);
 
 	const dispatch = useDispatch();
-	// const location = useLocation();
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
@@ -100,7 +106,7 @@ function Home() {
 						<PleaseSignin />
 					)
 				) : (
-					<Topquotes />
+					<Topquotes isMounted={mounted.current} />
 				)}
 			</>
 		</>

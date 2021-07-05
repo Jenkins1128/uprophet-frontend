@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
+import { getUserAsync } from '../../presentationals/Header/getUserSlice';
 import { loginAsync } from './signinSlice';
 
 function Signin() {
@@ -9,6 +10,10 @@ function Signin() {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	useEffect(() => {
+		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+	}, [dispatch]);
 
 	const handleUsernameOnchange = (event) => {
 		const { value } = event.target;

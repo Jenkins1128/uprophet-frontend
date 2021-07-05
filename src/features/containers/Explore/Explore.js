@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import QuotePost from '../QuotePost/QuotePost';
 import { getExploreQuotesAsync, selectExploreQuotes } from './exploreQuotesSlice';
-import Header from '../../presentationals/Header/Header';
 import { useHistory } from 'react-router-dom';
 import refreshIcon from './refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';

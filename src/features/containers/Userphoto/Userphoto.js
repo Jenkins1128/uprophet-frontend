@@ -6,22 +6,24 @@ import { userPhotoAsync } from './userPhotoSlice';
 const Userphoto = ({ size, username }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
-	// const mounted = useRef(false);
+	const mounted = useRef(null);
 
 	useEffect(() => {
-		dispatch(userPhotoAsync({ url: 'http://localhost:3001/getPhoto', username })).then((res) => {
-			if (res.meta.requestStatus === 'fulfilled') {
-				setBase64Img(res.payload.photo);
-			}
-		});
-	}, [dispatch, username]);
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
-	// useEffect(() => {
-	// 	mounted.current = true;
-	// 	return () => {
-	// 		mounted.current = false;
-	// 	};
-	// }, []);
+	useEffect(() => {
+		if (mounted) {
+			dispatch(userPhotoAsync({ url: 'http://localhost:3001/getPhoto', username })).then((res) => {
+				if (res.meta.requestStatus === 'fulfilled') {
+					setBase64Img(res.payload.photo);
+				}
+			});
+		}
+	}, [dispatch, username]);
 
 	const getSize = () => {
 		switch (size) {

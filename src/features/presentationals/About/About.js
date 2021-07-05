@@ -1,6 +1,5 @@
 import React from 'react';
 import profilePic from './profile.jpg';
-import Header from '../../presentationals/Header/Header';
 
 const About = () => {
 	return (

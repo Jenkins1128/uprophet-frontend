@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import QuotePost from '../QuotePost/QuotePost';
 import Userphoto from '../Userphoto/Userphoto';
 import { profileAsync, selectProfileQuotes, selectRequestStatus } from './profileSlice';
-import Header from '../../presentationals/Header/Header';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';

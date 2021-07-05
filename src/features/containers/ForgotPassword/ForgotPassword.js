@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Header from '../../presentationals/Header/Header';
 import Loading from '../../presentationals/Loading/Loading';
 import ForgotPasswordForm from './CheckEmailForm';
 import { forgotPasswordAsync } from './forgotPasswordSlice';
@@ -38,7 +37,6 @@ function ForgotPassword() {
 
 	return (
 		<>
-			<Header isSignedIn={false} />
 			{!response ? (
 				<Loading />
 			) : (
@@ -53,7 +51,7 @@ function ForgotPassword() {
 									</div>
 									<div className='mv3'>
 										<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='text' name='email' id='email' onChange={handleEmailOnchange} />
-							     	</div>
+									</div>
 								</fieldset>
 								<div className='lh-copy mt1'>
 									<button className='b ph3 pv2 input-reset ba br4 b--black bg-light-green grow pointer f6 dib' type='submit' onClick={initCheckEmailForm}>
