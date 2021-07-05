@@ -1,9 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-const initialState = {
-	status: 'idle',
-	isIn: false
-};
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const signUpAsync = createAsyncThunk('signUpAsync/status', async (data, { rejectWithValue }) => {
 	const { url, name, username, password, email } = data;
@@ -20,28 +15,12 @@ export const signUpAsync = createAsyncThunk('signUpAsync/status', async (data, {
 				email
 			})
 		});
+		if (response.status >= 400 && response.status < 500) {
+			throw new Error(response.status);
+		}
 		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
-	}
-});
-
-export const signUpSlice = createSlice({
-	name: 'signUp',
-	initialState,
-	reducers: {},
-	extraReducers: (builder) => {
-		builder
-			.addCase(signUpAsync.pending, (state) => {
-				state.status = 'loading';
-			})
-			.addCase(signUpAsync.fulfilled, (state) => {
-				state.status = 'success';
-				state.isIn = true;
-			})
-			.addCase(signUpAsync.rejected, (state) => {
-				state.status = 'rejected';
-			});
 	}
 });

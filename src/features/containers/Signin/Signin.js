@@ -10,6 +10,8 @@ function Signin() {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [isIncorrectError, setIsIncorrectError] = useState(false);
+	const [isEmptyError, setIsEmptyError] = useState(false);
 
 	useEffect(() => {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
@@ -27,26 +29,43 @@ function Signin() {
 
 	const submitLogin = (event) => {
 		event.preventDefault();
-		dispatch(loginAsync({ url: 'http://localhost:3001/signin', username, password })).then((res) => {
-			console.log(res);
-			//console.log(res.meta.requestStatus);
-			if (res.meta.requestStatus === 'fulfilled') {
-				history.push('/');
-			}
-		});
+		if (username && password) {
+			dispatch(loginAsync({ url: 'http://localhost:3001/signin', username, password })).then((res) => {
+				console.log(res);
+				//console.log(res.meta.requestStatus);
+				if (res.meta.requestStatus === 'fulfilled') {
+					history.push('/');
+				} else {
+					setIsIncorrectError(true);
+				}
+			});
+		} else {
+			setIsEmptyError(true);
+		}
 	};
 
 	return (
 		<>
 			<section className='pt7 '>
 				<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+					{isIncorrectError && (
+						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<p className='f5 white'>Username or password is incorrect.</p>
+						</div>
+					)}
+					{isEmptyError && (
+						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<p className='f5 white'>Please fill all the fields.</p>
+						</div>
+					)}
+
 					<form className='measure center pa3 black-80'>
 						<fieldset id='sign_in' className='ba b--transparent ph0 mh0'>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' name='name' id='name' onChange={handleUsernameOnchange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' maxLength='20' placeholder='Username' type='text' name='name' id='name' onChange={handleUsernameOnchange} />
 							</div>
 							<div className='mv3'>
-								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' name='password' id='password' onChange={handlePasswordOnchange} />
+								<input className='b pa2 input-reset ba br4 bg-transparent w-75' maxLength='128' placeholder='Password' type='password' name='password' id='password' onChange={handlePasswordOnchange} />
 							</div>
 						</fieldset>
 						<div className='lh-copy mt1'>

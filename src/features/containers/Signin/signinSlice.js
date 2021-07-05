@@ -24,8 +24,8 @@ export const loginAsync = createAsyncThunk('signin/status', async (data, { rejec
 			})
 		});
 
-		if (response.status === 401) {
-			throw new Error('Username or password is incorrect.');
+		if (response.status >= 400 && response.status < 500) {
+			throw new Error(response.status);
 		}
 		// The value we return becomes the `fulfilled` action payload
 		return response.status;

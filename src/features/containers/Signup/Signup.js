@@ -13,6 +13,9 @@ function Signup() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [terms, setTerms] = useState(false);
+	const [isExistsError, setIsExistsError] = useState(false);
+	const [isTermsError, setIsTermsError] = useState(false);
+	const [isEmptyError, setIsEmptyError] = useState(false);
 
 	const onNameChange = (event) => {
 		const { value } = event.target;
@@ -36,40 +39,33 @@ function Signup() {
 
 	const onTermsChange = (event) => {
 		const { value } = event.target;
-		console.log('Terms ', value);
 		setTerms(value === 'on' ? true : false);
 	};
 
 	const submitLogin = (username, password) => {
 		dispatch(loginAsync({ url: 'http://localhost:3001/signin', username, password })).then((res) => {
-			// do additional work
-
-			//console.log(res.meta.requestStatus);
-			console.log(res);
-			//console.log(res.meta.requestStatus);
 			if (res.meta.requestStatus === 'fulfilled') {
-				history.push({
-					pathname: '/',
-					state: {
-						// location state
-						isIn: true
-					}
-				});
+				history.push('/');
 			}
 		});
 	};
 
 	const signup = (event) => {
 		event.preventDefault();
-		if (terms) {
-			dispatch(signUpAsync({ url: 'http://localhost:3001/signup', name, username, password, email })).then((res) => {
-				console.log(res);
-				if (res.meta.requestStatus === 'fulfilled') {
-					submitLogin(username, password);
-				}
-			});
+		if (username && name && password && email) {
+			if (terms) {
+				dispatch(signUpAsync({ url: 'http://localhost:3001/signup', name, username, password, email })).then((res) => {
+					if (res.meta.requestStatus === 'fulfilled') {
+						submitLogin(username, password);
+					} else {
+						setIsExistsError(true);
+					}
+				});
+			} else {
+				if (!terms) setIsTermsError(true);
+			}
 		} else {
-			console.log('Please accept terms.');
+			setIsEmptyError(true);
 		}
 	};
 
@@ -78,19 +74,35 @@ function Signup() {
 			<section className='pt6'>
 				<h1 className='moon-gray'>Join Uprophet today!</h1>
 				<article className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>
+					{isExistsError && (
+						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<p className='f5 white'>Username already exists.</p>
+						</div>
+					)}
+					{isTermsError && (
+						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<p className='f5 white'>Please accept terms.</p>
+						</div>
+					)}
+					{isEmptyError && (
+						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<p className='f5 white'>Please fill all the fields.</p>
+						</div>
+					)}
+
 					<div className='measure pa3 black-80'>
 						<fieldset id='sign_up' className='ba b--transparent ph0 mh0'>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Name' type='text' name='name' id='name' onChange={onNameChange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Name' type='text' maxLength='20' name='name' id='name' onChange={onNameChange} />
 							</div>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' name='username' id='username' onChange={onUsernameChange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' name='username' id='username' onChange={onUsernameChange} />
 							</div>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='email' name='email-address' id='email-address' onChange={onEmailChange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='email' maxLength='100' name='email-address' id='email-address' onChange={onEmailChange} />
 							</div>
 							<div className='mv3'>
-								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' name='password' id='password' onChange={onPasswordChange} />
+								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' name='password' id='password' onChange={onPasswordChange} />
 							</div>
 							<div className='mv3'>
 								<input className='b pa2 ba br4 bg-transparent' type='radio' name='terms' id='terms' onChange={onTermsChange} />

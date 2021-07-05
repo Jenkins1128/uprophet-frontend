@@ -7,7 +7,7 @@ const QuotePoster = ({ postQuote, onQuoteChange, onTitleChange }) => {
 				<form className='measure center pa3 ph1 black-80' onSubmit={postQuote}>
 					<fieldset id='sign_in' className='flex flex-column ba b--transparent '>
 						<div className='mt2 ph4'>
-							<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Title' type='text' onChange={onTitleChange} />
+							<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Title' type='text' maxLength='20' onChange={onTitleChange} />
 						</div>
 						<div className='mt3  flex'>
 							<strong className='f2 mr2 moon-gray'>"</strong>

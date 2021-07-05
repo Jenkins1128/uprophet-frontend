@@ -14,6 +14,11 @@ function ChangePassword() {
 	const [verifyPassword, setVerifyPassword] = useState('');
 	const [changePasswordForm, setChangePasswordForm] = useState(false);
 
+	const [isIncorrectError, setIsIncorrectError] = useState(false);
+	const [isIncorrectVerifyError, setIsIncorrectVerifyError] = useState(false);
+	const [isEmptyError1, setIsEmptyError1] = useState(false);
+	const [isEmptyError2, setIsEmptyError2] = useState(false);
+
 	const handleUsernameOnchange = (event) => {
 		const { value } = event.target;
 		setUsername(value);
@@ -36,30 +41,35 @@ function ChangePassword() {
 
 	const initChangePasswordForm = (event) => {
 		event.preventDefault();
-
-		dispatch(changePasswordSignInAsync({ url: 'http://localhost:3001/changePasswordSignIn', username, password })).then((res) => {
-			console.log(res);
-			if (res.meta.requestStatus === 'fulfilled') {
-				setChangePasswordForm(true);
-			}
-		});
+		if (username && password) {
+			dispatch(changePasswordSignInAsync({ url: 'http://localhost:3001/changePasswordSignIn', username, password })).then((res) => {
+				console.log(res);
+				if (res.meta.requestStatus === 'fulfilled') {
+					setChangePasswordForm(true);
+				} else {
+					setIsIncorrectError(true);
+				}
+			});
+		} else {
+			setIsEmptyError1(true);
+		}
 	};
 
 	const changePassword = (event) => {
 		event.preventDefault();
-
-		if (newPassword === verifyPassword) {
-			console.log('newPassword ' + newPassword);
-			console.log('verifyPassword ' + verifyPassword);
-			dispatch(changePasswordAsync({ url: 'http://localhost:3001/changePassword', username, newPassword })).then((res) => {
-				console.log(res);
-				if (res.meta.requestStatus === 'fulfilled') {
-					console.log('PASSWORD CHANGED!');
-					history.push('/signin');
-				}
-			});
+		if (newPassword && verifyPassword) {
+			if (newPassword === verifyPassword) {
+				dispatch(changePasswordAsync({ url: 'http://localhost:3001/changePassword', username, newPassword })).then((res) => {
+					console.log(res);
+					if (res.meta.requestStatus === 'fulfilled') {
+						history.push('/signin');
+					}
+				});
+			} else {
+				setIsIncorrectVerifyError(true);
+			}
 		} else {
-			console.log('PASSWORDS INCORRECT!');
+			setIsEmptyError2(true);
 		}
 	};
 
@@ -70,13 +80,24 @@ function ChangePassword() {
 
 				{!changePasswordForm ? (
 					<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+						{isIncorrectError && (
+							<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+								<p className='f5 white'>Username or password is incorrect.</p>
+							</div>
+						)}
+						{isEmptyError1 && (
+							<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+								<p className='f5 white'>Please fill all the fields.</p>
+							</div>
+						)}
+
 						<form className='measure center pa3 black-80'>
 							<fieldset id='change_password_signin' className='ba b--transparent ph0 mh0'>
 								<div className='mt3'>
-									<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' name='name' id='name' onChange={handleUsernameOnchange} />
+									<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' name='name' id='name' onChange={handleUsernameOnchange} />
 								</div>
 								<div className='mv3'>
-									<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' name='password' id='password' onChange={handlePasswordOnchange} />
+									<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' name='password' id='password' onChange={handlePasswordOnchange} />
 								</div>
 							</fieldset>
 							<div className='lh-copy mt1'>
@@ -87,7 +108,13 @@ function ChangePassword() {
 						</form>
 					</article>
 				) : (
-					<ChangePasswordForm handleNewPasswordOnchange={handleNewPasswordOnchange} handleVerifyPasswordOnchange={handleVerifyPasswordOnchange} changePassword={changePassword} />
+					<ChangePasswordForm
+						handleNewPasswordOnchange={handleNewPasswordOnchange}
+						handleVerifyPasswordOnchange={handleVerifyPasswordOnchange}
+						isIncorrectVerifyError={isIncorrectVerifyError}
+						isEmptyError2={isEmptyError2}
+						changePassword={changePassword}
+					/>
 				)}
 			</section>
 		</>
