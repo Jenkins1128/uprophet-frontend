@@ -16,11 +16,13 @@ import QuoteComments from './features/containers/QuoteComments/QuoteComments';
 import Searchresults from './features/containers/Searchresults/Searchresults';
 import Favoriters from './features/containers/Favoriters/Favoriters';
 import Favoriting from './features/containers/Favoriting/Favoriting';
+import Header from './features/presentationals/Header/Header';
 
 function App() {
 	return (
 		<Router>
 			<div className='App'>
+				<Header />
 				<main>
 					<Switch>
 						<Route exact path='/' component={Home} />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import Header from '../../presentationals/Header/Header';
 import { signUpAsync } from './signUpSlice';
 import { loginAsync } from '../Signin/signinSlice';
 
@@ -76,7 +75,6 @@ function Signup() {
 
 	return (
 		<>
-			<Header isSignedIn={false} />
 			<section className='pt6'>
 				<h1 className='moon-gray'>Join Uprophet today!</h1>
 				<article className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>

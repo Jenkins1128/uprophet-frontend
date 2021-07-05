@@ -10,6 +10,7 @@ import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { selectUserInfo, userInfoAsync } from './userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 
 function Profile() {
 	const { username } = useParams();
@@ -25,6 +26,11 @@ function Profile() {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
 	}, [dispatch]);
 
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+	}, [dispatch]);
+
 	//get profile quotes
 	useEffect(() => {
 		dispatch(profileAsync({ url: 'http://localhost:3001/profile', username }));
@@ -37,7 +43,6 @@ function Profile() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} />
 			<>
 				{requestStatus1 === 'pending' ? (
 					<Loading />

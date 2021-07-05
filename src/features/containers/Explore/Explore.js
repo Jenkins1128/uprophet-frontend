@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import refreshIcon from './refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
+import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 function Explore() {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -17,6 +18,11 @@ function Explore() {
 
 	useEffect(() => {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+	}, [dispatch]);
+
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -31,7 +37,6 @@ function Explore() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus === 'fulfilled' ? true : false} />
 			<>
 				{requestStatus === 'pending' ? (
 					<Loading />

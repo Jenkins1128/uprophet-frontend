@@ -6,6 +6,8 @@ import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Header from '../../presentationals/Header/Header';
 import ResultCard from './ResultCard/ResultCard';
 import Loading from '../../presentationals/Loading/Loading';
+import { getUserAsync } from '../../presentationals/Header/getUserSlice';
+import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 
 const Searchresults = () => {
 	const { searchtext } = useParams();
@@ -13,6 +15,15 @@ const Searchresults = () => {
 
 	const requestStatus = useSelector(selectRequestStatus);
 	const results = useSelector(selectResults);
+
+	useEffect(() => {
+		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+	}, [dispatch]);
+
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (searchtext && searchtext.trim() !== '') {

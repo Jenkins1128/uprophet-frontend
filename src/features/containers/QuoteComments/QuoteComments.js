@@ -86,16 +86,19 @@ function QuoteComments() {
 						<Loading />
 					) : requestStatus2 === 'fulfilled' ? (
 						<section className='mt6 mh2 f7'>
-							<QuotePost
-								quoteId={quotePost.id}
-								username={quotePost.user_name}
-								title={quotePost.title}
-								quote={`${quotePost.quote}`}
-								likeCount={quotePost.likeCount}
-								didLike={quotePost.didLike}
-								date={quotePost.date_posted}
-								hasComments={false}
-							/>
+							{quotePost.id && (
+								<QuotePost
+									quoteId={quotePost.id}
+									username={quotePost.user_name}
+									title={quotePost.title}
+									quote={`${quotePost.quote}`}
+									likeCount={quotePost.likeCount}
+									didLike={quotePost.didLike}
+									date={quotePost.date_posted}
+									hasComments={false}
+								/>
+							)}
+
 							<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
 							<div className='mt5'>
 								{latestComments.comments.map((comment, i) => {

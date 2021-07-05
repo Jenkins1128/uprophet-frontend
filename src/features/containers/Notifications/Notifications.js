@@ -6,6 +6,7 @@ import Header from '../../presentationals/Header/Header';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
+import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 
 function Notifications() {
 	const dispatch = useDispatch();
@@ -20,9 +21,14 @@ function Notifications() {
 	useEffect(() => {
 		dispatch(getNotificationsAsync('http://localhost:3001/notifications'));
 	}, [dispatch]);
+
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+	}, [dispatch]);
+
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} notiDotOff={true} />
 			<>
 				{console.log(notifications)}
 				{requestStatus1 === 'pending' ? (

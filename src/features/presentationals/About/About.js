@@ -5,7 +5,6 @@ import Header from '../../presentationals/Header/Header';
 const About = () => {
 	return (
 		<>
-			<Header isSignedIn={false} />
 			<section className='pt6 '>
 				<h1 className=' moon-gray'>About</h1>
 				<p className='ma3 pv3 ph5-l ph4-m ph3-ns light-green b'>

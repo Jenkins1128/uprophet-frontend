@@ -9,6 +9,7 @@ import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Header from '../../presentationals/Header/Header';
 import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 
 function Home() {
 	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
@@ -26,6 +27,11 @@ function Home() {
 
 	useEffect(() => {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+	}, [dispatch]);
+
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -61,7 +67,6 @@ function Home() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
 			<>
 				{console.log(requestStatus1, requestStatus2)}
 				{requestStatus1 === 'pending' ? (

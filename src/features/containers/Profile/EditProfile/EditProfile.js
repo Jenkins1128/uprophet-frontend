@@ -8,6 +8,7 @@ import { getUserAsync, selectFirstRequestStatus } from '../../../presentationals
 import { getCurrentUserInfoAsync, selectCurrentUserInfo, selectRequestStatus } from './currentUserInfoSlice';
 import { changeBioAsync, selectChangeBioStatus } from './editBioSlice';
 import { changePhotoAsync, selectChangePhotoStatus } from './editPhotoSlice';
+import { getNotificationCountAsync } from '../../../presentationals/Header/getNotificationCountSlice';
 
 const EditProfile = () => {
 	const [bio, setBio] = useState('');
@@ -23,6 +24,11 @@ const EditProfile = () => {
 	useEffect(() => {
 		dispatch(getUserAsync('http://localhost:3001/currentUser'));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
+
+	useEffect(() => {
+		console.log('noti check');
+		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+	}, [dispatch]);
 
 	//get userInfo obj
 	useEffect(() => {
@@ -66,7 +72,6 @@ const EditProfile = () => {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' ? true : false} />
 			<>
 				{console.log(requestStatus1, requestStatus2)}
 				{console.log('changePhotoStatus', changePhotoStatus)}

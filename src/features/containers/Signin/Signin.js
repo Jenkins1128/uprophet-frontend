@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { loginAsync } from './signinSlice';
-import Header from '../../presentationals/Header/Header';
 
 function Signin() {
 	const history = useHistory();
@@ -27,20 +26,13 @@ function Signin() {
 			console.log(res);
 			//console.log(res.meta.requestStatus);
 			if (res.meta.requestStatus === 'fulfilled') {
-				history.push({
-					pathname: '/',
-					state: {
-						// location state
-						isIn: true
-					}
-				});
+				history.push('/');
 			}
 		});
 	};
 
 	return (
 		<>
-			<Header isSignedIn={false} />
 			<section className='pt7 '>
 				<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 					<form className='measure center pa3 black-80'>

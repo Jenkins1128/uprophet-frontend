@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
@@ -6,6 +6,7 @@ import { userPhotoAsync } from './userPhotoSlice';
 const Userphoto = ({ size, username }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
+	// const mounted = useRef(false);
 
 	useEffect(() => {
 		dispatch(userPhotoAsync({ url: 'http://localhost:3001/getPhoto', username })).then((res) => {
@@ -14,6 +15,13 @@ const Userphoto = ({ size, username }) => {
 			}
 		});
 	}, [dispatch, username]);
+
+	// useEffect(() => {
+	// 	mounted.current = true;
+	// 	return () => {
+	// 		mounted.current = false;
+	// 	};
+	// }, []);
 
 	const getSize = () => {
 		switch (size) {

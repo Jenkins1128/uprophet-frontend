@@ -34,6 +34,7 @@ export const getUserSlice = createSlice({
 			})
 			.addCase(getUserAsync.rejected, (state) => {
 				state.requestStatus = 'rejected';
+				state.currentUser = '';
 			});
 	}
 });

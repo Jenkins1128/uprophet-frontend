@@ -28,13 +28,7 @@ const Navigation = ({ hasNotifications, notiDotOff, currentUser, isSignedIn }) =
 		dispatch(logoutAsync('http://localhost:3001/logout')).then((res) => {
 			if (res.meta.requestStatus === 'fulfilled') {
 				console.log(res);
-				history.push('/signin', {
-					pathname: '/signin',
-					state: {
-						// location state
-						isIn: false
-					}
-				});
+				history.push('/signin');
 			}
 		});
 	};
@@ -46,15 +40,7 @@ const Navigation = ({ hasNotifications, notiDotOff, currentUser, isSignedIn }) =
 					{!(isTabletOrMobile || isPortrait) ? (
 						isSignedIn ? (
 							<>
-								<Link
-									to={{
-										pathname: '/',
-										state: {
-											isIn: true
-										}
-									}}
-									className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'
-								>
+								<Link to='/' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
 									<img title='Home' className='w2 h2' alt='Home' src={Home} />
 								</Link>
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
