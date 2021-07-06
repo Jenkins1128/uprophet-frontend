@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { url } from '../../../domain';
 import Loading from '../../presentationals/Loading/Loading';
 import CheckEmailForm from './CheckEmailForm';
 import { forgotPasswordAsync } from './forgotPasswordSlice';
@@ -29,7 +30,7 @@ function ForgotPassword() {
 		event.preventDefault();
 		if (username && email) {
 			setLoading(true);
-			dispatch(forgotPasswordAsync({ url: 'http://localhost:3001/forgotPassword', username, email })).then((res) => {
+			dispatch(forgotPasswordAsync({ url: `${url}/forgotPassword`, username, email })).then((res) => {
 				console.log(res);
 				setLoading(false);
 				if (res.meta.requestStatus === 'fulfilled') {

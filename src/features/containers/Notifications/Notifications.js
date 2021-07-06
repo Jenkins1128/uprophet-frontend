@@ -6,6 +6,7 @@ import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/He
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
+import { url } from '../../../domain';
 
 function Notifications() {
 	const dispatch = useDispatch();
@@ -14,16 +15,16 @@ function Notifications() {
 	const notifications = useSelector(selectNotifications);
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getNotificationsAsync('http://localhost:3001/notifications'));
+		dispatch(getNotificationsAsync(`${url}/notifications`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	return (

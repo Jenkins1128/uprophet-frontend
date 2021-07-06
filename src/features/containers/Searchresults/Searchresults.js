@@ -8,6 +8,7 @@ import ResultCard from './ResultCard/ResultCard';
 import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync } from '../../presentationals/Header/getUserSlice';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
+import { url } from '../../../domain';
 
 const Searchresults = () => {
 	const { searchtext } = useParams();
@@ -17,17 +18,17 @@ const Searchresults = () => {
 	const results = useSelector(selectResults);
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		if (searchtext && searchtext.trim() !== '') {
-			dispatch(searchAsync({ url: 'http://localhost:3001/search', search: searchtext }));
+			dispatch(searchAsync({ url: `${url}/search`, search: searchtext }));
 		}
 	}, [dispatch, searchtext]);
 

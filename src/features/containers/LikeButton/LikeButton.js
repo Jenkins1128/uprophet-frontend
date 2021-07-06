@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import Like from './like.png';
 import { likeAsync, unlikeAsync } from './likeButtonSlice';
 import UnLike from './unlike.png';
+import { url } from '../../../domain';
 
 const LikeButton = ({ quoteId, likeCount, didLike }) => {
 	const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 	const [getDidLike, setDidLike] = useState(didLike);
 
 	const like = () => {
-		dispatch(likeAsync({ url: 'http://localhost:3001/like', quoteId })).then((res) => {
+		dispatch(likeAsync({ url: `${url}/like`, quoteId })).then((res) => {
 			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				getLikeCount.current += 1;
@@ -21,7 +22,7 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 	};
 
 	const unlike = () => {
-		dispatch(unlikeAsync({ url: 'http://localhost:3001/unlike', quoteId })).then((res) => {
+		dispatch(unlikeAsync({ url: `${url}/unlike`, quoteId })).then((res) => {
 			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				getLikeCount.current -= 1;

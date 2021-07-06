@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { logoutAsync } from './navSlice';
 import Userphoto from '../../containers/Userphoto/Userphoto';
 import RedDot from './reddot.png';
+import { url } from '../../../domain';
 
 const Navigation = ({ hasNotifications, notiDotOff, currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
@@ -25,7 +26,7 @@ const Navigation = ({ hasNotifications, notiDotOff, currentUser, isSignedIn }) =
 	const history = useHistory();
 
 	const logout = () => {
-		dispatch(logoutAsync('http://localhost:3001/logout')).then((res) => {
+		dispatch(logoutAsync(`${url}/logout`)).then((res) => {
 			if (res.meta.requestStatus === 'fulfilled') {
 				console.log(res);
 				history.push('/signin');

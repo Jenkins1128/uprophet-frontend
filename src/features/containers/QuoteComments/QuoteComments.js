@@ -12,6 +12,7 @@ import QuotePost from '../QuotePost/QuotePost';
 import { postCommentAsync, selectAddedComment } from './postCommentSlice';
 import { getQuotePostAsync, selectQuotePost } from './getQuotePostSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { url } from '../../../domain';
 
 function QuoteComments() {
 	const { quoteId } = useParams();
@@ -36,18 +37,18 @@ function QuoteComments() {
 
 	//get quote post
 	useEffect(() => {
-		dispatch(getQuotePostAsync({ url: 'http://localhost:3001/getQuotePost', quoteId }));
+		dispatch(getQuotePostAsync({ url: `${url}/getQuotePost`, quoteId }));
 	}, [dispatch, quoteId]);
 
 	//get current user status
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	//get comments
 	useEffect(() => {
 		if (requestStatus1 === 'fulfilled') {
-			dispatch(getCommentsAsync({ url: 'http://localhost:3001/getComments', quoteId }));
+			dispatch(getCommentsAsync({ url: `${url}/getComments`, quoteId }));
 		}
 	}, [dispatch, requestStatus1, quoteId]);
 
@@ -66,7 +67,7 @@ function QuoteComments() {
 	const postComment = (event) => {
 		event.preventDefault();
 		if (comment !== '') {
-			dispatch(postCommentAsync({ url: 'http://localhost:3001/addComment', quoteId, comment }));
+			dispatch(postCommentAsync({ url: `${url}/addComment`, quoteId, comment }));
 		}
 	};
 

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import FavoritersCard from './FavoritersCard/FavoritersCard';
 import { favoritersAsync, selectFavoriters, selectRequestStatus } from './favoritersSlice';
 import Header from '../../presentationals/Header/Header';
+import { url } from '../../../domain';
 
 function Favoriters() {
 	const { username } = useParams();
@@ -12,7 +13,7 @@ function Favoriters() {
 	const favoriters = useSelector(selectFavoriters);
 
 	useEffect(() => {
-		dispatch(favoritersAsync({ url: 'http://localhost:3001/favoriters', username }));
+		dispatch(favoritersAsync({ url: `${url}/favoriters`, username }));
 	}, [dispatch, username]);
 
 	return (

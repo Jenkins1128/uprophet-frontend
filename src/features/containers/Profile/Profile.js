@@ -10,6 +10,7 @@ import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/He
 import { selectUserInfo, userInfoAsync } from './userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
+import { url } from '../../../domain';
 
 function Profile() {
 	const { username } = useParams();
@@ -22,22 +23,22 @@ function Profile() {
 	//TODO - HANDLE IF USER DOESN"T EXIST
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	//get profile quotes
 	useEffect(() => {
-		dispatch(profileAsync({ url: 'http://localhost:3001/profile', username }));
+		dispatch(profileAsync({ url: `${url}/profile`, username }));
 	}, [dispatch, username]);
 
 	//get userInfo obj
 	useEffect(() => {
-		dispatch(userInfoAsync({ url: 'http://localhost:3001/userInfo', username }));
+		dispatch(userInfoAsync({ url: `${url}/userInfo`, username }));
 	}, [dispatch, username]);
 
 	return (

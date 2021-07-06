@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { url } from '../../../domain';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
 
@@ -17,7 +18,7 @@ const Userphoto = ({ size, username }) => {
 
 	useEffect(() => {
 		if (mounted) {
-			dispatch(userPhotoAsync({ url: 'http://localhost:3001/getPhoto', username })).then((res) => {
+			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
 				if (res.meta.requestStatus === 'fulfilled') {
 					setBase64Img(res.payload.photo);
 				}

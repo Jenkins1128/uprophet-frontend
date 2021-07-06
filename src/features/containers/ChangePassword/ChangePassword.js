@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { changePasswordAsync, changePasswordSignInAsync } from './changePasswordSlice';
 import ChangePasswordForm from './ChangePasswordForm';
 import { useTitle } from '../../../Title';
+import { url } from '../../../domain';
 
 function ChangePassword() {
 	const history = useHistory();
@@ -45,7 +46,7 @@ function ChangePassword() {
 	const initChangePasswordForm = (event) => {
 		event.preventDefault();
 		if (username && password) {
-			dispatch(changePasswordSignInAsync({ url: 'http://localhost:3001/changePasswordSignIn', username, password })).then((res) => {
+			dispatch(changePasswordSignInAsync({ url: `${url}/changePasswordSignIn`, username, password })).then((res) => {
 				if (res.meta.requestStatus === 'fulfilled') {
 					setChangePasswordForm(true);
 				} else {
@@ -61,7 +62,7 @@ function ChangePassword() {
 		event.preventDefault();
 		if (newPassword && verifyPassword) {
 			if (newPassword === verifyPassword) {
-				dispatch(changePasswordAsync({ url: 'http://localhost:3001/changePassword', username, newPassword })).then((res) => {
+				dispatch(changePasswordAsync({ url: `${url}/changePassword`, username, newPassword })).then((res) => {
 					console.log(res);
 					if (res.meta.requestStatus === 'fulfilled') {
 						history.push('/signin');

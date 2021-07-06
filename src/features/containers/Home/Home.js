@@ -9,6 +9,7 @@ import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
+import { url } from '../../../domain';
 
 function Home() {
 	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
@@ -32,17 +33,17 @@ function Home() {
 	}, []);
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		if (requestStatus1 === 'fulfilled') {
-			dispatch(homeAsync('http://localhost:3001/'));
+			dispatch(homeAsync(`${url}/`));
 		}
 	}, [dispatch, requestStatus1]);
 
@@ -57,7 +58,7 @@ function Home() {
 	const postQuote = (event) => {
 		event.preventDefault();
 		if (title !== '' && quote !== '') {
-			dispatch(postQuoteAsync({ url: 'http://localhost:3001/createQuote', title, quote }));
+			dispatch(postQuoteAsync({ url: `${url}/createQuote`, title, quote }));
 		}
 	};
 

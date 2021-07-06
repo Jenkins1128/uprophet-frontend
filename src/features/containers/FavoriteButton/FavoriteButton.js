@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { url } from '../../../domain';
 import { favoriteAsync, unfavoriteAsync } from './favoriteButtonSlice';
 
 const FavoriteButton = ({ username, didFavorite }) => {
@@ -8,7 +9,7 @@ const FavoriteButton = ({ username, didFavorite }) => {
 	const [getDidFavorite, setDidFavorite] = useState(didFavorite);
 
 	const favorite = () => {
-		dispatch(favoriteAsync({ url: 'http://localhost:3001/favorite', toUser: username })).then((res) => {
+		dispatch(favoriteAsync({ url: `${url}/favorite`, toUser: username })).then((res) => {
 			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				setDidFavorite(true);
@@ -17,7 +18,7 @@ const FavoriteButton = ({ username, didFavorite }) => {
 	};
 
 	const unfavorite = () => {
-		dispatch(unfavoriteAsync({ url: 'http://localhost:3001/unfavorite', toUser: username })).then((res) => {
+		dispatch(unfavoriteAsync({ url: `${url}/unfavorite`, toUser: username })).then((res) => {
 			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				setDidFavorite(false);

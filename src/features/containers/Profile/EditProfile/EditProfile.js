@@ -8,6 +8,7 @@ import { getCurrentUserInfoAsync, selectCurrentUserInfo, selectRequestStatus } f
 import { changeBioAsync, selectChangeBioStatus } from './editBioSlice';
 import { changePhotoAsync, selectChangePhotoStatus } from './editPhotoSlice';
 import { getNotificationCountAsync } from '../../../presentationals/Header/getNotificationCountSlice';
+import { url } from '../../../../domain';
 
 const EditProfile = () => {
 	const [bio, setBio] = useState('');
@@ -21,29 +22,29 @@ const EditProfile = () => {
 	const userInfo = useSelector(selectCurrentUserInfo);
 
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	//get userInfo obj
 	useEffect(() => {
-		dispatch(getCurrentUserInfoAsync('http://localhost:3001/currentUserInfo'));
+		dispatch(getCurrentUserInfoAsync(`${url}/currentUserInfo`));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
 
 	const savePhoto = (event) => {
 		event.preventDefault();
 
-		dispatch(changePhotoAsync({ url: 'http://localhost:3001/uploadPic', imageData }));
+		dispatch(changePhotoAsync({ url: `${url}/uploadPic`, imageData }));
 	};
 
 	const saveBio = (event) => {
 		event.preventDefault();
 		console.log('bio', bio);
-		dispatch(changeBioAsync({ url: 'http://localhost:3001/savebio', bio }));
+		dispatch(changeBioAsync({ url: `${url}/savebio`, bio }));
 	};
 
 	const onBioChange = (event) => {

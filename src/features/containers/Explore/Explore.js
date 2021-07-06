@@ -8,6 +8,9 @@ import refreshIcon from './refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
+import { useTitle } from '../../../Title';
+import { url } from '../../../domain';
+
 function Explore() {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -15,18 +18,20 @@ function Explore() {
 	const requestStatus = useSelector(selectFirstRequestStatus);
 	const exploreQuotes = useSelector(selectExploreQuotes);
 
+	useTitle('Uprophet');
+
 	useEffect(() => {
-		dispatch(getUserAsync('http://localhost:3001/currentUser'));
+		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		console.log('noti check');
-		dispatch(getNotificationCountAsync('http://localhost:3001/getNotificationCount'));
+		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {
 		if (requestStatus === 'fulfilled') {
-			dispatch(getExploreQuotesAsync('http://localhost:3001/explore'));
+			dispatch(getExploreQuotesAsync(`${url}/explore`));
 		}
 	}, [requestStatus, dispatch]);
 
