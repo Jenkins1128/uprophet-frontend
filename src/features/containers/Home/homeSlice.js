@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
 	latestQuotes: [],
@@ -8,9 +9,10 @@ const initialState = {
 export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWithValue }) => {
 	let errorCode;
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'GET',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
 
@@ -19,7 +21,7 @@ export const homeAsync = createAsyncThunk('home/status', async (url, { rejectWit
 		}
 
 		// The value we return becomes the `fulfilled` action payload
-		return await response.json();
+		return response.data;
 	} catch (err) {
 		return rejectWithValue([errorCode]);
 	}

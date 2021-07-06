@@ -1,17 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const forgotPasswordAsync = createAsyncThunk('forgotPassword/status', async (data, { rejectWithValue }) => {
 	const { url, username, email } = data;
-	console.log(url, username, email);
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			data: {
 				username,
 				email
-			})
+			}
 		});
 
 		if (response.status >= 400 && response.status < 500) {

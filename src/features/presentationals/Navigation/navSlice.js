@@ -1,10 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const logoutAsync = createAsyncThunk('logout/status', async (url, { rejectWithValue }) => {
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'GET',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { 'Content-Type': 'application/json' }
 		});
 		return response.status;
@@ -12,27 +14,3 @@ export const logoutAsync = createAsyncThunk('logout/status', async (url, { rejec
 		return rejectWithValue(error.response.data);
 	}
 });
-
-const initialState = {
-	status: ''
-};
-
-export const logoutSlice = createSlice({
-	name: 'logout',
-	initialState,
-	reducers: {},
-	extraReducers: (builder) => {
-		builder
-			.addCase(logoutAsync.pending, (state) => {
-				state.status = 'loading';
-			})
-			.addCase(logoutAsync.fulfilled, (state) => {
-				state.status = 'success';
-			})
-			.addCase(logoutAsync.rejected, (state) => {
-				state.status = 'rejected';
-			});
-	}
-});
-
-export default logoutSlice.reducer;

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { changePasswordAsync, changePasswordSignInAsync } from './changePasswordSlice';
 import ChangePasswordForm from './ChangePasswordForm';
+import { useTitle } from '../../../Title';
 
 function ChangePassword() {
 	const history = useHistory();
@@ -18,6 +19,8 @@ function ChangePassword() {
 	const [isIncorrectVerifyError, setIsIncorrectVerifyError] = useState(false);
 	const [isEmptyError1, setIsEmptyError1] = useState(false);
 	const [isEmptyError2, setIsEmptyError2] = useState(false);
+
+	useTitle('Uprophet');
 
 	const handleUsernameOnchange = (event) => {
 		const { value } = event.target;
@@ -43,7 +46,6 @@ function ChangePassword() {
 		event.preventDefault();
 		if (username && password) {
 			dispatch(changePasswordSignInAsync({ url: 'http://localhost:3001/changePasswordSignIn', username, password })).then((res) => {
-				console.log(res);
 				if (res.meta.requestStatus === 'fulfilled') {
 					setChangePasswordForm(true);
 				} else {
@@ -81,12 +83,12 @@ function ChangePassword() {
 				{!changePasswordForm ? (
 					<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 						{isIncorrectError && (
-							<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 								<p className='f5 white'>Username or password is incorrect.</p>
 							</div>
 						)}
 						{isEmptyError1 && (
-							<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+							<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 								<p className='f5 white'>Please fill all the fields.</p>
 							</div>
 						)}

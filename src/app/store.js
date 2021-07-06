@@ -1,6 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import signinReducer from '../features/containers/Signin/signinSlice';
 import homeReducer from '../features/containers/Home/homeSlice';
 import commentsReducer from '../features/containers/QuoteComments/quoteCommentsSlice';
 import postCommentReducer from '../features/containers/QuoteComments/postCommentSlice';
@@ -19,11 +17,8 @@ import currentUserInfoReducer from '../features/containers/Profile/EditProfile/c
 import editBioReducer from '../features/containers/Profile/EditProfile/editBioSlice';
 import editPhotoReducer from '../features/containers/Profile/EditProfile/editPhotoSlice';
 
-//import changePasswordReducer from '../features/containers/ChangePassword/changePasswordSlice';
 export const store = configureStore({
 	reducer: {
-		counter: counterReducer,
-		signin: signinReducer,
 		home: homeReducer,
 		comments: commentsReducer,
 		postComment: postCommentReducer,
@@ -41,7 +36,5 @@ export const store = configureStore({
 		currentUserInfo: currentUserInfoReducer,
 		changeBio: editBioReducer,
 		changePhoto: editPhotoReducer
-
-		//changePassword: changePasswordReducer
 	}
 });

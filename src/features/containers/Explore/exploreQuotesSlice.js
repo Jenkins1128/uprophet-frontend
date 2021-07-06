@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
 	exploreQuotes: []
@@ -6,14 +7,15 @@ const initialState = {
 
 export const getExploreQuotesAsync = createAsyncThunk('exploreQuotes/status', async (url, { rejectWithValue }) => {
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'GET',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
 		// The value we return becomes the `fulfilled` action payload
 
-		return await response.json();
+		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
 	}

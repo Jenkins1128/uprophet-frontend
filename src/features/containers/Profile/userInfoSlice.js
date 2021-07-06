@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
 	userInfo: {}
@@ -7,13 +8,14 @@ const initialState = {
 export const userInfoAsync = createAsyncThunk('userInfo/status', async (data, { rejectWithValue }) => {
 	const { url, username } = data;
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'POST',
 			credentials: 'include',
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			data: {
 				username
-			})
+			}
 		});
 		// The value we return becomes the `fulfilled` action payload
 		return await response.json();

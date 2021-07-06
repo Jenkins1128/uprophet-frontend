@@ -1,20 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const changePasswordAsync = createAsyncThunk('changePassword/status', async (data, { rejectWithValue }) => {
 	const { url, username, newPassword } = data;
-	console.log(url, username, newPassword);
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			data: {
 				username,
 				password: newPassword
-			})
+			}
 		});
-		console.log(response.status);
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
@@ -23,21 +22,20 @@ export const changePasswordAsync = createAsyncThunk('changePassword/status', asy
 
 export const changePasswordSignInAsync = createAsyncThunk('changePasswordSignIn/status', async (data, { rejectWithValue }) => {
 	const { url, username, password } = data;
-	console.log(url, username, password);
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			data: {
 				username,
 				password
-			})
+			}
 		});
 		if (response.status === 401) {
 			throw new Error(response.status);
 		}
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

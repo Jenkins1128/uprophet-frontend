@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
 	changePhotoStatus: 'idle'
@@ -7,16 +8,17 @@ const initialState = {
 export const changePhotoAsync = createAsyncThunk('changePhoto/status', async (data, { rejectWithValue }) => {
 	const { url, imageData } = data;
 	const { name, image } = imageData;
-	console.log('imageData', imageData);
+
 	try {
-		const response = await fetch(url, {
+		const response = await axios({
+			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			data: {
 				name,
 				image
-			})
+			}
 		});
 		// The value we return becomes the `fulfilled` action payload
 		return response.status;

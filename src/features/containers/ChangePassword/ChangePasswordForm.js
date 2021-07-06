@@ -2,16 +2,15 @@ const ChangePasswordForm = ({ handleNewPasswordOnchange, handleVerifyPasswordOnc
 	return (
 		<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 			{isIncorrectVerifyError && (
-				<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+				<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 					<p className='f5 white'>Passwords are not the same.</p>
 				</div>
 			)}
 			{isEmptyError2 && (
-				<div className='center h-10 w-75 ba bw1 br3 bg-red'>
+				<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 					<p className='f5 white'>Please fill all the fields.</p>
 				</div>
 			)}
-
 			<form className='measure center pa3 black-80'>
 				<fieldset id='change_password' className='ba b--transparent ph0 mh0'>
 					<div className='mv3'>
