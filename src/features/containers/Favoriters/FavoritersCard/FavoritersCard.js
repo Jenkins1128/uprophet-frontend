@@ -7,7 +7,7 @@ const FavoritersCard = ({ currentUser, username, didFavorite }) => {
 	return (
 		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
-				<div className='dtc w2 w3-ns v-mid'>
+				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
 						<Userphoto username={username} />
 					</Link>

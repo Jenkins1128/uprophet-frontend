@@ -10,6 +10,7 @@ import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
+import { useTitle } from '../../../Title';
 
 function Home() {
 	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
@@ -24,6 +25,8 @@ function Home() {
 
 	const dispatch = useDispatch();
 	const mounted = useRef(null);
+
+	useTitle('Uprophet');
 
 	useEffect(() => {
 		mounted.current = true;

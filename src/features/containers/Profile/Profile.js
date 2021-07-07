@@ -77,7 +77,7 @@ function Profile() {
 											</Link>
 										</div>
 										<div className='mt3'>
-											<p className='tc'>{userInfo.bio}</p>
+											<p className='measure tc'>{userInfo.bio}</p>
 										</div>
 									</div>
 								</div>

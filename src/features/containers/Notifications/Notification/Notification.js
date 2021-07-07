@@ -14,13 +14,13 @@ const Notification = ({ username, notice, currentUser, quotesId, date }) => {
 	return (
 		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
-				<div className='dtc w2 w3-ns v-mid'>
+				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
 						<Userphoto username={username} />
 					</Link>
 				</div>
 				<div className='dtc v-mid pl3'>
-					<h1 className='f6 f5-ns fw6 lh-title light-green mv0'>{notice}</h1>
+					<h1 className='f7 f5-ns fw6 lh-title light-green mv0'>{notice}</h1>
 					<div>
 						<ReactTimeAgo date={new Date(offsetDate(date))} locale='en' timeStyle='mini-minute-now' />
 					</div>

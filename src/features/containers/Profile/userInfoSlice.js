@@ -11,14 +11,14 @@ export const userInfoAsync = createAsyncThunk('userInfo/status', async (data, { 
 		const response = await axios({
 			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
 			data: {
 				username
 			}
 		});
 		// The value we return becomes the `fulfilled` action payload
-		return await response.json();
+		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
 	}

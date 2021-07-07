@@ -71,18 +71,18 @@ const Menu = ({ isSignedIn, hasNotifications, notiDotOff, logout, currentUser })
 							&nbsp;{'Explore'}
 						</div>
 					</Link>
-					<Link to='/icjenkins' onClick={closeNav} className='f6 grow b '>
+					<Link to={`/${currentUser}`} onClick={closeNav} className='f6 grow b '>
 						<div className='flex items-center'>
 							<Userphoto size={'header'} username={currentUser} />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>
-					<button onClick={signout} className='f6 grow bg-transparent b--none mt2 relative left-2 pointer'>
-						<div className='flex f3 b items-center'>
+					<Link to='#' onClick={signout} className='f6 grow b'>
+						<div className='flex items-center'>
 							<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
 							&nbsp;{'Logout'}
 						</div>
-					</button>
+					</Link>
 				</div>
 			) : (
 				<div id='mySidenav' className='sidenav'>

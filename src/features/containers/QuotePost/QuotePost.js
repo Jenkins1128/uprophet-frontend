@@ -24,7 +24,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 				<p className='f6 b underline light-green'>{title}</p>
 				<p className='f6 mt3 light-green b'>{quote}</p>
 			</div>
-			<div className='flex justify-between mt5 h1'>
+			<div className='flex justify-between mt5 h1 ph4'>
 				<div className='flex items-center'>
 					<LikeButton quoteId={quoteId} likeCount={likeCount} didLike={didLike} />
 					{hasComments && (

@@ -12,7 +12,7 @@ export const searchAsync = createAsyncThunk('search/status', async (data, { reje
 		const response = await axios({
 			url,
 			method: 'POST',
-			credentials: 'include',
+			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
 			data: {
 				search

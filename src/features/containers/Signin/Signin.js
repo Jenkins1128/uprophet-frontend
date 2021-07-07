@@ -47,7 +47,8 @@ function Signin() {
 	};
 
 	return (
-		<section className='pt7 '>
+		<section className='pt6 '>
+			<h1 className='moon-gray f3'>"Focus on the now."</h1>
 			<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 				{isIncorrectError && (
 					<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
