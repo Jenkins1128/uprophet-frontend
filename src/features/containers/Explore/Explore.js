@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import QuotePost from '../QuotePost/QuotePost';
@@ -8,7 +8,6 @@ import refreshIcon from './refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
-import { useTitle } from '../../../Title';
 import { url } from '../../../domain';
 
 function Explore() {
@@ -18,7 +17,14 @@ function Explore() {
 	const requestStatus = useSelector(selectFirstRequestStatus);
 	const exploreQuotes = useSelector(selectExploreQuotes);
 
-	useTitle('Uprophet');
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -55,6 +61,7 @@ function Explore() {
 								return (
 									<QuotePost
 										key={quote.id}
+										isMounted={mounted.current}
 										quoteId={quote.id}
 										username={quote.user_name}
 										title={quote.title}

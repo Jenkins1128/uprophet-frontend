@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import QuotePost from '../QuotePost/QuotePost';
@@ -21,6 +21,15 @@ function Profile() {
 	const profileQuotes = useSelector(selectProfileQuotes);
 	const userInfo = useSelector(selectUserInfo);
 	//TODO - HANDLE IF USER DOESN"T EXIST
+
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -65,7 +74,7 @@ function Profile() {
 								<h1 className='flex ml4 light-green'>{username}</h1>
 
 								<div className='flex justify-center'>
-									<Userphoto size={'profile'} username={username} />
+									<Userphoto size={'profile'} username={username} isMounted={mounted.current} />
 									<div className='flex flex-column'>
 										<div className='flex mt4'>
 											<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.length} quotes</p>
@@ -87,6 +96,7 @@ function Profile() {
 										return (
 											<QuotePost
 												key={quote.id}
+												isMounted={mounted.current}
 												quoteId={quote.id}
 												username={quote.user_name}
 												title={quote.title}

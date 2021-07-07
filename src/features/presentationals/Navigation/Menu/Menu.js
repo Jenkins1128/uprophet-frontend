@@ -8,7 +8,7 @@ import Logout from '../logout.png';
 import Userphoto from '../../../containers/Userphoto/Userphoto';
 import RedDot from '../reddot.png';
 
-const Menu = ({ isSignedIn, hasNotifications, notiDotOff, logout, currentUser }) => {
+const Menu = ({ isMounted, isSignedIn, hasNotifications, notiDotOff, logout, currentUser }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
@@ -29,28 +29,10 @@ const Menu = ({ isSignedIn, hasNotifications, notiDotOff, logout, currentUser })
 					<button className='closebtn mt1 mr2 pr0' onClick={closeNav}>
 						&times;
 					</button>
-					<Link
-						to={{
-							pathname: '/',
-							state: {
-								isIn: true
-							}
-						}}
-						onClick={closeNav}
-						className='f6 grow b'
-					>
+					<Link to='/' onClick={closeNav} className='f6 grow b'>
 						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
-					<Link
-						to={{
-							pathname: '/',
-							state: {
-								isIn: true
-							}
-						}}
-						onClick={closeNav}
-						className='f6 grow b'
-					>
+					<Link to='/' onClick={closeNav} className='f6 grow b'>
 						<div className='flex items-center'>
 							<img title='Home' className='w2 h2' alt='Home' src={Home} />
 							&nbsp;{'Home'}
@@ -73,7 +55,7 @@ const Menu = ({ isSignedIn, hasNotifications, notiDotOff, logout, currentUser })
 					</Link>
 					<Link to={`/${currentUser}`} onClick={closeNav} className='f6 grow b '>
 						<div className='flex items-center'>
-							<Userphoto size={'header'} username={currentUser} />
+							<Userphoto size={'header'} username={currentUser} isMounted={isMounted} />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>

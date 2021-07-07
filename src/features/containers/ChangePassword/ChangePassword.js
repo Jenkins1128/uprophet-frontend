@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { changePasswordAsync, changePasswordSignInAsync } from './changePasswordSlice';
 import ChangePasswordForm from './ChangePasswordForm';
-import { useTitle } from '../../../Title';
 import { url } from '../../../domain';
 
 function ChangePassword() {
@@ -20,8 +19,6 @@ function ChangePassword() {
 	const [isIncorrectVerifyError, setIsIncorrectVerifyError] = useState(false);
 	const [isEmptyError1, setIsEmptyError1] = useState(false);
 	const [isEmptyError2, setIsEmptyError2] = useState(false);
-
-	useTitle('Uprophet');
 
 	const handleUsernameOnchange = (event) => {
 		const { value } = event.target;

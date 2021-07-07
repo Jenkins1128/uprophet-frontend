@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { signUpAsync } from './signUpSlice';
 import { loginAsync } from '../Signin/signinSlice';
-import { useTitle } from '../../../Title';
 import { url } from '../../../domain';
 
 function Signup() {
@@ -18,8 +17,6 @@ function Signup() {
 	const [isExistsError, setIsExistsError] = useState(false);
 	const [isTermsError, setIsTermsError] = useState(false);
 	const [isEmptyError, setIsEmptyError] = useState(false);
-
-	useTitle('Uprophet');
 
 	const onNameChange = (event) => {
 		const { value } = event.target;

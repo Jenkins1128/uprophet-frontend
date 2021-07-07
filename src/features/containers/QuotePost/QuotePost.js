@@ -4,7 +4,7 @@ import Userphoto from '../Userphoto/Userphoto';
 import { Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
 
-const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, hasComments }) => {
+const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, isMounted, hasComments }) => {
 	const offsetDate = (date) => {
 		var newDate = new Date(date);
 		newDate.setHours(newDate.getHours() - 7);
@@ -14,7 +14,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 		<article id={quoteId} className='tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
 			<div className='flex absolute top-1 left-1'>
 				<Link to={`/${username}`}>
-					<Userphoto username={username} />
+					<Userphoto username={username} isMounted={isMounted} />
 				</Link>
 				<Link to={`/${username}`} className='no-underline'>
 					<p className='black-50 b relative top--1 '>{username}</p>

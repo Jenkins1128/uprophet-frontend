@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from './Notification/Notification';
 import { getNotificationsAsync, selectNotifications, selectRequestStatus } from './notificationsSlice';
@@ -13,6 +13,14 @@ function Notifications() {
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectRequestStatus);
 	const notifications = useSelector(selectNotifications);
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -47,7 +55,17 @@ function Notifications() {
 									} else if (notification.user_name) {
 										currentUser = notification.user_name;
 									}
-									return <Notification key={notification.id} username={notification.notice.split(' ')[0]} notice={notification.notice} currentUser={currentUser} quotesId={notification.quotes_id} date={notification.date} />;
+									return (
+										<Notification
+											key={notification.id}
+											isMounted={mounted.current}
+											username={notification.notice.split(' ')[0]}
+											notice={notification.notice}
+											currentUser={currentUser}
+											quotesId={notification.quotes_id}
+											date={notification.date}
+										/>
+									);
 								})}
 							</div>
 						</section>

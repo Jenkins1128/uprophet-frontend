@@ -1,30 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { url } from '../../../domain';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
 
-const Userphoto = ({ size, username }) => {
+const Userphoto = ({ size, username, isMounted }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
-	const mounted = useRef(null);
 
 	useEffect(() => {
-		mounted.current = true;
-		return () => {
-			mounted.current = false;
-		};
-	}, []);
-
-	useEffect(() => {
-		if (mounted) {
+		if (isMounted) {
 			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
 				if (res.meta.requestStatus === 'fulfilled') {
 					setBase64Img(res.payload.photo);
 				}
 			});
 		}
-	}, [dispatch, username]);
+	}, [dispatch, username, isMounted]);
 
 	const getSize = () => {
 		switch (size) {

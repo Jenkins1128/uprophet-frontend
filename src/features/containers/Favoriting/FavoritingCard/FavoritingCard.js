@@ -3,13 +3,13 @@ import FavoriteButton from '../../FavoriteButton/FavoriteButton';
 import Userphoto from '../../Userphoto/Userphoto';
 import { Link } from 'react-router-dom';
 
-const FavoritingCard = ({ currentUser, username, didFavorite }) => {
+const FavoritingCard = ({ isMounted, currentUser, username, didFavorite }) => {
 	return (
 		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
 				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
-						<Userphoto username={username} />
+						<Userphoto username={username} isMounted={isMounted} />
 					</Link>
 				</div>
 				<div className='dtc v-mid pl3'>

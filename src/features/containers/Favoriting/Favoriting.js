@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import FavoritingCard from './FavoritingCard/FavoritingCard';
@@ -11,6 +11,15 @@ function Favoriting() {
 	const { username } = useParams();
 	const dispatch = useDispatch();
 	const favoriting = useSelector(selectFavoriting);
+
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -31,7 +40,7 @@ function Favoriting() {
 			<div className='mt5'>
 				{favoriting.length > 0 &&
 					favoriting.map((favoriter, i) => {
-						return <FavoritingCard key={i} currentUser={favoriter.currentUser} username={favoriter.to_user} didFavorite={favoriter.didFavorite} />;
+						return <FavoritingCard key={i} isMounted={mounted.current} currentUser={favoriter.currentUser} username={favoriter.to_user} didFavorite={favoriter.didFavorite} />;
 					})}
 			</div>
 		</section>

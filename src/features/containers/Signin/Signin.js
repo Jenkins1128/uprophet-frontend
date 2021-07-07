@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { url } from '../../../domain';
-import { useTitle } from '../../../Title';
 import { getUserAsync } from '../../presentationals/Header/getUserSlice';
 import { loginAsync } from './signinSlice';
 
@@ -14,8 +13,6 @@ function Signin() {
 	const [password, setPassword] = useState('');
 	const [isIncorrectError, setIsIncorrectError] = useState(false);
 	const [isEmptyError, setIsEmptyError] = useState(false);
-
-	useTitle('Uprophet');
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));

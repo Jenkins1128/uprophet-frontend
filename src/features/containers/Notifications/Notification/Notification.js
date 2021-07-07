@@ -5,7 +5,7 @@ import Userphoto from '../../Userphoto/Userphoto';
 import { HashLink } from 'react-router-hash-link';
 import ReactTimeAgo from 'react-time-ago';
 
-const Notification = ({ username, notice, currentUser, quotesId, date }) => {
+const Notification = ({ isMounted, username, notice, currentUser, quotesId, date }) => {
 	const offsetDate = (date) => {
 		var newDate = new Date(date);
 		newDate.setHours(newDate.getHours() - 7);
@@ -16,7 +16,7 @@ const Notification = ({ username, notice, currentUser, quotesId, date }) => {
 			<div className='flex items-center'>
 				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
-						<Userphoto username={username} />
+						<Userphoto username={username} isMounted={isMounted} />
 					</Link>
 				</div>
 				<div className='dtc v-mid pl3'>

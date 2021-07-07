@@ -1,9 +1,7 @@
 import React from 'react';
-import { useTitle } from '../../../Title';
 import profilePic from './profile.jpg';
 
 const About = () => {
-	useTitle('Uprophet');
 	return (
 		<>
 			<section className='pt6 '>
