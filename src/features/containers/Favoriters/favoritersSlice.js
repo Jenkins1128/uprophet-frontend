@@ -16,7 +16,6 @@ export const favoritersAsync = createAsyncThunk('favoriters/status', async (data
 				username
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

@@ -14,7 +14,6 @@ export const getNotificationsAsync = createAsyncThunk('notifications/status', as
 			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' }
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

@@ -7,7 +7,6 @@ const initialState = {
 
 export const postCommentAsync = createAsyncThunk('postComment/status', async (data, { rejectWithValue }) => {
 	const { url, quoteId, comment } = data;
-
 	try {
 		const response = await axios({
 			url,
@@ -19,8 +18,6 @@ export const postCommentAsync = createAsyncThunk('postComment/status', async (da
 				comment
 			}
 		});
-
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

@@ -71,17 +71,7 @@ const Menu = ({ isMounted, isSignedIn, hasNotifications, notiDotOff, logout, cur
 					<button className='closebtn mt1 mr2 pr0' onClick={closeNav}>
 						&times;
 					</button>
-
-					<Link
-						to={{
-							pathname: '/',
-							state: {
-								isIn: false
-							}
-						}}
-						onClick={closeNav}
-						className='f6 grow b'
-					>
+					<Link to='/' onClick={closeNav} className='f6 grow b'>
 						<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer' src={Logo} alt='Logo' />
 					</Link>
 					<Link to='/about' onClick={closeNav} className='f6 grow b'>
@@ -98,7 +88,6 @@ const Menu = ({ isMounted, isSignedIn, hasNotifications, notiDotOff, logout, cur
 					</a>
 				</div>
 			)}
-
 			<button className='menuIconSize mr2 pr0 pointer b--none bg-transparent hover-white' onClick={openNav}>
 				&#9776;
 			</button>

@@ -18,7 +18,6 @@ export const searchAsync = createAsyncThunk('search/status', async (data, { reje
 				search
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

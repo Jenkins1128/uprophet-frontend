@@ -6,24 +6,32 @@ import QuotePoster from './QuotePoster/QuotePoster';
 import { homeAsync, selectLatestQuotes, selectSecondRequestStatus } from './homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import { postQuoteAsync, selectAddedLatestQuotes } from './postQuoteSlice';
+import { postQuoteAsync, selectNewQuote } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 
 function Home() {
+	const dispatch = useDispatch();
+
 	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
 	const [title, setTitle] = useState('');
 	const [quote, setQuote] = useState('');
 
 	const getlatestQuotes = useSelector(selectLatestQuotes);
-	const getAddedLatestQuotes = useSelector(selectAddedLatestQuotes);
+	const getNewQuote = useSelector(selectNewQuote);
 
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectSecondRequestStatus);
 
-	const dispatch = useDispatch();
 	const mounted = useRef(null);
+
+	const isEmpty = (obj) => {
+		for (const x in obj) {
+			return false;
+		}
+		return true;
+	};
 
 	useEffect(() => {
 		mounted.current = true;
@@ -37,7 +45,6 @@ function Home() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
@@ -52,8 +59,19 @@ function Home() {
 	}, [getlatestQuotes]);
 
 	useEffect(() => {
-		setLatestQuotes({ quotes: [...getAddedLatestQuotes] });
-	}, [getAddedLatestQuotes]);
+		if (!isEmpty(getNewQuote)) {
+			let updatedQuotes = [...getlatestQuotes];
+			//replace your current quote to added quote
+			updatedQuotes.some((quote, i) => {
+				if (quote.user_name === getNewQuote.user_name) {
+					updatedQuotes.splice(i, 1, getNewQuote);
+				}
+				return quote.user_name === getNewQuote.user_name;
+			});
+			//add new quote to latest quotes
+			setLatestQuotes({ quotes: [...updatedQuotes] });
+		}
+	}, [getlatestQuotes, getNewQuote]);
 
 	const postQuote = (event) => {
 		event.preventDefault();
@@ -74,43 +92,40 @@ function Home() {
 
 	return (
 		<>
-			<>
-				{console.log(requestStatus1, requestStatus2)}
-				{requestStatus1 === 'pending' ? (
+			{requestStatus1 === 'pending' ? (
+				<Loading />
+			) : requestStatus1 === 'fulfilled' ? (
+				requestStatus2 === 'pending' ? (
 					<Loading />
-				) : requestStatus1 === 'fulfilled' ? (
-					requestStatus2 === 'pending' ? (
-						<Loading />
-					) : requestStatus2 === 'fulfilled' ? (
-						<section className='mt6 mh2 f7'>
-							<h1 className='flex ml4 moon-gray'>Home</h1>
-							<QuotePoster postQuote={postQuote} onQuoteChange={onQuoteChange} onTitleChange={onTitleChange} />
-							<div className='mt5'>
-								{latestQuotes.quotes.map((quote) => {
-									return (
-										<QuotePost
-											key={quote.id}
-											quoteId={quote.id}
-											username={quote.user_name}
-											title={quote.title}
-											quote={`"${quote.quote}"`}
-											likeCount={quote.likeCount}
-											didLike={quote.didLike}
-											date={quote.date_posted}
-											isMounted={mounted.current}
-											hasComments={true}
-										/>
-									);
-								})}
-							</div>
-						</section>
-					) : (
-						<PleaseSignin />
-					)
+				) : requestStatus2 === 'fulfilled' ? (
+					<section className='mt6 mh2 f7'>
+						<h1 className='flex ml4 moon-gray'>Home</h1>
+						<QuotePoster postQuote={postQuote} onQuoteChange={onQuoteChange} onTitleChange={onTitleChange} />
+						<div className='mt5'>
+							{latestQuotes.quotes.map((quote) => {
+								return (
+									<QuotePost
+										key={quote.id}
+										isMounted={mounted.current}
+										quoteId={quote.id}
+										username={quote.user_name}
+										title={quote.title}
+										quote={`"${quote.quote}"`}
+										likeCount={quote.likeCount}
+										didLike={quote.didLike}
+										date={quote.date_posted}
+										hasComments={true}
+									/>
+								);
+							})}
+						</div>
+					</section>
 				) : (
-					<Topquotes isMounted={mounted.current} />
-				)}
-			</>
+					<PleaseSignin />
+				)
+			) : (
+				<Topquotes isMounted={mounted.current} />
+			)}
 		</>
 	);
 }

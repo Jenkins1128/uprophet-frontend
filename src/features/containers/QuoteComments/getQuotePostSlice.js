@@ -17,8 +17,6 @@ export const getQuotePostAsync = createAsyncThunk('getQuotePost/status', async (
 				quoteId
 			}
 		});
-
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

@@ -13,8 +13,6 @@ export const getExploreQuotesAsync = createAsyncThunk('exploreQuotes/status', as
 			withCredentials: true,
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
-		// The value we return becomes the `fulfilled` action payload
-
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
@@ -29,7 +27,6 @@ export const exploreQuotesSlice = createSlice({
 		builder
 			.addCase(getExploreQuotesAsync.pending, () => {})
 			.addCase(getExploreQuotesAsync.fulfilled, (state, { payload }) => {
-				console.log('exploreQuotes', payload);
 				state.exploreQuotes = payload;
 			})
 			.addCase(getExploreQuotesAsync.rejected, () => {});

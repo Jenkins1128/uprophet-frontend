@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import QuotePost from '../QuotePost/QuotePost';
@@ -11,14 +12,17 @@ import { selectUserInfo, userInfoAsync } from './userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
+import { deleteQuoteAsync } from './deleteQuoteSlice';
 
 function Profile() {
 	const { username } = useParams();
 	const dispatch = useDispatch();
 
+	const [profileQuotes, setProfileQuotes] = useState({ quotes: [] });
+
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectRequestStatus);
-	const profileQuotes = useSelector(selectProfileQuotes);
+	const getProfileQuotes = useSelector(selectProfileQuotes);
 	const userInfo = useSelector(selectUserInfo);
 	//TODO - HANDLE IF USER DOESN"T EXIST
 
@@ -36,88 +40,106 @@ function Profile() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
-	//get profile quotes
 	useEffect(() => {
 		dispatch(profileAsync({ url: `${url}/profile`, username }));
 	}, [dispatch, username]);
 
-	//get userInfo obj
+	useEffect(() => {
+		setProfileQuotes({ quotes: getProfileQuotes });
+	}, [getProfileQuotes]);
+
 	useEffect(() => {
 		dispatch(userInfoAsync({ url: `${url}/userInfo`, username }));
 	}, [dispatch, username]);
 
+	const deleteQuote = (quoteId) => {
+		dispatch(deleteQuoteAsync({ url: `${url}/deleteQuote`, quoteId })).then((res) => {
+			if (res.meta.requestStatus === 'fulfilled') {
+				Swal.fire('Deleted!', 'Your quote has been deleted.', 'success');
+				let updatedQuotes = [...profileQuotes.quotes];
+				//delete your current quote to added quote
+				updatedQuotes.some((quote, i) => {
+					if (quote.id === quoteId) {
+						updatedQuotes.splice(i, 1);
+					}
+					return quote.id === quoteId;
+				});
+				setProfileQuotes({ quotes: [...updatedQuotes] });
+			}
+		});
+	};
+
 	return (
 		<>
-			<>
-				{requestStatus1 === 'pending' ? (
+			{requestStatus1 === 'pending' ? (
+				<Loading />
+			) : requestStatus1 === 'fulfilled' ? (
+				requestStatus2 === 'pending' ? (
 					<Loading />
-				) : requestStatus1 === 'fulfilled' ? (
-					requestStatus2 === 'pending' ? (
-						<Loading />
-					) : requestStatus2 === 'fulfilled' ? (
-						<section className='mt6 mh2 f7'>
-							<div className='flex flex-column'>
-								{userInfo.currentUser === username ? (
-									<Link to='/account/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
-										Edit Profile
-									</Link>
-								) : (
-									<div className='self-end'>
-										<FavoriteButton username={username} didFavorite={userInfo.didFavorite} />
-									</div>
-								)}
-
-								<h1 className='flex ml4 light-green'>{username}</h1>
-
-								<div className='flex justify-center'>
-									<Userphoto size={'profile'} username={username} isMounted={mounted.current} />
-									<div className='flex flex-column'>
-										<div className='flex mt4'>
-											<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.length} quotes</p>
-											<Link to={`/${username}/favoriters`} className='ml4 no-underline moon-gray b f5-l f6-m'>
-												{userInfo.favoriters} favoriters
-											</Link>
-											<Link to={`/${username}/favoriting`} className='ml4 no-underline moon-gray b f5-l f6-m'>
-												{userInfo.favoriting} favoriting
-											</Link>
-										</div>
-										<div className='mt3'>
-											<p className='measure tc'>{userInfo.bio}</p>
-										</div>
-									</div>
+				) : requestStatus2 === 'fulfilled' ? (
+					<section className='mt6 mh2 f7'>
+						<div className='flex flex-column'>
+							{userInfo.currentUser === username ? (
+								<Link to='/account/edit' className='self-end w-10 b--none no-underline br3 bg-white moon-gray grow pointer:hover: pointer'>
+									Edit Profile
+								</Link>
+							) : (
+								<div className='self-end'>
+									<FavoriteButton username={username} didFavorite={userInfo.didFavorite} />
 								</div>
-								<div className=' mt3'>
-									<h1 className='flex pl6-l pl5-m light-green'>Quotes</h1>
-									{profileQuotes.map((quote) => {
-										return (
-											<QuotePost
-												key={quote.id}
-												isMounted={mounted.current}
-												quoteId={quote.id}
-												username={quote.user_name}
-												title={quote.title}
-												quote={`"${quote.quote}"`}
-												likeCount={quote.likeCount}
-												didLike={quote.didLike}
-												date={quote.date_posted}
-												hasComments={true}
-											/>
-										);
-									})}
+							)}
+
+							<h1 className='flex ml4 light-green'>{username}</h1>
+
+							<div className='flex justify-center'>
+								<Userphoto size={'profile'} username={username} isMounted={mounted.current} />
+								<div className='flex flex-column'>
+									<div className='flex mt4'>
+										<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.quotes.length} quotes</p>
+										<Link to={`/${username}/favoriters`} className='ml4 no-underline moon-gray b f5-l f6-m'>
+											{userInfo.favoriters} favoriters
+										</Link>
+										<Link to={`/${username}/favoriting`} className='ml4 no-underline moon-gray b f5-l f6-m'>
+											{userInfo.favoriting} favoriting
+										</Link>
+									</div>
+									<div className='mt3'>
+										<p className='measure tc'>{userInfo.bio}</p>
+									</div>
 								</div>
 							</div>
-						</section>
-					) : (
-						<PleaseSignin />
-					)
+							<div className=' mt3'>
+								<h1 className='flex pl6-l pl5-m light-green'>Quotes</h1>
+								{profileQuotes.quotes.map((quote) => {
+									return (
+										<QuotePost
+											key={quote.id}
+											isMounted={mounted.current}
+											quoteId={quote.id}
+											username={quote.user_name}
+											title={quote.title}
+											quote={`"${quote.quote}"`}
+											likeCount={quote.likeCount}
+											didLike={quote.didLike}
+											date={quote.date_posted}
+											hasComments={true}
+											canDelete={true}
+											deleteQuote={deleteQuote}
+										/>
+									);
+								})}
+							</div>
+						</div>
+					</section>
 				) : (
 					<PleaseSignin />
-				)}
-			</>
+				)
+			) : (
+				<PleaseSignin />
+			)}
 		</>
 	);
 }

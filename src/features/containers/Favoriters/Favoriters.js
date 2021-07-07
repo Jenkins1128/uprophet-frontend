@@ -26,7 +26,6 @@ function Favoriters() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 

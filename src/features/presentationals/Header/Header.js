@@ -20,7 +20,6 @@ const Header = ({ notiDotOff }) => {
 
 	return (
 		<header className='flex justify-between z-1 fixed top-0 bb bw1 b--light-green bg-light-green'>
-			{console.log(currentUser)}
 			<Logo isSignedIn={currentUser !== '' ? true : false} />
 			<Navigation isMounted={mounted.current} hasNotifications={notificationCount > 0 ? true : false} currentUser={currentUser} isSignedIn={currentUser !== '' ? true : false} notiDotOff={notiDotOff} />
 		</header>

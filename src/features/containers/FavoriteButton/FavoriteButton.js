@@ -10,7 +10,6 @@ const FavoriteButton = ({ username, didFavorite }) => {
 
 	const favorite = () => {
 		dispatch(favoriteAsync({ url: `${url}/favorite`, toUser: username })).then((res) => {
-			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				setDidFavorite(true);
 			}
@@ -19,7 +18,6 @@ const FavoriteButton = ({ username, didFavorite }) => {
 
 	const unfavorite = () => {
 		dispatch(unfavoriteAsync({ url: `${url}/unfavorite`, toUser: username })).then((res) => {
-			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				setDidFavorite(false);
 			}

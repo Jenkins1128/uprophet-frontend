@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Userphoto from '../../Userphoto/Userphoto';
 import PleaseSignin from '../../../presentationals/PleaseSignin/PleaseSignin';
@@ -21,12 +21,20 @@ const EditProfile = () => {
 	const changePhotoStatus = useSelector(selectChangePhotoStatus);
 	const userInfo = useSelector(selectCurrentUserInfo);
 
+	const mounted = useRef(null);
+
+	useEffect(() => {
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
+
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
@@ -37,13 +45,11 @@ const EditProfile = () => {
 
 	const savePhoto = (event) => {
 		event.preventDefault();
-
 		dispatch(changePhotoAsync({ url: `${url}/uploadPic`, imageData }));
 	};
 
 	const saveBio = (event) => {
 		event.preventDefault();
-		console.log('bio', bio);
 		dispatch(changeBioAsync({ url: `${url}/savebio`, bio }));
 	};
 
@@ -72,38 +78,34 @@ const EditProfile = () => {
 
 	return (
 		<>
-			<>
-				{console.log(requestStatus1, requestStatus2)}
-				{console.log('changePhotoStatus', changePhotoStatus)}
-				{requestStatus1 === 'pending' ? (
+			{requestStatus1 === 'pending' ? (
+				<Loading />
+			) : requestStatus1 === 'fulfilled' ? (
+				requestStatus2 === 'pending' ? (
 					<Loading />
-				) : requestStatus1 === 'fulfilled' ? (
-					requestStatus2 === 'pending' ? (
-						<Loading />
-					) : requestStatus2 === 'fulfilled' ? (
-						<section className='mt6 mh2 f7'>
-							<h1 className='flex ml4 moon-gray'>Edit Profile</h1>
-							<form onSubmit={savePhoto}>
-								<figure className='flex flex-column items-center'>
-									<Userphoto size='profile' username={userInfo.currentUser} />
-									<figcaption>
-										<input type='file' name='profilePhoto' onChange={onPicChange} className='mt4 bg-transparent b--none pointer tc b light-green f5' />
-									</figcaption>
-									<button className='bg-light-green pointer mt3 br-pill w4 h2'>Save</button>
-								</figure>
-							</form>
-							<form className='mt5 flex flex-column items-center' onSubmit={saveBio}>
-								<textarea placeholder={userInfo.bio} name='bio' onChange={onBioChange} className='db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2' />
+				) : requestStatus2 === 'fulfilled' ? (
+					<section className='mt6 mh2 f7'>
+						<h1 className='flex ml4 moon-gray'>Edit Profile</h1>
+						<form onSubmit={savePhoto}>
+							<figure className='flex flex-column items-center'>
+								<Userphoto size='profile' username={userInfo.currentUser} isMounted={mounted.current} />
+								<figcaption>
+									<input type='file' name='profilePhoto' onChange={onPicChange} className='mt4 bg-transparent b--none pointer tc b light-green f5' />
+								</figcaption>
 								<button className='bg-light-green pointer mt3 br-pill w4 h2'>Save</button>
-							</form>
-						</section>
-					) : (
-						<PleaseSignin />
-					)
+							</figure>
+						</form>
+						<form className='mt5 flex flex-column items-center' onSubmit={saveBio}>
+							<textarea placeholder={userInfo.bio} name='bio' onChange={onBioChange} className='db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2' />
+							<button className='bg-light-green pointer mt3 br-pill w4 h2'>Save</button>
+						</form>
+					</section>
 				) : (
 					<PleaseSignin />
-				)}
-			</>
+				)
+			) : (
+				<PleaseSignin />
+			)}
 		</>
 	);
 };

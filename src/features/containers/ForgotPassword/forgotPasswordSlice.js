@@ -14,11 +14,9 @@ export const forgotPasswordAsync = createAsyncThunk('forgotPassword/status', asy
 				email
 			}
 		});
-
 		if (response.status >= 400 && response.status < 500) {
 			throw new Error(response.status);
 		}
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

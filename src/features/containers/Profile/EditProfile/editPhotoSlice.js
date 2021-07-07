@@ -20,7 +20,6 @@ export const changePhotoAsync = createAsyncThunk('changePhoto/status', async (da
 				image
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

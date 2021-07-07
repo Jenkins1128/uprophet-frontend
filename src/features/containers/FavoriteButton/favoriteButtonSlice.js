@@ -13,11 +13,9 @@ export const favoriteAsync = createAsyncThunk('favorite/status', async (data, { 
 				toUser
 			}
 		});
-
 		if (response.status >= 400 && response.status < 500) {
 			throw new Error('400');
 		}
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
@@ -36,7 +34,6 @@ export const unfavoriteAsync = createAsyncThunk('unfavorite/status', async (data
 				toUser
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

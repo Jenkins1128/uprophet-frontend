@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const likeAsync = createAsyncThunk('like/status', async (data, { rejectWithValue }) => {
 	const { url, quoteId } = data;
-
 	try {
 		const response = await axios({
 			url,
@@ -14,7 +13,6 @@ export const likeAsync = createAsyncThunk('like/status', async (data, { rejectWi
 				quoteId
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
@@ -23,7 +21,6 @@ export const likeAsync = createAsyncThunk('like/status', async (data, { rejectWi
 
 export const unlikeAsync = createAsyncThunk('unlike/status', async (data, { rejectWithValue }) => {
 	const { url, quoteId } = data;
-
 	try {
 		const response = await axios({
 			url,
@@ -34,7 +31,6 @@ export const unlikeAsync = createAsyncThunk('unlike/status', async (data, { reje
 				quoteId
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.status;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

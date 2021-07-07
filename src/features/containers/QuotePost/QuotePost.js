@@ -3,24 +3,51 @@ import LikeButton from '../LikeButton/LikeButton';
 import Userphoto from '../Userphoto/Userphoto';
 import { Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
+import Swal from 'sweetalert2';
 
-const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, isMounted, hasComments }) => {
+const QuotePost = ({ isMounted, username, title, quote, quoteId, likeCount, didLike, date, hasComments, canDelete, deleteQuote }) => {
 	const offsetDate = (date) => {
 		var newDate = new Date(date);
 		newDate.setHours(newDate.getHours() - 7);
 		return newDate.toISOString();
 	};
+
+	const deleteMaybe = () => {
+		Swal.fire({
+			title: 'Delete this quote?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#a1ead0',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				deleteQuote(quoteId);
+			}
+		});
+	};
+
 	return (
-		<article id={quoteId} className='tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
-			<div className='flex absolute top-1 left-1'>
-				<Link to={`/${username}`}>
-					<Userphoto username={username} isMounted={isMounted} />
-				</Link>
-				<Link to={`/${username}`} className='no-underline'>
-					<p className='black-50 b relative top--1 '>{username}</p>
-				</Link>
+		<article id={quoteId} className=' bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
+			<div className='flex justify-between'>
+				<div className='flex'>
+					<Link to={`/${username}`}>
+						<Userphoto username={username} isMounted={isMounted} />
+					</Link>
+					<Link to={`/${username}`} className='no-underline'>
+						<p className='black-50 b relative top--1 '>{username}</p>
+					</Link>
+				</div>
+				<div>
+					{canDelete && (
+						<button onClick={deleteMaybe} className='bg-transparent b--none red b f5 pointer'>
+							X
+						</button>
+					)}
+				</div>
 			</div>
-			<div className='pt5 mt2 ph3'>
+			<div className='pt3 ph3'>
 				<p className='f6 b underline light-green'>{title}</p>
 				<p className='f6 mt3 light-green b'>{quote}</p>
 			</div>

@@ -19,8 +19,6 @@ export const getCommentsAsync = createAsyncThunk('getComments/status', async (da
 				quoteId
 			}
 		});
-
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue([errorCode]);
@@ -37,8 +35,6 @@ export const getCommentsSlice = createSlice({
 			})
 			.addCase(getCommentsAsync.fulfilled, (state, { payload }) => {
 				state.status = 'fulfilled';
-				//const newQuotes = payload;
-				console.log('PAYLOAD: ' + payload);
 				state.latestComments = payload;
 			})
 			.addCase(getCommentsAsync.rejected, (state) => {

@@ -28,7 +28,6 @@ const Navigation = ({ isMounted, hasNotifications, notiDotOff, currentUser, isSi
 	const logout = () => {
 		dispatch(logoutAsync(`${url}/logout`)).then((res) => {
 			if (res.meta.requestStatus === 'fulfilled') {
-				console.log(res);
 				history.push('/signin');
 			}
 		});

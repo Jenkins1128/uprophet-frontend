@@ -13,7 +13,6 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 
 	const like = () => {
 		dispatch(likeAsync({ url: `${url}/like`, quoteId })).then((res) => {
-			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				getLikeCount.current += 1;
 				setDidLike(true);
@@ -23,7 +22,6 @@ const LikeButton = ({ quoteId, likeCount, didLike }) => {
 
 	const unlike = () => {
 		dispatch(unlikeAsync({ url: `${url}/unlike`, quoteId })).then((res) => {
-			console.log(res);
 			if (res.meta.requestStatus === 'fulfilled') {
 				getLikeCount.current -= 1;
 				setDidLike(false);

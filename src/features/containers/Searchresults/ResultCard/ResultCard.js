@@ -18,7 +18,6 @@ const ResultCard = ({ isMounted, currentUser, username, didFavorite }) => {
 					</Link>
 				</div>
 			</div>
-
 			<div className='self-center'>{currentUser !== username && <FavoriteButton username={username} didFavorite={didFavorite} />}</div>
 		</article>
 	);

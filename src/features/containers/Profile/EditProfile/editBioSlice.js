@@ -17,7 +17,6 @@ export const changeBioAsync = createAsyncThunk('changeBio/status', async (data, 
 				bio
 			}
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

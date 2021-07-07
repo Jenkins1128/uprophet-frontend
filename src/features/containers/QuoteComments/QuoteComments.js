@@ -44,29 +44,24 @@ function QuoteComments() {
 		};
 	}, []);
 
-	//get quote post
 	useEffect(() => {
 		dispatch(getQuotePostAsync({ url: `${url}/getQuotePost`, quoteId }));
 	}, [dispatch, quoteId]);
 
-	//get current user status
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
 
-	//get comments
 	useEffect(() => {
 		if (requestStatus1 === 'fulfilled') {
 			dispatch(getCommentsAsync({ url: `${url}/getComments`, quoteId }));
 		}
 	}, [dispatch, requestStatus1, quoteId]);
 
-	//listen for get latest comments
 	useEffect(() => {
 		setLatestComments({ comments: [...getlatestComments] });
 	}, [getlatestComments]);
 
-	//listen for an added comment
 	useEffect(() => {
 		if (!isEmpty(getAddedComment)) {
 			setLatestComments({ comments: [...getlatestComments, getAddedComment] });
@@ -109,7 +104,6 @@ function QuoteComments() {
 									hasComments={false}
 								/>
 							)}
-
 							<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
 							<div className='mt5'>
 								{latestComments.comments.map((comment, i) => {

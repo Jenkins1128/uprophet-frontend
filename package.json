@@ -5,7 +5,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
@@ -25,7 +25,7 @@
     "react-scripts": "4.0.3",
     "react-time-ago": "^7.0.0",
     "react-timeago": "^6.2.1",
-    "sfcookies": "^1.0.2",
+    "sweetalert2": "^11.0.18",
     "tachyons": "^4.12.0",
     "timeago-react": "^3.0.2"
   },

@@ -30,7 +30,6 @@ const Searchresults = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
@@ -42,7 +41,6 @@ const Searchresults = () => {
 
 	return (
 		<>
-			{console.log(requestStatus)}
 			{requestStatus === 'pending' ? (
 				<Loading />
 			) : requestStatus === 'fulfilled' ? (

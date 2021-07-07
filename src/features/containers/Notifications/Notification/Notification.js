@@ -11,6 +11,7 @@ const Notification = ({ isMounted, username, notice, currentUser, quotesId, date
 		newDate.setHours(newDate.getHours() - 7);
 		return newDate.toISOString();
 	};
+
 	return (
 		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
@@ -26,7 +27,6 @@ const Notification = ({ isMounted, username, notice, currentUser, quotesId, date
 					</div>
 				</div>
 			</div>
-
 			<div className='self-center'>
 				{!quotesId ? (
 					<Link to={`/${username}`}>

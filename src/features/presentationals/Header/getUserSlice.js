@@ -14,7 +14,6 @@ export const getUserAsync = createAsyncThunk('getUser/status', async (url, { rej
 			withCredentials: true,
 			headers: { Accept: '*/*' }
 		});
-		// The value we return becomes the `fulfilled` action payload
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);

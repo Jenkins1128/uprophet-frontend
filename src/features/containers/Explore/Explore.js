@@ -31,7 +31,6 @@ function Explore() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log('noti check');
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
@@ -47,38 +46,36 @@ function Explore() {
 
 	return (
 		<>
-			<>
-				{requestStatus === 'pending' ? (
-					<Loading />
-				) : requestStatus === 'fulfilled' ? (
-					<section className='mt6 mh2 f7'>
-						<button className='bg-transparent b--none pointer grow' onClick={refresh}>
-							<img alt='refresh' className='h1 w1' src={refreshIcon} />
-						</button>
-						<h1 className='flex ml4 moon-gray'>Explore</h1>
-						<div className='mt5'>
-							{exploreQuotes.map((quote) => {
-								return (
-									<QuotePost
-										key={quote.id}
-										isMounted={mounted.current}
-										quoteId={quote.id}
-										username={quote.user_name}
-										title={quote.title}
-										quote={`"${quote.quote}"`}
-										likeCount={quote.likeCount}
-										didLike={quote.didLike}
-										date={quote.date_posted}
-										hasComments={true}
-									/>
-								);
-							})}
-						</div>
-					</section>
-				) : (
-					<PleaseSignin />
-				)}
-			</>
+			{requestStatus === 'pending' ? (
+				<Loading />
+			) : requestStatus === 'fulfilled' ? (
+				<section className='mt6 mh2 f7'>
+					<button className='bg-transparent b--none pointer grow' onClick={refresh}>
+						<img alt='refresh' className='h1 w1' src={refreshIcon} />
+					</button>
+					<h1 className='flex ml4 moon-gray'>Explore</h1>
+					<div className='mt5'>
+						{exploreQuotes.map((quote) => {
+							return (
+								<QuotePost
+									key={quote.id}
+									isMounted={mounted.current}
+									quoteId={quote.id}
+									username={quote.user_name}
+									title={quote.title}
+									quote={`"${quote.quote}"`}
+									likeCount={quote.likeCount}
+									didLike={quote.didLike}
+									date={quote.date_posted}
+									hasComments={true}
+								/>
+							);
+						})}
+					</div>
+				</section>
+			) : (
+				<PleaseSignin />
+			)}
 		</>
 	);
 }

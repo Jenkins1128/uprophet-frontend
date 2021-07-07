@@ -13,8 +13,6 @@ export const getNotificationCountAsync = createAsyncThunk('getNotificationCount/
 			withCredentials: true,
 			headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 		});
-		// The value we return becomes the `fulfilled` action payload
-
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
