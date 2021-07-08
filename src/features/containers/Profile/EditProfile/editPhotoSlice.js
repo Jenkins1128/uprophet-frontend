@@ -12,7 +12,7 @@ export const changePhotoAsync = createAsyncThunk('changePhoto/status', async (da
 	try {
 		const response = await axios({
 			url,
-			method: 'POST',
+			method: 'PUT',
 			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
 			data: {

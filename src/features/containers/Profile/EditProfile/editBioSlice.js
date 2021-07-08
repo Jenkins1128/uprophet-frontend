@@ -10,7 +10,7 @@ export const changeBioAsync = createAsyncThunk('changeBio/status', async (data, 
 	try {
 		const response = await axios({
 			url,
-			method: 'POST',
+			method: 'PUT',
 			withCredentials: true,
 			headers: { Accept: '*/*', 'Content-Type': 'application/json' },
 			data: {

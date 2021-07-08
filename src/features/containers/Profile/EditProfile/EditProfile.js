@@ -38,7 +38,6 @@ const EditProfile = () => {
 		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
-	//get userInfo obj
 	useEffect(() => {
 		dispatch(getCurrentUserInfoAsync(`${url}/currentUserInfo`));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);

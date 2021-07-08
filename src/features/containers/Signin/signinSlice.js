@@ -6,7 +6,7 @@ export const loginAsync = createAsyncThunk('signin/status', async (data, { rejec
 	try {
 		const response = await axios({
 			url,
-			method: 'POST',
+			method: 'PUT',
 			withCredentials: true,
 			headers: { 'Content-Type': 'application/json' },
 			data: {
