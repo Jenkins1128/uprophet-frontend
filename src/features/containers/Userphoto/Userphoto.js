@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../../domain';
+import { selectChangePhotoStatus } from '../Profile/EditProfile/editPhotoSlice';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
 
 const Userphoto = ({ size, username, isMounted }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
+	const changePhotoStatus = useSelector(selectChangePhotoStatus);
 
 	useEffect(() => {
 		if (isMounted) {
@@ -17,6 +19,16 @@ const Userphoto = ({ size, username, isMounted }) => {
 			});
 		}
 	}, [dispatch, username, isMounted]);
+
+	useEffect(() => {
+		if (changePhotoStatus === 'fulfilled') {
+			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
+				if (res.meta.requestStatus === 'fulfilled') {
+					setBase64Img(res.payload.photo);
+				}
+			});
+		}
+	}, [dispatch, username, changePhotoStatus]);
 
 	const getSize = () => {
 		switch (size) {

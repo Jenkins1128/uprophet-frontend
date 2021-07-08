@@ -5,7 +5,6 @@ import { getNotificationsAsync, selectNotifications, selectRequestStatus } from 
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 
 function Notifications() {
@@ -28,10 +27,6 @@ function Notifications() {
 
 	useEffect(() => {
 		dispatch(getNotificationsAsync(`${url}/notifications`));
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	return (

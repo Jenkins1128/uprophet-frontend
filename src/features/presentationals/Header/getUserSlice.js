@@ -23,7 +23,11 @@ export const getUserAsync = createAsyncThunk('getUser/status', async (url, { rej
 export const getUserSlice = createSlice({
 	name: 'getUser',
 	initialState,
-	reducers: {},
+	reducers: {
+		clearCurrentUser: (state) => {
+			state.currentUser = '';
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUserAsync.pending, (state) => {
@@ -40,6 +44,7 @@ export const getUserSlice = createSlice({
 	}
 });
 
+export const { clearCurrentUser } = getUserSlice.actions;
 export const selectFirstRequestStatus = (state) => state.getUser.requestStatus;
 export const selectCurrentUser = (state) => state.getUser.currentUser;
 export default getUserSlice.reducer;

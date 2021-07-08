@@ -10,7 +10,6 @@ import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { selectUserInfo, userInfoAsync } from './userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 import { deleteQuoteAsync } from './deleteQuoteSlice';
 
@@ -37,10 +36,6 @@ function Profile() {
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {

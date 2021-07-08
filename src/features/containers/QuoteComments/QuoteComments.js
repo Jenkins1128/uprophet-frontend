@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import Header from '../../presentationals/Header/Header';
 import { useParams } from 'react-router-dom';
 import { getCommentsAsync, selectLatestComments, selectSecondRequestStatus } from './quoteCommentsSlice';
 import CommentPoster from './CommentPoster/CommentPoster';
 import QuoteComment from './QuoteComment/QuoteComment';
 import QuotePost from '../QuotePost/QuotePost';
-import { postCommentAsync, selectAddedComment } from './postCommentSlice';
+import { clearAddedComment, postCommentAsync, selectAddedComment } from './postCommentSlice';
 import { getQuotePostAsync, selectQuotePost } from './getQuotePostSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { url } from '../../../domain';
@@ -64,12 +63,16 @@ function QuoteComments() {
 
 	useEffect(() => {
 		if (!isEmpty(getAddedComment)) {
-			setLatestComments({ comments: [...getlatestComments, getAddedComment] });
+			let updatedComments = [...latestComments.comments];
+			updatedComments.unshift(getAddedComment);
+			dispatch(clearAddedComment());
+			setLatestComments({ comments: [...updatedComments] });
 		}
-	}, [getAddedComment, getlatestComments]);
+	}, [dispatch, getAddedComment, latestComments]);
 
 	const postComment = (event) => {
 		event.preventDefault();
+		event.target.reset();
 		if (comment !== '') {
 			dispatch(postCommentAsync({ url: `${url}/addComment`, quoteId, comment }));
 		}
@@ -82,42 +85,40 @@ function QuoteComments() {
 
 	return (
 		<>
-			<Header isSignedIn={requestStatus1 === 'fulfilled' && requestStatus2 === 'fulfilled' ? true : false} />
-			<>
-				{requestStatus1 === 'idle' ? (
+			{requestStatus1 === 'idle' ? (
+				<Loading />
+			) : requestStatus1 === 'fulfilled' ? (
+				requestStatus2 === 'pending' ? (
 					<Loading />
-				) : requestStatus1 === 'fulfilled' ? (
-					requestStatus2 === 'pending' ? (
-						<Loading />
-					) : requestStatus2 === 'fulfilled' ? (
-						<section className='mt6 mh2 f7'>
-							{quotePost.id && (
-								<QuotePost
-									isMounted={mounted.current}
-									quoteId={quotePost.id}
-									username={quotePost.user_name}
-									title={quotePost.title}
-									quote={`${quotePost.quote}`}
-									likeCount={quotePost.likeCount}
-									didLike={quotePost.didLike}
-									date={quotePost.date_posted}
-									hasComments={false}
-								/>
-							)}
-							<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
-							<div className='mt5'>
-								{latestComments.comments.map((comment, i) => {
-									return <QuoteComment key={comment.id} isMounted={mounted.current} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
-								})}
-							</div>
-						</section>
-					) : (
-						<PleaseSignin />
-					)
+				) : requestStatus2 === 'fulfilled' ? (
+					<section className='mt6 mh2 f7'>
+						{quotePost.id && (
+							<QuotePost
+								isMounted={mounted.current}
+								quoteId={quotePost.id}
+								username={quotePost.user_name}
+								title={quotePost.title}
+								quote={`${quotePost.quote}`}
+								likeCount={quotePost.likeCount}
+								didLike={quotePost.didLike}
+								date={quotePost.date_posted}
+								hasComments={false}
+							/>
+						)}
+						<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
+						<div className='mt5'>
+							{console.log(latestComments)}
+							{latestComments.comments.map((comment) => {
+								return <QuoteComment key={comment.id} isMounted={mounted.current} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
+							})}
+						</div>
+					</section>
 				) : (
 					<PleaseSignin />
-				)}
-			</>
+				)
+			) : (
+				<PleaseSignin />
+			)}
 		</>
 	);
 }

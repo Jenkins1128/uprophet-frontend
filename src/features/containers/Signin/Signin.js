@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { url } from '../../../domain';
-import { getUserAsync } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/getUserSlice';
 import { loginAsync } from './signinSlice';
 
 function Signin() {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const currentUser = useSelector(selectCurrentUser);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -17,6 +18,12 @@ function Signin() {
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (currentUser) {
+			history.push('/');
+		}
+	}, [history, currentUser]);
 
 	const handleUsernameOnchange = (event) => {
 		const { value } = event.target;
@@ -45,6 +52,7 @@ function Signin() {
 
 	return (
 		<section className='pt6 '>
+			{console.log('signin', currentUser)}
 			<h1 className='moon-gray f3'>"Focus on the now."</h1>
 			<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 				{isIncorrectError && (

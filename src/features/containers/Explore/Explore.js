@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import refreshIcon from './refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 
 function Explore() {
@@ -28,10 +27,6 @@ function Explore() {
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {

@@ -9,10 +9,11 @@ import Menu from './Menu/Menu';
 import { useDispatch } from 'react-redux';
 import { logoutAsync } from './navSlice';
 import Userphoto from '../../containers/Userphoto/Userphoto';
-import RedDot from './reddot.png';
 import { url } from '../../../domain';
+import { clearCurrentUser } from '../Header/getUserSlice';
+import NotiDot from '../NotiDot/NotiDot';
 
-const Navigation = ({ isMounted, hasNotifications, notiDotOff, currentUser, isSignedIn }) => {
+const Navigation = ({ isMounted, hasNotifications, currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
 		query: '(min-device-width: 1224px)'
 	});
@@ -28,6 +29,7 @@ const Navigation = ({ isMounted, hasNotifications, notiDotOff, currentUser, isSi
 	const logout = () => {
 		dispatch(logoutAsync(`${url}/logout`)).then((res) => {
 			if (res.meta.requestStatus === 'fulfilled') {
+				dispatch(clearCurrentUser());
 				history.push('/signin');
 			}
 		});
@@ -46,7 +48,7 @@ const Navigation = ({ isMounted, hasNotifications, notiDotOff, currentUser, isSi
 								<Link to='/notifications' className='f6 grow no-underline b b--none ba bw1 ph3 mh3 dib black hover-white'>
 									<div className='relative'>
 										<img title='Notifications' className='w2 h2' alt='Notifications' src={Bell} />
-										{hasNotifications && !notiDotOff && <img alt='notidot' className='absolute left-1 h1 w1' src={RedDot} />}
+										<NotiDot />
 									</div>
 								</Link>
 								<Link to='/explore' className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent '>
@@ -76,7 +78,7 @@ const Navigation = ({ isMounted, hasNotifications, notiDotOff, currentUser, isSi
 							</>
 						)
 					) : (
-						<Menu isMounted={isMounted} isSignedIn={isSignedIn} hasNotifications={hasNotifications} notiDotOff={notiDotOff} logout={logout} currentUser={currentUser} />
+						<Menu NotiDot={NotiDot} isMounted={isMounted} isSignedIn={isSignedIn} hasNotifications={hasNotifications} logout={logout} currentUser={currentUser} />
 					)}
 				</>
 			)}

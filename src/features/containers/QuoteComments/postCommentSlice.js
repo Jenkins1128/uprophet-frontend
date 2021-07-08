@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-	addedQuote: {}
+	addedComment: {}
 };
 
 export const postCommentAsync = createAsyncThunk('postComment/status', async (data, { rejectWithValue }) => {
@@ -27,15 +27,22 @@ export const postCommentAsync = createAsyncThunk('postComment/status', async (da
 export const postCommentSlice = createSlice({
 	name: 'postComment',
 	initialState,
+	reducers: {
+		clearAddedComment: (state) => {
+			state.addedComment = {};
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(postCommentAsync.pending, () => {})
 			.addCase(postCommentAsync.fulfilled, (state, { payload }) => {
-				state.addedQuote = payload;
+				state.addedComment = payload;
+				console.log(state.addedComment);
 			})
 			.addCase(postCommentAsync.rejected, () => {});
 	}
 });
 
-export const selectAddedComment = (state) => state.postComment.addedQuote;
+export const { clearAddedComment } = postCommentSlice.actions;
+export const selectAddedComment = (state) => state.postComment.addedComment;
 export default postCommentSlice.reducer;

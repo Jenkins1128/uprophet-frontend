@@ -6,7 +6,6 @@ import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import ResultCard from './ResultCard/ResultCard';
 import Loading from '../../presentationals/Loading/Loading';
 import { getUserAsync } from '../../presentationals/Header/getUserSlice';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 
 const Searchresults = () => {
@@ -27,10 +26,6 @@ const Searchresults = () => {
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {

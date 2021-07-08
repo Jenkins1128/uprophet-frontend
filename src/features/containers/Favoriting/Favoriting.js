@@ -5,7 +5,6 @@ import FavoritingCard from './FavoritingCard/FavoritingCard';
 import { favoritingAsync, selectFavoriting } from './favoritingSlice';
 import { url } from '../../../domain';
 import { getUserAsync } from '../../presentationals/Header/getUserSlice';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 
 function Favoriting() {
 	const { username } = useParams();
@@ -23,10 +22,6 @@ function Favoriting() {
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
 	}, [dispatch]);
 
 	useEffect(() => {

@@ -7,7 +7,6 @@ import { getUserAsync, selectFirstRequestStatus } from '../../../presentationals
 import { getCurrentUserInfoAsync, selectCurrentUserInfo, selectRequestStatus } from './currentUserInfoSlice';
 import { changeBioAsync, selectChangeBioStatus } from './editBioSlice';
 import { changePhotoAsync, selectChangePhotoStatus } from './editPhotoSlice';
-import { getNotificationCountAsync } from '../../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../../domain';
 
 const EditProfile = () => {
@@ -35,20 +34,18 @@ const EditProfile = () => {
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
 
 	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
-	}, [dispatch]);
-
-	useEffect(() => {
 		dispatch(getCurrentUserInfoAsync(`${url}/currentUserInfo`));
 	}, [dispatch, changePhotoStatus, changeBioStatus]);
 
 	const savePhoto = (event) => {
 		event.preventDefault();
-		dispatch(changePhotoAsync({ url: `${url}/uploadPic`, imageData }));
+		event.target.reset();
+		if (imageData) dispatch(changePhotoAsync({ url: `${url}/uploadPic`, imageData }));
 	};
 
 	const saveBio = (event) => {
 		event.preventDefault();
+		event.target.reset();
 		dispatch(changeBioAsync({ url: `${url}/savebio`, bio }));
 	};
 

@@ -34,7 +34,7 @@ export const homeSlice = createSlice({
 				state.requestStatus = 'pending';
 			})
 			.addCase(homeAsync.fulfilled, (state, { payload }) => {
-				state.latestQuotes = payload.reverse();
+				state.latestQuotes = payload;
 				state.requestStatus = 'fulfilled';
 			})
 			.addCase(homeAsync.rejected, (state) => {

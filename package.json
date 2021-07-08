@@ -24,6 +24,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-time-ago": "^7.0.0",
+    "react-time-sync": "^5.1.0",
     "react-timeago": "^6.2.1",
     "sweetalert2": "^11.0.18",
     "tachyons": "^4.12.0",

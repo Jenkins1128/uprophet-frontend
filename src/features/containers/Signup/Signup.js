@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { signUpAsync } from './signUpSlice';
 import { loginAsync } from '../Signin/signinSlice';
 import { url } from '../../../domain';
+import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/getUserSlice';
 
 function Signup() {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const currentUser = useSelector(selectCurrentUser);
 
 	const [name, setName] = useState('');
 	const [username, setUsername] = useState('');
@@ -17,6 +19,16 @@ function Signup() {
 	const [isExistsError, setIsExistsError] = useState(false);
 	const [isTermsError, setIsTermsError] = useState(false);
 	const [isEmptyError, setIsEmptyError] = useState(false);
+
+	useEffect(() => {
+		dispatch(getUserAsync(`${url}/currentUser`));
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (currentUser) {
+			history.push('/');
+		}
+	}, [history, currentUser]);
 
 	const onNameChange = (event) => {
 		const { value } = event.target;

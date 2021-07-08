@@ -8,7 +8,6 @@ import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import { postQuoteAsync, selectNewQuote } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
-import { getNotificationCountAsync } from '../../presentationals/Header/getNotificationCountSlice';
 import { url } from '../../../domain';
 
 function Home() {
@@ -45,10 +44,6 @@ function Home() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getNotificationCountAsync(`${url}/getNotificationCount`));
-	}, [dispatch]);
-
-	useEffect(() => {
 		if (requestStatus1 === 'fulfilled') {
 			dispatch(homeAsync(`${url}/`));
 		}
@@ -62,12 +57,16 @@ function Home() {
 		if (!isEmpty(getNewQuote)) {
 			let updatedQuotes = [...getlatestQuotes];
 			//replace your current quote to added quote
-			updatedQuotes.some((quote, i) => {
-				if (quote.user_name === getNewQuote.user_name) {
-					updatedQuotes.splice(i, 1, getNewQuote);
-				}
-				return quote.user_name === getNewQuote.user_name;
-			});
+			if (updatedQuotes.length) {
+				updatedQuotes.some((quote, i) => {
+					if (quote.user_name === getNewQuote.user_name) {
+						updatedQuotes.splice(i, 1, getNewQuote);
+					}
+					return quote.user_name === getNewQuote.user_name;
+				});
+			} else {
+				updatedQuotes.push(getNewQuote);
+			}
 			//add new quote to latest quotes
 			setLatestQuotes({ quotes: [...updatedQuotes] });
 		}
@@ -75,6 +74,7 @@ function Home() {
 
 	const postQuote = (event) => {
 		event.preventDefault();
+		event.target.reset();
 		if (title !== '' && quote !== '') {
 			dispatch(postQuoteAsync({ url: `${url}/createQuote`, title, quote }));
 		}
