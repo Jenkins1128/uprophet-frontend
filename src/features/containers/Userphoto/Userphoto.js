@@ -21,14 +21,14 @@ const Userphoto = ({ size, username, isMounted }) => {
 	}, [dispatch, username, isMounted]);
 
 	useEffect(() => {
-		if (changePhotoStatus === 'fulfilled') {
+		if (changePhotoStatus === 'fulfilled' && isMounted) {
 			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
 				if (res.meta.requestStatus === 'fulfilled') {
 					setBase64Img(res.payload.photo);
 				}
 			});
 		}
-	}, [dispatch, username, changePhotoStatus]);
+	}, [dispatch, isMounted, username, changePhotoStatus]);
 
 	const getSize = () => {
 		switch (size) {

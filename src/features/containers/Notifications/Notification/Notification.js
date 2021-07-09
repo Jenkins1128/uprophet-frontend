@@ -2,7 +2,6 @@ import React from 'react';
 import forward from './forward2.png';
 import { Link } from 'react-router-dom';
 import Userphoto from '../../Userphoto/Userphoto';
-import { HashLink } from 'react-router-hash-link';
 import ReactTimeAgo from 'react-time-ago';
 
 const Notification = ({ isMounted, username, notice, currentUser, quotesId, date }) => {
@@ -33,9 +32,9 @@ const Notification = ({ isMounted, username, notice, currentUser, quotesId, date
 						<img src={forward} alt='forward' className='w2  h2 bg-light-green br-100' />
 					</Link>
 				) : (
-					<HashLink smooth to={`/${currentUser}/#${quotesId}`}>
+					<Link to={`/quote/${quotesId}`}>
 						<img src={forward} alt='forward' className='w2  h2 bg-light-green br-100' />
-					</HashLink>
+					</Link>
 				)}
 			</div>
 		</article>

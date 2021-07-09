@@ -3,23 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
-import { homeAsync, selectLatestQuotes, selectSecondRequestStatus } from './homeSlice';
+import { homeAsync, selectLatestQuotes, selectSecondRequestStatus, updateLatestQuotes } from './homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import { postQuoteAsync, selectNewQuote } from './postQuoteSlice';
+import { clearAddedQuote, postQuoteAsync, selectNewQuote } from './postQuoteSlice';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { url } from '../../../domain';
 
 function Home() {
 	const dispatch = useDispatch();
-
-	const [latestQuotes, setLatestQuotes] = useState({ quotes: [] });
 	const [title, setTitle] = useState('');
 	const [quote, setQuote] = useState('');
 
-	const getlatestQuotes = useSelector(selectLatestQuotes);
+	const latestQuotes = useSelector(selectLatestQuotes);
 	const getNewQuote = useSelector(selectNewQuote);
-
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectSecondRequestStatus);
 
@@ -50,12 +47,8 @@ function Home() {
 	}, [dispatch, requestStatus1]);
 
 	useEffect(() => {
-		setLatestQuotes({ quotes: [...getlatestQuotes] });
-	}, [getlatestQuotes]);
-
-	useEffect(() => {
 		if (!isEmpty(getNewQuote)) {
-			let updatedQuotes = [...getlatestQuotes];
+			let updatedQuotes = [...latestQuotes];
 			//replace your current quote to added quote
 			if (updatedQuotes.length) {
 				updatedQuotes.some((quote, i) => {
@@ -67,16 +60,19 @@ function Home() {
 			} else {
 				updatedQuotes.push(getNewQuote);
 			}
+			dispatch(clearAddedQuote());
 			//add new quote to latest quotes
-			setLatestQuotes({ quotes: [...updatedQuotes] });
+			dispatch(updateLatestQuotes(updatedQuotes));
 		}
-	}, [getlatestQuotes, getNewQuote]);
+	}, [dispatch, latestQuotes, getNewQuote]);
 
 	const postQuote = (event) => {
 		event.preventDefault();
 		event.target.reset();
 		if (title !== '' && quote !== '') {
 			dispatch(postQuoteAsync({ url: `${url}/createQuote`, title, quote }));
+			setTitle('');
+			setQuote('');
 		}
 	};
 
@@ -102,7 +98,7 @@ function Home() {
 						<h1 className='flex ml4 moon-gray'>Home</h1>
 						<QuotePoster postQuote={postQuote} onQuoteChange={onQuoteChange} onTitleChange={onTitleChange} />
 						<div className='mt5'>
-							{latestQuotes.quotes.map((quote) => {
+							{latestQuotes.map((quote) => {
 								return (
 									<QuotePost
 										key={quote.id}

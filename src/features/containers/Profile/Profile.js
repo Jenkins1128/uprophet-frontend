@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -17,11 +17,9 @@ function Profile() {
 	const { username } = useParams();
 	const dispatch = useDispatch();
 
-	const [profileQuotes, setProfileQuotes] = useState({ quotes: [] });
-
 	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const requestStatus2 = useSelector(selectRequestStatus);
-	const getProfileQuotes = useSelector(selectProfileQuotes);
+	const profileQuotes = useSelector(selectProfileQuotes);
 	const userInfo = useSelector(selectUserInfo);
 	const currentUser = useSelector(selectCurrentUser);
 
@@ -50,10 +48,6 @@ function Profile() {
 	}, [dispatch, username]);
 
 	useEffect(() => {
-		setProfileQuotes({ quotes: getProfileQuotes });
-	}, [getProfileQuotes]);
-
-	useEffect(() => {
 		dispatch(userInfoAsync({ url: `${url}/userInfo`, username }));
 	}, [dispatch, username]);
 
@@ -61,15 +55,7 @@ function Profile() {
 		dispatch(deleteQuoteAsync({ url: `${url}/deleteQuote`, quoteId })).then((res) => {
 			if (res.meta.requestStatus === 'fulfilled') {
 				Swal.fire('Deleted!', 'Your quote has been deleted.', 'success');
-				let updatedQuotes = [...profileQuotes.quotes];
-				//delete your current quote to added quote
-				updatedQuotes.some((quote, i) => {
-					if (quote.id === quoteId) {
-						updatedQuotes.splice(i, 1);
-					}
-					return quote.id === quoteId;
-				});
-				setProfileQuotes({ quotes: [...updatedQuotes] });
+				dispatch(profileAsync({ url: `${url}/profile`, username }));
 			}
 		});
 	};
@@ -98,7 +84,7 @@ function Profile() {
 								<Userphoto size={'profile'} username={username} isMounted={mounted.current} />
 								<div className='flex flex-column'>
 									<div className='flex mt4'>
-										<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.quotes.length} quotes</p>
+										<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.length} quotes</p>
 										<Link to={!isEmpty(userInfo) ? `/${username}/favoriters` : '#'} className='ml4 no-underline moon-gray b f5-l f6-m'>
 											{userInfo.favoriters} favoriters
 										</Link>
@@ -113,7 +99,7 @@ function Profile() {
 							</div>
 							<div className=' mt3'>
 								<h1 className='flex pl6-l pl5-m light-green'>Quotes</h1>
-								{profileQuotes.quotes.map((quote) => {
+								{profileQuotes.map((quote) => {
 									return (
 										<QuotePost
 											key={quote.id}

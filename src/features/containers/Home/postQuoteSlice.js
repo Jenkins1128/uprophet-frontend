@@ -27,7 +27,11 @@ export const postQuoteAsync = createAsyncThunk('postQuote/status', async (data, 
 export const postQuoteSlice = createSlice({
 	name: 'postQuote',
 	initialState,
-	reducers: {},
+	reducers: {
+		clearAddedQuote: (state, { payload }) => {
+			state.newQuote = {};
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(postQuoteAsync.pending, () => {})
@@ -38,5 +42,6 @@ export const postQuoteSlice = createSlice({
 	}
 });
 
+export const { clearAddedQuote } = postQuoteSlice.actions;
 export const selectNewQuote = (state) => state.postQuote.newQuote;
 export default postQuoteSlice.reducer;

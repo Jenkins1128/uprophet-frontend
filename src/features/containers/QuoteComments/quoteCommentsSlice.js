@@ -28,6 +28,11 @@ export const getCommentsAsync = createAsyncThunk('getComments/status', async (da
 export const getCommentsSlice = createSlice({
 	name: 'getComments',
 	initialState,
+	reducers: {
+		updateQuoteComment: (state, { payload }) => {
+			state.latestComments = payload;
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getCommentsAsync.pending, (state) => {
@@ -43,6 +48,7 @@ export const getCommentsSlice = createSlice({
 	}
 });
 
+export const { updateQuoteComment } = getCommentsSlice.actions;
 export const selectLatestComments = (state) => state.comments.latestComments;
 export const selectSecondRequestStatus = (state) => state.comments.status;
 export default getCommentsSlice.reducer;
