@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import RedDot from './reddot.png';
 import { useTime } from 'react-time-sync';
 import { useDispatch, useSelector } from 'react-redux';

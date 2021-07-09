@@ -7,7 +7,7 @@ import Userphoto from '../Userphoto/Userphoto';
 import { profileAsync, selectProfileQuotes, selectRequestStatus } from './profileSlice';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectCurrentUser, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import { selectUserInfo, userInfoAsync } from './userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { url } from '../../../domain';
@@ -23,7 +23,14 @@ function Profile() {
 	const requestStatus2 = useSelector(selectRequestStatus);
 	const getProfileQuotes = useSelector(selectProfileQuotes);
 	const userInfo = useSelector(selectUserInfo);
-	//TODO - HANDLE IF USER DOESN"T EXIST
+	const currentUser = useSelector(selectCurrentUser);
+
+	const isEmpty = (obj) => {
+		for (const x in obj) {
+			return false;
+		}
+		return true;
+	};
 
 	const mounted = useRef(null);
 
@@ -82,9 +89,7 @@ function Profile() {
 									Edit Profile
 								</Link>
 							) : (
-								<div className='self-end'>
-									<FavoriteButton username={username} didFavorite={userInfo.didFavorite} />
-								</div>
+								<div className='self-end'>{!isEmpty(userInfo) && <FavoriteButton username={username} didFavorite={userInfo.didFavorite} />}</div>
 							)}
 
 							<h1 className='flex ml4 light-green'>{username}</h1>
@@ -94,10 +99,10 @@ function Profile() {
 								<div className='flex flex-column'>
 									<div className='flex mt4'>
 										<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.quotes.length} quotes</p>
-										<Link to={`/${username}/favoriters`} className='ml4 no-underline moon-gray b f5-l f6-m'>
+										<Link to={!isEmpty(userInfo) ? `/${username}/favoriters` : '#'} className='ml4 no-underline moon-gray b f5-l f6-m'>
 											{userInfo.favoriters} favoriters
 										</Link>
-										<Link to={`/${username}/favoriting`} className='ml4 no-underline moon-gray b f5-l f6-m'>
+										<Link to={!isEmpty(userInfo) ? `/${username}/favoriting` : '#'} className='ml4 no-underline moon-gray b f5-l f6-m'>
 											{userInfo.favoriting} favoriting
 										</Link>
 									</div>
@@ -121,7 +126,7 @@ function Profile() {
 											didLike={quote.didLike}
 											date={quote.date_posted}
 											hasComments={true}
-											canDelete={true}
+											canDelete={quote.user_name === currentUser ? true : false}
 											deleteQuote={deleteQuote}
 										/>
 									);

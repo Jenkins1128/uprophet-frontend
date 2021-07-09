@@ -37,7 +37,6 @@ export const postCommentSlice = createSlice({
 			.addCase(postCommentAsync.pending, () => {})
 			.addCase(postCommentAsync.fulfilled, (state, { payload }) => {
 				state.addedComment = payload;
-				console.log(state.addedComment);
 			})
 			.addCase(postCommentAsync.rejected, () => {});
 	}

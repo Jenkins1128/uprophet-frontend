@@ -33,7 +33,9 @@ export const userInfoSlice = createSlice({
 			.addCase(userInfoAsync.fulfilled, (state, { payload }) => {
 				state.userInfo = payload;
 			})
-			.addCase(userInfoAsync.rejected, () => {});
+			.addCase(userInfoAsync.rejected, (state) => {
+				state.userInfo = {};
+			});
 	}
 });
 

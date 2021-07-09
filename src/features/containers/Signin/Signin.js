@@ -52,7 +52,6 @@ function Signin() {
 
 	return (
 		<section className='pt6 '>
-			{console.log('signin', currentUser)}
 			<h1 className='moon-gray f3'>"Focus on the now."</h1>
 			<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 				{isIncorrectError && (

@@ -107,7 +107,6 @@ function QuoteComments() {
 						)}
 						<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
 						<div className='mt5'>
-							{console.log(latestComments)}
 							{latestComments.comments.map((comment) => {
 								return <QuoteComment key={comment.id} isMounted={mounted.current} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
 							})}
