@@ -65,9 +65,9 @@ function QuoteComments() {
 
 	const postComment = (event) => {
 		event.preventDefault();
-		event.target.reset();
-		if (comment !== '') {
+		if (quotePost.id && comment !== '') {
 			dispatch(postCommentAsync({ url: `${url}/addComment`, quoteId, comment }));
+			event.target.reset();
 			setComment('');
 		}
 	};

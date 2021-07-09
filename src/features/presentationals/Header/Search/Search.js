@@ -12,9 +12,9 @@ const Search = () => {
 
 	const submitSearch = (event) => {
 		event.preventDefault();
-		event.target.reset();
 		if (searchtext.trim() !== '') {
 			history.push(`/search/${searchtext}`);
+			event.target.reset();
 		}
 	};
 

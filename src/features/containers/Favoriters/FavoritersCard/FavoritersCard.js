@@ -19,11 +19,7 @@ const FavoritersCard = ({ isMounted, currentUser, username, didFavorite }) => {
 				</div>
 			</div>
 
-			<div className='self-center'>
-				<Link to={`/${username}`} className='no-underline'>
-					{currentUser !== username && <FavoriteButton username={username} didFavorite={didFavorite} />}
-				</Link>
-			</div>
+			<div className='self-center'>{currentUser !== username && <FavoriteButton username={username} didFavorite={didFavorite} />}</div>
 		</article>
 	);
 };

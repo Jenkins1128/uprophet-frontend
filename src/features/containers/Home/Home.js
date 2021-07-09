@@ -68,9 +68,9 @@ function Home() {
 
 	const postQuote = (event) => {
 		event.preventDefault();
-		event.target.reset();
 		if (title !== '' && quote !== '') {
 			dispatch(postQuoteAsync({ url: `${url}/createQuote`, title, quote }));
+			event.target.reset();
 			setTitle('');
 			setQuote('');
 		}
