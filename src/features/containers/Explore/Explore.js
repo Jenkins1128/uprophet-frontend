@@ -20,8 +20,10 @@ function Explore() {
 
 	useEffect(() => {
 		mounted.current = true;
+		//console.log('mounted', mounted.current);
 		return () => {
 			mounted.current = false;
+			//	console.log('mounted', mounted.current);
 		};
 	}, []);
 

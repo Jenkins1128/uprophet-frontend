@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../../domain';
-import { selectChangePhotoStatus } from '../Profile/EditProfile/editPhotoSlice';
+import { changePhotoStatusToIdle, selectChangePhotoStatus } from '../Profile/EditProfile/editPhotoSlice';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
 
@@ -10,21 +10,29 @@ const Userphoto = ({ size, username, isMounted }) => {
 	const [base64Img, setBase64Img] = useState('');
 	const changePhotoStatus = useSelector(selectChangePhotoStatus);
 
+	const mounted = useRef(null);
+
 	useEffect(() => {
-		if (isMounted) {
-			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
-				if (res.meta.requestStatus === 'fulfilled') {
-					setBase64Img(res.payload.photo);
-				}
-			});
-		}
+		mounted.current = true;
+		return () => {
+			mounted.current = false;
+		};
+	}, []);
+
+	useEffect(() => {
+		dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
+			if (res.meta.requestStatus === 'fulfilled' && mounted.current) {
+				setBase64Img(res.payload.photo);
+			}
+		});
 	}, [dispatch, username, isMounted]);
 
 	useEffect(() => {
-		if (changePhotoStatus === 'fulfilled' && isMounted) {
+		if (changePhotoStatus === 'fulfilled') {
 			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
-				if (res.meta.requestStatus === 'fulfilled') {
+				if (res.meta.requestStatus === 'fulfilled' && mounted.current) {
 					setBase64Img(res.payload.photo);
+					dispatch(changePhotoStatusToIdle());
 				}
 			});
 		}

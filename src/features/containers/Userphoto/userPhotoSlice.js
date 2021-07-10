@@ -1,9 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const initialState = {
-	status: 'idle'
-};
 
 export const userPhotoAsync = createAsyncThunk('userPhoto/status', async (data, { rejectWithValue }) => {
 	const { url, username } = data;
@@ -20,23 +16,5 @@ export const userPhotoAsync = createAsyncThunk('userPhoto/status', async (data, 
 		return response.data;
 	} catch (err) {
 		return rejectWithValue(err.response.data);
-	}
-});
-
-export const userPhotoSlice = createSlice({
-	name: 'userPhoto',
-	initialState,
-	reducers: {},
-	extraReducers: (builder) => {
-		builder
-			.addCase(userPhotoAsync.pending, (state) => {
-				state.status = 'loading';
-			})
-			.addCase(userPhotoAsync.fulfilled, (state) => {
-				state.status = 'success';
-			})
-			.addCase(userPhotoAsync.rejected, (state) => {
-				state.status = 'rejected';
-			});
 	}
 });

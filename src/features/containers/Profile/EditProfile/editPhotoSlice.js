@@ -29,7 +29,11 @@ export const changePhotoAsync = createAsyncThunk('changePhoto/status', async (da
 export const changePhotoSlice = createSlice({
 	name: 'changePhoto',
 	initialState,
-	reducers: {},
+	reducers: {
+		changePhotoStatusToIdle: (state) => {
+			state.changePhotoStatus = 'idle';
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(changePhotoAsync.pending, (state) => {
@@ -44,5 +48,6 @@ export const changePhotoSlice = createSlice({
 	}
 });
 
+export const { changePhotoStatusToIdle } = changePhotoSlice.actions;
 export const selectChangePhotoStatus = (state) => state.changePhoto.changePhotoStatus;
 export default changePhotoSlice.reducer;
