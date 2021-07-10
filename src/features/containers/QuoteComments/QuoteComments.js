@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Loading from '../../presentationals/Loading/Loading';
@@ -30,15 +30,6 @@ function QuoteComments() {
 		}
 		return true;
 	};
-
-	const mounted = useRef(null);
-
-	useEffect(() => {
-		mounted.current = true;
-		return () => {
-			mounted.current = false;
-		};
-	}, []);
 
 	useEffect(() => {
 		dispatch(getQuotePostAsync({ url: `${url}/getQuotePost`, quoteId }));
@@ -88,7 +79,6 @@ function QuoteComments() {
 					<section className='mt6 mh2 f7'>
 						{quotePost.id && (
 							<QuotePost
-								isMounted={mounted.current}
 								quoteId={quotePost.id}
 								username={quotePost.user_name}
 								title={quotePost.title}
@@ -102,7 +92,7 @@ function QuoteComments() {
 						<CommentPoster postComment={postComment} onCommentChange={onCommentChange} />
 						<div className='mt5'>
 							{latestComments.map((comment) => {
-								return <QuoteComment key={comment.id} isMounted={mounted.current} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
+								return <QuoteComment key={comment.id} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
 							})}
 						</div>
 					</section>

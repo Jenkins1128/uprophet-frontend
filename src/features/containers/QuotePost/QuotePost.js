@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
 import Swal from 'sweetalert2';
 
-const QuotePost = ({ isMounted, username, title, quote, quoteId, likeCount, didLike, date, hasComments, canDelete, deleteQuote }) => {
+const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, hasComments, canDelete, deleteQuote }) => {
 	const offsetDate = (date) => {
 		var newDate = new Date(date);
 		newDate.setHours(newDate.getHours() - 7);
@@ -33,7 +33,7 @@ const QuotePost = ({ isMounted, username, title, quote, quoteId, likeCount, didL
 			<div className='flex justify-between'>
 				<div className='flex'>
 					<Link to={`/${username}`}>
-						<Userphoto username={username} isMounted={isMounted} />
+						<Userphoto username={username} />
 					</Link>
 					<Link to={`/${username}`} className='no-underline'>
 						<p className='black-50 b relative top--1 '>{username}</p>

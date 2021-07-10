@@ -7,7 +7,7 @@ import Home from '../home.png';
 import Logout from '../logout.png';
 import Userphoto from '../../../containers/Userphoto/Userphoto';
 
-const Menu = ({ NotiDot, isMounted, isSignedIn, logout, currentUser }) => {
+const Menu = ({ NotiDot, isSignedIn, logout, currentUser }) => {
 	const openNav = () => {
 		document.getElementById('mySidenav').style.width = '100%';
 	};
@@ -54,7 +54,7 @@ const Menu = ({ NotiDot, isMounted, isSignedIn, logout, currentUser }) => {
 					</Link>
 					<Link to={`/${currentUser}`} onClick={closeNav} className='f6 grow b '>
 						<div className='flex items-center'>
-							<Userphoto size={'header'} username={currentUser} isMounted={isMounted} />
+							<Userphoto size={'header'} username={currentUser} />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>

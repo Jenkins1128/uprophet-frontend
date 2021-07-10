@@ -5,7 +5,7 @@ import { changePhotoStatusToIdle, selectChangePhotoStatus } from '../Profile/Edi
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
 
-const Userphoto = ({ size, username, isMounted }) => {
+const Userphoto = ({ size, username }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
 	const changePhotoStatus = useSelector(selectChangePhotoStatus);
@@ -25,7 +25,7 @@ const Userphoto = ({ size, username, isMounted }) => {
 				setBase64Img(res.payload.photo);
 			}
 		});
-	}, [dispatch, username, isMounted]);
+	}, [dispatch, username]);
 
 	useEffect(() => {
 		if (changePhotoStatus === 'fulfilled') {
@@ -36,7 +36,7 @@ const Userphoto = ({ size, username, isMounted }) => {
 				}
 			});
 		}
-	}, [dispatch, isMounted, username, changePhotoStatus]);
+	}, [dispatch, username, changePhotoStatus]);
 
 	const getSize = () => {
 		switch (size) {

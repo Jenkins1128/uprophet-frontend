@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { searchAsync, selectRequestStatus, selectResults } from './searchSlice';
@@ -14,15 +14,6 @@ const Searchresults = () => {
 
 	const requestStatus = useSelector(selectRequestStatus);
 	const results = useSelector(selectResults);
-
-	const mounted = useRef(null);
-
-	useEffect(() => {
-		mounted.current = true;
-		return () => {
-			mounted.current = false;
-		};
-	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -43,7 +34,7 @@ const Searchresults = () => {
 					<h1 className='flex ml4 moon-gray'>Search Results for "{searchtext}"</h1>
 					<div className='mt5'>
 						{results.map((result) => {
-							return <ResultCard key={result.id} isMounted={mounted.current} currentUser={result.currentUser} username={result.user_name} didFavorite={result.didFavorite} />;
+							return <ResultCard key={result.id} currentUser={result.currentUser} username={result.user_name} didFavorite={result.didFavorite} />;
 						})}
 					</div>
 				</section>

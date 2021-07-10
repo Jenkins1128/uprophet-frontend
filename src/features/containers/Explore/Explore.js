@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
 import QuotePost from '../QuotePost/QuotePost';
@@ -15,17 +15,6 @@ function Explore() {
 
 	const requestStatus = useSelector(selectFirstRequestStatus);
 	const exploreQuotes = useSelector(selectExploreQuotes);
-
-	const mounted = useRef(null);
-
-	useEffect(() => {
-		mounted.current = true;
-		//console.log('mounted', mounted.current);
-		return () => {
-			mounted.current = false;
-			//	console.log('mounted', mounted.current);
-		};
-	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -54,18 +43,7 @@ function Explore() {
 					<div className='mt5'>
 						{exploreQuotes.map((quote) => {
 							return (
-								<QuotePost
-									key={quote.id}
-									isMounted={mounted.current}
-									quoteId={quote.id}
-									username={quote.user_name}
-									title={quote.title}
-									quote={`"${quote.quote}"`}
-									likeCount={quote.likeCount}
-									didLike={quote.didLike}
-									date={quote.date_posted}
-									hasComments={true}
-								/>
+								<QuotePost key={quote.id} quoteId={quote.id} username={quote.user_name} title={quote.title} quote={`"${quote.quote}"`} likeCount={quote.likeCount} didLike={quote.didLike} date={quote.date_posted} hasComments={true} />
 							);
 						})}
 					</div>

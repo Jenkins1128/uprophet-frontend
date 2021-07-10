@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Userphoto from '../../Userphoto/Userphoto';
 import PleaseSignin from '../../../presentationals/PleaseSignin/PleaseSignin';
@@ -19,15 +19,6 @@ const EditProfile = () => {
 	const changeBioStatus = useSelector(selectChangeBioStatus);
 	const changePhotoStatus = useSelector(selectChangePhotoStatus);
 	const userInfo = useSelector(selectCurrentUserInfo);
-
-	const mounted = useRef(null);
-
-	useEffect(() => {
-		mounted.current = true;
-		return () => {
-			mounted.current = false;
-		};
-	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -84,7 +75,7 @@ const EditProfile = () => {
 						<h1 className='flex ml4 moon-gray'>Edit Profile</h1>
 						<form onSubmit={savePhoto}>
 							<figure className='flex flex-column items-center'>
-								<Userphoto size='profile' username={userInfo.currentUser} isMounted={mounted.current} />
+								<Userphoto size='profile' username={userInfo.currentUser} />
 								<figcaption>
 									<input type='file' name='profilePhoto' onChange={onPicChange} className='mt4 bg-transparent b--none pointer tc b light-green f5' />
 								</figcaption>

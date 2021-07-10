@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -29,15 +29,6 @@ function Profile() {
 		}
 		return true;
 	};
-
-	const mounted = useRef(null);
-
-	useEffect(() => {
-		mounted.current = true;
-		return () => {
-			mounted.current = false;
-		};
-	}, []);
 
 	useEffect(() => {
 		dispatch(getUserAsync(`${url}/currentUser`));
@@ -81,7 +72,7 @@ function Profile() {
 							<h1 className='flex ml4 light-green'>{username}</h1>
 
 							<div className='flex justify-center'>
-								<Userphoto size={'profile'} username={username} isMounted={mounted.current} />
+								<Userphoto size={'profile'} username={username} />
 								<div className='flex flex-column'>
 									<div className='flex mt4'>
 										<p className='ml3 mt0 moon-gray b f5-l f6-m'>{profileQuotes.length} quotes</p>
@@ -103,7 +94,6 @@ function Profile() {
 									return (
 										<QuotePost
 											key={quote.id}
-											isMounted={mounted.current}
 											quoteId={quote.id}
 											username={quote.user_name}
 											title={quote.title}

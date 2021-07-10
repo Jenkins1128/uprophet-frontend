@@ -102,7 +102,6 @@ function Home() {
 								return (
 									<QuotePost
 										key={quote.id}
-										isMounted={mounted.current}
 										quoteId={quote.id}
 										username={quote.user_name}
 										title={quote.title}

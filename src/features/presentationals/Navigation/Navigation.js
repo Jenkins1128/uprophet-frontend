@@ -13,7 +13,7 @@ import { url } from '../../../domain';
 import { clearCurrentUser } from '../Header/getUserSlice';
 import NotiDot from '../NotiDot/NotiDot';
 
-const Navigation = ({ isMounted, hasNotifications, currentUser, isSignedIn }) => {
+const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
 	const isDesktopOrLaptop = useMediaQuery({
 		query: '(min-device-width: 1224px)'
 	});
@@ -55,7 +55,7 @@ const Navigation = ({ isMounted, hasNotifications, currentUser, isSignedIn }) =>
 									<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
 								</Link>
 								<Link to={`/${currentUser}`} className='f6 grow no-underline mh3 mb2 dib'>
-									<Userphoto size={'header'} username={currentUser} isMounted={isMounted} />
+									<Userphoto size={'header'} username={currentUser} />
 								</Link>
 								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent pointer'>
 									<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />
@@ -78,7 +78,7 @@ const Navigation = ({ isMounted, hasNotifications, currentUser, isSignedIn }) =>
 							</>
 						)
 					) : (
-						<Menu NotiDot={NotiDot} isMounted={isMounted} isSignedIn={isSignedIn} hasNotifications={hasNotifications} logout={logout} currentUser={currentUser} />
+						<Menu NotiDot={NotiDot} isSignedIn={isSignedIn} hasNotifications={hasNotifications} logout={logout} currentUser={currentUser} />
 					)}
 				</>
 			)}
