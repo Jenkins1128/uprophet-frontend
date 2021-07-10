@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 import FavoritersCard from './FavoritersCard/FavoritersCard';
 import { favoritersAsync, selectFavoriters } from './favoritersSlice';
 import { url } from '../../../domain';
-import { getUserAsync } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 
 function Favoriters() {
 	const { username } = useParams();
 	const dispatch = useDispatch();
 	const favoriters = useSelector(selectFavoriters);
-
+	const requestStatus1 = useSelector(selectFirstRequestStatus);
 	const mounted = useRef(null);
 
 	useEffect(() => {
@@ -28,7 +29,7 @@ function Favoriters() {
 		dispatch(favoritersAsync({ url: `${url}/favoriters`, username }));
 	}, [dispatch, username]);
 
-	return (
+	return requestStatus1 === 'fulfilled' ? (
 		<section className='mt6 mh2 f7'>
 			<h1 className='flex ml4 moon-gray'>Favoriters</h1>
 			<div className='mt5'>
@@ -38,6 +39,8 @@ function Favoriters() {
 					})}
 			</div>
 		</section>
+	) : (
+		<PleaseSignin />
 	);
 }
 

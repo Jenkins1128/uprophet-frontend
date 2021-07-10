@@ -29,7 +29,7 @@ const QuotePost = ({ isMounted, username, title, quote, quoteId, likeCount, didL
 	};
 
 	return (
-		<article id={quoteId} className=' bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
+		<article id={quoteId} className=' bg-transparent br7 pv3 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph3'>
 			<div className='flex justify-between'>
 				<div className='flex'>
 					<Link to={`/${username}`}>
