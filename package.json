@@ -10,7 +10,6 @@
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^0.21.1",
-		"https-proxy-agent": "^5.0.0",
 		"javascript-time-ago": "^2.3.7",
 		"js-ago": "^1.1.0",
 		"jwt-decode": "^3.1.2",
