@@ -12,7 +12,11 @@ export const getUserAsync = createAsyncThunk('getUser/status', async (url, { rej
 			url,
 			method: 'GET',
 			withCredentials: true,
-			headers: { Accept: '*/*' }
+			headers: { Accept: '*/*' },
+			proxy: {
+				host: 'localhost',
+				port: 3001
+			}
 		});
 		return response.data;
 	} catch (err) {
