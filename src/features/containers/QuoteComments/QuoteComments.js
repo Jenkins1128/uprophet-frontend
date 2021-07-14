@@ -70,7 +70,7 @@ function QuoteComments() {
 
 	return (
 		<>
-			{requestStatus1 === 'idle' ? (
+			{requestStatus1 === 'pending' ? (
 				<Loading />
 			) : requestStatus1 === 'fulfilled' ? (
 				requestStatus2 === 'pending' ? (
