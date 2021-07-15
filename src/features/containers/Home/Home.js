@@ -57,6 +57,7 @@ function Home() {
 					}
 					return quote.user_name === getNewQuote.user_name;
 				});
+				updatedQuotes.sort((a, b) => b.date_posted - a.date_posted);
 			} else {
 				updatedQuotes.push(getNewQuote);
 			}
