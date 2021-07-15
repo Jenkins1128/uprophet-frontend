@@ -17,10 +17,8 @@ import Searchresults from './features/containers/Searchresults/Searchresults';
 import Favoriters from './features/containers/Favoriters/Favoriters';
 import Favoriting from './features/containers/Favoriting/Favoriting';
 import Header from './features/presentationals/Header/Header';
-import { useTitle } from './Title';
 
 function App() {
-	useTitle('Uprophet');
 	return (
 		<Router>
 			<div className='App'>
