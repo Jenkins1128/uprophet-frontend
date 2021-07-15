@@ -6,12 +6,6 @@ import ReactTimeAgo from 'react-time-ago';
 import Swal from 'sweetalert2';
 
 const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, hasComments, canDelete, deleteQuote }) => {
-	const offsetDate = (date) => {
-		var newDate = new Date(date);
-		newDate.setHours(newDate.getHours() - 7);
-		return newDate.toISOString();
-	};
-
 	const deleteMaybe = () => {
 		Swal.fire({
 			title: 'Delete this quote?',
@@ -61,7 +55,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 					)}
 				</div>
 				<div>
-					<ReactTimeAgo date={new Date(offsetDate(date))} locale='en' timeStyle='mini-minute-now' />
+					<ReactTimeAgo date={new Date(date)} locale='en' timeStyle='mini-minute-now' />
 				</div>
 			</div>
 		</article>
