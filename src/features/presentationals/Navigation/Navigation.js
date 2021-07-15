@@ -55,7 +55,7 @@ const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {
 									<img title='Explore' className='w2 h2' alt='Compass' src={Compass} />
 								</Link>
 								<Link to={`/${currentUser}`} className='f6 grow no-underline mh3 mb2 dib'>
-									<Userphoto size={'header'} username={currentUser} />
+									<Userphoto size='header' username={currentUser} />
 								</Link>
 								<button onClick={logout} className='f6 grow b--none ph3 mh3 pt1 mb2 dib bg-transparent pointer'>
 									<img title='Logout' className='w2 h2' alt='Logout' src={Logout} />

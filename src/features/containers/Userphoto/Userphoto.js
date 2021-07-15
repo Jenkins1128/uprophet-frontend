@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../../domain';
+import Loading from '../../presentationals/Loading/Loading';
 import { changePhotoStatusToIdle, selectChangePhotoStatus } from '../Profile/EditProfile/editPhotoSlice';
 import defaultProfilePic from './defaultProfilePic.png';
 import { userPhotoAsync } from './userPhotoSlice';
@@ -8,6 +9,7 @@ import { userPhotoAsync } from './userPhotoSlice';
 const Userphoto = ({ size, username }) => {
 	const dispatch = useDispatch();
 	const [base64Img, setBase64Img] = useState('');
+	const [loading, setLoading] = useState(true);
 	const changePhotoStatus = useSelector(selectChangePhotoStatus);
 
 	const mounted = useRef(null);
@@ -21,22 +23,29 @@ const Userphoto = ({ size, username }) => {
 
 	useEffect(() => {
 		dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
+			if (mounted.current) {
+				setLoading(false);
+			}
 			if (res.meta.requestStatus === 'fulfilled' && mounted.current) {
 				setBase64Img(res.payload.photo);
 			}
 		});
-	}, [dispatch, username]);
+	}, [dispatch, setLoading, username]);
 
 	useEffect(() => {
 		if (changePhotoStatus === 'fulfilled') {
+			setLoading(true);
 			dispatch(userPhotoAsync({ url: `${url}/getPhoto`, username })).then((res) => {
+				if (mounted.current) {
+					setLoading(false);
+				}
 				if (res.meta.requestStatus === 'fulfilled' && mounted.current) {
 					setBase64Img(res.payload.photo);
 					dispatch(changePhotoStatusToIdle());
 				}
 			});
 		}
-	}, [dispatch, username, changePhotoStatus]);
+	}, [dispatch, setLoading, username, changePhotoStatus]);
 
 	const getSize = () => {
 		switch (size) {
@@ -49,7 +58,7 @@ const Userphoto = ({ size, username }) => {
 		}
 	};
 
-	return <img className={`br-100 ba bw1 b--white bg-white ${getSize()}`} src={base64Img ? `data:image;base64,${base64Img}` : defaultProfilePic} alt='UserPhoto' />;
+	return loading ? <Loading isPhoto={true} size={size} /> : <img className={`br-100 ba bw1 b--white bg-white ${getSize()}`} src={base64Img ? `data:image;base64,${base64Img}` : defaultProfilePic} alt='UserPhoto' />;
 };
 
 export default Userphoto;

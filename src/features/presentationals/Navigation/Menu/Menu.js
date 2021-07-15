@@ -54,7 +54,7 @@ const Menu = ({ NotiDot, isSignedIn, logout, currentUser }) => {
 					</Link>
 					<Link to={`/${currentUser}`} onClick={closeNav} className='f6 grow b '>
 						<div className='flex items-center'>
-							<Userphoto size={'header'} username={currentUser} />
+							<Userphoto size='header' username={currentUser} />
 							&nbsp;{'Profile'}
 						</div>
 					</Link>
