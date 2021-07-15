@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { url } from '../../../domain';
 import { favoriteAsync, unfavoriteAsync } from './favoriteButtonSlice';
 
 const FavoriteButton = ({ username, didFavorite }) => {
 	const dispatch = useDispatch();
+	const [getDidFavorite, setDidFavorite] = useState(false);
 
-	const [getDidFavorite, setDidFavorite] = useState(didFavorite);
+	useEffect(() => {
+		setDidFavorite(didFavorite);
+	}, [didFavorite]);
 
 	const favorite = () => {
 		dispatch(favoriteAsync({ url: `${url}/favorite`, toUser: username })).then((res) => {
