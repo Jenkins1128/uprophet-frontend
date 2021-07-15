@@ -53,14 +53,12 @@ function Home() {
 			if (updatedQuotes.length) {
 				updatedQuotes.some((quote, i) => {
 					if (quote.user_name === getNewQuote.user_name) {
-						updatedQuotes.splice(i, 1, getNewQuote);
+						updatedQuotes.splice(i, 1);
 					}
 					return quote.user_name === getNewQuote.user_name;
 				});
-				updatedQuotes.sort((a, b) => b.date_posted - a.date_posted);
-			} else {
-				updatedQuotes.push(getNewQuote);
 			}
+			updatedQuotes.unshift(getNewQuote);
 			dispatch(clearAddedQuote());
 			//add new quote to latest quotes
 			dispatch(updateLatestQuotes(updatedQuotes));
