@@ -2,7 +2,7 @@ import React from 'react';
 
 const QuotePoster = ({ postQuote, onQuoteChange, onTitleChange }) => {
 	return (
-		<div className=' br2 ba pa4-l pa3-m pa4-ns pt3 black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+		<article className=' br2 ba pa4-l pa3-m pa4-ns pt3 black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 			<form className='measure center pa3 ph1 black-80' onSubmit={postQuote}>
 				<fieldset id='sign_in' className='flex flex-column ba b--transparent '>
 					<div className='mt2 ph4'>
@@ -20,7 +20,7 @@ const QuotePoster = ({ postQuote, onQuoteChange, onTitleChange }) => {
 					</button>
 				</div>
 			</form>
-		</div>
+		</article>
 	);
 };
 

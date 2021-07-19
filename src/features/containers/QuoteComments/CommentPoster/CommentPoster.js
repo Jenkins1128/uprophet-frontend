@@ -2,7 +2,7 @@ import React from 'react';
 
 const CommentPoster = ({ postComment, onCommentChange }) => {
 	return (
-		<div className=' br2 ba pa4-l pa3-m pa4-ns pt3 black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+		<article className=' br2 ba pa4-l pa3-m pa4-ns pt3 black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 			<form className='measure center pa3 ph1 black-80' onSubmit={postComment}>
 				<fieldset id='comment_poster' className='flex flex-column ba b--transparent '>
 					<div className='mt3  flex'>
@@ -15,7 +15,7 @@ const CommentPoster = ({ postComment, onCommentChange }) => {
 					</button>
 				</div>
 			</form>
-		</div>
+		</article>
 	);
 };
 

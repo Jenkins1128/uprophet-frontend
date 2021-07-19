@@ -49,7 +49,7 @@ function ForgotPassword() {
 			{isLoading ? (
 				<Loading />
 			) : !checkEmailForm ? (
-				<div className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+				<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 					{isIncorrectError && (
 						<div className='center h-10 w-75 ba bw1 br3 bg-red'>
 							<p className='f5 white'>Username or email is incorrect.</p>
@@ -75,7 +75,7 @@ function ForgotPassword() {
 							</button>
 						</div>
 					</form>
-				</div>
+				</article>
 			) : (
 				<CheckEmailForm Link={Link} />
 			)}

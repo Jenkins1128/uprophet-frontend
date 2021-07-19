@@ -6,7 +6,7 @@ import ReactTimeAgo from 'react-time-ago';
 
 const Notification = ({ username, notice, currentUser, quotesId, date }) => {
 	return (
-		<div className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
+		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
 				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
@@ -31,7 +31,7 @@ const Notification = ({ username, notice, currentUser, quotesId, date }) => {
 					</Link>
 				)}
 			</div>
-		</div>
+		</article>
 	);
 };
 

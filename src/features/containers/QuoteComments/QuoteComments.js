@@ -76,7 +76,7 @@ function QuoteComments() {
 				requestStatus2 === 'pending' ? (
 					<Loading />
 				) : requestStatus2 === 'fulfilled' ? (
-					<div className='mt6 mh2 f7'>
+					<section className='mt6 mh2 f7'>
 						{quotePost.id && (
 							<QuotePost
 								quoteId={quotePost.id}
@@ -95,7 +95,7 @@ function QuoteComments() {
 								return <QuoteComment key={comment.id} commentId={comment.id} comment={comment.comment} commenter={comment.commenter} date={comment.date_posted} />;
 							})}
 						</div>
-					</div>
+					</section>
 				) : (
 					<PleaseSignin />
 				)
