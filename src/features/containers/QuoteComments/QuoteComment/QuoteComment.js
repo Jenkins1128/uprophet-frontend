@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const QuoteComment = ({ commenter, comment, date }) => {
 	return (
-		<article className='flex flex-column tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
+		<div className='flex flex-column tc relative bg-transparent br7 pv4 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph4-l ph4-m ph3-ns'>
 			<div className='flex absolute top-1 left-1'>
 				<Link to={`/${commenter}`}>
 					<Userphoto username={commenter} />
@@ -20,7 +20,7 @@ const QuoteComment = ({ commenter, comment, date }) => {
 			<div className='self-end'>
 				<ReactTimeAgo date={new Date(date)} locale='en' timeStyle='mini-minute-now' />
 			</div>
-		</article>
+		</div>
 	);
 };
 

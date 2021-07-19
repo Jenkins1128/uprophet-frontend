@@ -5,12 +5,12 @@ import Search from '../Search/Search';
 
 const Logo = ({ isSignedIn }) => {
 	return (
-		<article className='flex items-center'>
+		<div className='flex items-center'>
 			<Link to='/'>
 				<img title='Home' className='br-100 ba bw2 ma2 b--white h3 w3 pointer:hover: pointer' src={logo} alt='Logo' />
 			</Link>
 			{isSignedIn ? <Search /> : <p className='f4 b white'>Uprophet</p>}
-		</article>
+		</div>
 	);
 };
 

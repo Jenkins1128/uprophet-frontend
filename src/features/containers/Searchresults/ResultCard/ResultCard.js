@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const ResultCard = ({ currentUser, username, didFavorite }) => {
 	return (
-		<article className='flex justify-between dt w-100 bb b--black-05 pb2 mt2' href='#0'>
+		<div className='flex justify-between dt w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>
 				<div className='dtc w3 v-mid'>
 					<Link to={`/${username}`}>
@@ -19,7 +19,7 @@ const ResultCard = ({ currentUser, username, didFavorite }) => {
 				</div>
 			</div>
 			<div className='self-center'>{currentUser !== username && <FavoriteButton username={username} didFavorite={didFavorite} />}</div>
-		</article>
+		</div>
 	);
 };
 

@@ -1,6 +1,6 @@
 const ChangePasswordForm = ({ handleNewPasswordOnchange, handleVerifyPasswordOnchange, isIncorrectVerifyError, isEmptyError2, changePassword }) => {
 	return (
-		<article className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
+		<div className=' br2 ba pa5-l pa4-m pa3-ns black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>
 			{isIncorrectVerifyError && (
 				<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 					<p className='f5 white'>Passwords are not the same.</p>
@@ -26,7 +26,7 @@ const ChangePasswordForm = ({ handleNewPasswordOnchange, handleVerifyPasswordOnc
 					</button>
 				</div>
 			</form>
-		</article>
+		</div>
 	);
 };
 

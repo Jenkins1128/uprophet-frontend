@@ -85,7 +85,7 @@ function Signup() {
 	return (
 		<section className='pt6'>
 			<h1 className='moon-gray f3'>Join Uprophet today!</h1>
-			<article className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>
+			<div className='br2 pa5-l pa4-m pa3-nsba dark-gray b--black-10 br4 mv4 w-75 mw6 shadow-5 center'>
 				{isExistsError && (
 					<div className='mt3 center h-10 w-75 ba bw1 br3 bg-red'>
 						<p className='f5 white'>Username already exists.</p>
@@ -129,7 +129,7 @@ function Signup() {
 						</button>
 					</div>
 				</div>
-			</article>
+			</div>
 		</section>
 	);
 }

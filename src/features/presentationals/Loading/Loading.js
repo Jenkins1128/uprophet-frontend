@@ -10,9 +10,9 @@ const Loading = ({ isPhoto, size }) => {
 		}
 	};
 	return !isPhoto ? (
-		<section className='mt6 flex justify-center'>
+		<div className='flex justify-center mt6'>
 			<div className={`loader ${getSize()}`}></div>
-		</section>
+		</div>
 	) : (
 		<div className={`loader ${getSize()} top-0 `}></div>
 	);

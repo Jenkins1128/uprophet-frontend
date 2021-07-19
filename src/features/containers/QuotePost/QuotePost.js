@@ -23,7 +23,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 	};
 
 	return (
-		<article id={quoteId} className=' bg-transparent br7 pv3 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph3'>
+		<div id={quoteId} className=' bg-transparent br7 pv3 ma3 mh6-l mh5-m br4 bw4 shadow-4 ph3'>
 			<div className='flex justify-between'>
 				<div className='flex'>
 					<Link to={`/${username}`}>
@@ -58,7 +58,7 @@ const QuotePost = ({ username, title, quote, quoteId, likeCount, didLike, date, 
 					<ReactTimeAgo date={new Date(date)} locale='en' timeStyle='mini-minute-now' />
 				</div>
 			</div>
-		</article>
+		</div>
 	);
 };
 

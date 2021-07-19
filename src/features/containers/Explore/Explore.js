@@ -36,10 +36,10 @@ function Explore() {
 				<Loading />
 			) : requestStatus === 'fulfilled' ? (
 				<section className='mt6 mh2 f7'>
+					<h1 className='flex ml4 moon-gray'>Explore</h1>
 					<button className='bg-transparent b--none pointer grow' onClick={refresh}>
 						<img alt='refresh' className='h1 w1' src={refreshIcon} />
 					</button>
-					<h1 className='flex ml4 moon-gray'>Explore</h1>
 					<div className='mt5'>
 						{exploreQuotes.map((quote) => {
 							return (
