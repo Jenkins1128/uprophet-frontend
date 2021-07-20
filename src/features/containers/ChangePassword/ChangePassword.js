@@ -90,10 +90,10 @@ function ChangePassword() {
 					<form className='measure center pa3 black-80'>
 						<fieldset id='change_password_signin' className='ba b--transparent ph0 mh0'>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' name='name' id='name' onChange={handleUsernameOnchange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' onChange={handleUsernameOnchange} />
 							</div>
 							<div className='mv3'>
-								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' name='password' id='password' onChange={handlePasswordOnchange} />
+								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' onChange={handlePasswordOnchange} />
 							</div>
 						</fieldset>
 						<div className='lh-copy mt1'>

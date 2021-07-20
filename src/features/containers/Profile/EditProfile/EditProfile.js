@@ -77,13 +77,13 @@ const EditProfile = () => {
 							<figure className='flex flex-column items-center'>
 								<Userphoto size='profile' username={userInfo.currentUser} />
 								<figcaption>
-									<input type='file' name='profilePhoto' onChange={onPicChange} className='mt4 bg-transparent b--none pointer tc b light-green f5' />
+									<input type='file' onChange={onPicChange} className='mt4 bg-transparent b--none pointer tc b light-green f5' />
 								</figcaption>
 								<button className='bg-light-green pointer mt3 br-pill w4 h2'>Save</button>
 							</figure>
 						</form>
 						<form className='mt5 flex flex-column items-center' onSubmit={saveBio}>
-							<textarea placeholder={userInfo.bio} name='bio' onChange={onBioChange} className='db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2' />
+							<textarea placeholder={userInfo.bio} onChange={onBioChange} className='db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2' />
 							<button className='bg-light-green pointer mt3 br-pill w4 h2'>Save</button>
 						</form>
 					</section>

@@ -14,10 +14,10 @@ const ChangePasswordForm = ({ handleNewPasswordOnchange, handleVerifyPasswordOnc
 			<form className='measure center pa3 black-80'>
 				<fieldset id='change_password' className='ba b--transparent ph0 mh0'>
 					<div className='mv3'>
-						<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='New Password' type='password' name='newPassword' id='newPassword' onChange={handleNewPasswordOnchange} />
+						<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='New Password' type='password' onChange={handleNewPasswordOnchange} />
 					</div>
 					<div className='mv3'>
-						<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Verify New Password' type='password' name='verifyPassword' id='verifyPassword' onChange={handleVerifyPasswordOnchange} />
+						<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Verify New Password' type='password' onChange={handleVerifyPasswordOnchange} />
 					</div>
 				</fieldset>
 				<div className='lh-copy mt1'>

@@ -6,7 +6,7 @@ const CommentPoster = ({ postComment, onCommentChange }) => {
 			<form className='measure center pa3 ph1 black-80' onSubmit={postComment}>
 				<fieldset id='comment_poster' className='flex flex-column ba b--transparent '>
 					<div className='mt3  flex'>
-						<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Add a comment' type='text' maxLength='255' name='comment' id='comment' onChange={onCommentChange} />
+						<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Add a comment' type='text' maxLength='255' onChange={onCommentChange} />
 					</div>
 				</fieldset>
 				<div className='lh-copy mt1'>

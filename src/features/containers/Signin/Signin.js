@@ -67,10 +67,10 @@ function Signin() {
 				<form className='measure center pa3 black-80'>
 					<fieldset id='sign_in' className='ba b--transparent ph0 mh0'>
 						<div className='mt3'>
-							<input className='pa2 input-reset ba br4 bg-transparent w-75' maxLength='20' placeholder='Username' type='text' name='name' id='name' onChange={handleUsernameOnchange} />
+							<input className='pa2 input-reset ba br4 bg-transparent w-75' maxLength='20' placeholder='Username' type='text' onChange={handleUsernameOnchange} />
 						</div>
 						<div className='mv3'>
-							<input className='b pa2 input-reset ba br4 bg-transparent w-75' maxLength='128' placeholder='Password' type='password' name='password' id='password' onChange={handlePasswordOnchange} />
+							<input className='b pa2 input-reset ba br4 bg-transparent w-75' maxLength='128' placeholder='Password' type='password' onChange={handlePasswordOnchange} />
 						</div>
 					</fieldset>
 					<div className='lh-copy mt1'>

@@ -21,7 +21,7 @@ const Search = () => {
 	return (
 		<div className='mr2'>
 			<form onSubmit={submitSearch}>
-				<input className='pa2 input-reset ba br4 bw1 bg-transparent b--white w-100 ' placeholder='Search' onChange={onSearchChange} type='text' maxLength='20' name='search' id='search' />
+				<input className='pa2 input-reset ba br4 bw1 bg-transparent b--white w-100 ' placeholder='Search' onChange={onSearchChange} type='text' maxLength='20' />
 			</form>
 		</div>
 	);

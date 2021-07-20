@@ -104,19 +104,19 @@ function Signup() {
 				<div className='measure pa3 black-80'>
 					<fieldset id='sign_up' className='ba b--transparent ph0 mh0'>
 						<div className='mt3'>
-							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Name' type='text' maxLength='20' name='name' id='name' onChange={onNameChange} />
+							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Name' type='text' maxLength='20' onChange={onNameChange} />
 						</div>
 						<div className='mt3'>
-							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' name='username' id='username' onChange={onUsernameChange} />
+							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' onChange={onUsernameChange} />
 						</div>
 						<div className='mt3'>
-							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='email' maxLength='100' name='email-address' id='email-address' onChange={onEmailChange} />
+							<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='email' maxLength='100' onChange={onEmailChange} />
 						</div>
 						<div className='mv3'>
-							<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' name='password' id='password' onChange={onPasswordChange} />
+							<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Password' type='password' maxLength='128' onChange={onPasswordChange} />
 						</div>
 						<div className='mv3'>
-							<input className='b pa2 ba br4 bg-transparent' type='radio' name='terms' id='terms' onChange={onTermsChange} />
+							<input className='b pa2 ba br4 bg-transparent' type='radio' onChange={onTermsChange} />
 							<p>I READ & UNDERSTAND the </p>
 							<Link to='/terms' className='no-underline dark-green'>
 								Terms of Uprophet.

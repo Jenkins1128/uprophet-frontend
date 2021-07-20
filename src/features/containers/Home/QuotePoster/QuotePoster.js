@@ -10,7 +10,7 @@ const QuotePoster = ({ postQuote, onQuoteChange, onTitleChange }) => {
 					</div>
 					<div className='mt3  flex'>
 						<strong className='f2 mr2 moon-gray'>"</strong>
-						<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Enter a quote. Marks set! :)' type='text' name='quote' id='quote' onChange={onQuoteChange} />
+						<input className='pa2 input-reset ba br4 bw1 bg-transparent b--moon-gray w-100' placeholder='Enter a quote. Marks set! :)' type='text' onChange={onQuoteChange} />
 						<strong className='f2 ml2 moon-gray'>"</strong>
 					</div>
 				</fieldset>

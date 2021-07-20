@@ -63,10 +63,10 @@ function ForgotPassword() {
 					<form className='measure center pa3 black-80'>
 						<fieldset id='change_password_signin' className='ba b--transparent ph0 mh0'>
 							<div className='mt3'>
-								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' name='username' id='username' onChange={handleUsernameOnchange} />
+								<input className='pa2 input-reset ba br4 bg-transparent w-75' placeholder='Username' type='text' maxLength='20' onChange={handleUsernameOnchange} />
 							</div>
 							<div className='mv3'>
-								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='text' maxLength='100' name='email' id='email' onChange={handleEmailOnchange} />
+								<input className='b pa2 input-reset ba br4 bg-transparent w-75' placeholder='Email' type='text' maxLength='100' onChange={handleEmailOnchange} />
 							</div>
 						</fieldset>
 						<div className='lh-copy mt1'>
