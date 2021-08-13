@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { url } from '../../../domain';
-import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/getUserSlice';
-import { loginAsync } from './signinSlice';
+import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/redux/getUserSlice';
+import { loginAsync } from './redux/signinThunk';
 
 function Signin() {
 	const history = useHistory();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { url } from '../../../domain';
-import { favoriteAsync, unfavoriteAsync } from './favoriteButtonSlice';
+import { favoriteAsync, unfavoriteAsync } from './redux/favoriteButtonThunk';
 
 const FavoriteButton = ({ username, didFavorite }) => {
 	const dispatch = useDispatch();

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from './Notification/Notification';
-import { getNotificationsAsync, selectNotifications, selectRequestStatus } from './notificationsSlice';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getNotificationsAsync, selectNotifications, selectRequestStatus } from './redux/notificationsSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import { url } from '../../../domain';
@@ -33,13 +33,7 @@ function Notifications() {
 						<h1 className='flex ml4 moon-gray'>Notifications</h1>
 						<div className='mt5'>
 							{notifications.map((notification) => {
-								let currentUser;
-								if (notification.to_user) {
-									currentUser = notification.to_user;
-								} else if (notification.user_name) {
-									currentUser = notification.user_name;
-								}
-								return <Notification key={notification.id} username={notification.notice.split(' ')[0]} notice={notification.notice} currentUser={currentUser} quotesId={notification.quotes_id} date={notification.date} />;
+								return <Notification key={notification.id} username={notification.notice.split(' ')[0]} notice={notification.notice} quotesId={notification.quotes_id} date={notification.date} />;
 							})}
 						</div>
 					</section>

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
 import QuotePost from '../QuotePost/QuotePost';
-import { getExploreQuotesAsync, selectExploreQuotes } from './exploreQuotesSlice';
+import { getExploreQuotesAsync, selectExploreQuotes } from './redux/exploreQuotesSlice';
 import { useHistory } from 'react-router-dom';
-import refreshIcon from './refresh.png';
+import refreshIcon from '../../../images/refresh.png';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 import { url } from '../../../domain';

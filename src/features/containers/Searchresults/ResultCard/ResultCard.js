@@ -1,4 +1,3 @@
-import React from 'react';
 import FavoriteButton from '../../FavoriteButton/FavoriteButton';
 import Userphoto from '../../Userphoto/Userphoto';
 import { Link } from 'react-router-dom';

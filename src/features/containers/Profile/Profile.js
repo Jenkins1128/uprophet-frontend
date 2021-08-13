@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import QuotePost from '../QuotePost/QuotePost';
 import Userphoto from '../Userphoto/Userphoto';
-import { profileAsync, selectProfileQuotes, selectRequestStatus } from './profileSlice';
+import { profileAsync, selectProfileQuotes, selectRequestStatus } from './redux/profileSlice';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
-import { getUserAsync, selectCurrentUser, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
-import { selectUserInfo, userInfoAsync } from './userInfoSlice';
+import { getUserAsync, selectCurrentUser, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
+import { selectUserInfo, userInfoAsync } from './redux/userInfoSlice';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { url } from '../../../domain';
-import { deleteQuoteAsync } from './deleteQuoteSlice';
+import { deleteQuoteAsync } from './redux/deleteQuoteThunk';
 
 function Profile() {
 	const { username } = useParams();

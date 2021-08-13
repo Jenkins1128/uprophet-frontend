@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import { signUpAsync } from './signUpSlice';
-import { loginAsync } from '../Signin/signinSlice';
+import { signUpAsync } from './redux/signUpThunk';
+import { loginAsync } from '../Signin/redux/signinThunk';
 import { url } from '../../../domain';
-import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectCurrentUser } from '../../presentationals/Header/redux/getUserSlice';
 
 function Signup() {
 	const dispatch = useDispatch();

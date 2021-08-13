@@ -1,10 +1,9 @@
-import React from 'react';
-import forward from './forward2.png';
+import forward from '../../../../images/forward.png';
 import { Link } from 'react-router-dom';
 import Userphoto from '../../Userphoto/Userphoto';
 import ReactTimeAgo from 'react-time-ago';
 
-const Notification = ({ username, notice, currentUser, quotesId, date }) => {
+const Notification = ({ username, notice, quotesId, date }) => {
 	return (
 		<article className='flex justify-between w-100 bb b--black-05 pb2 mt2' href='#0'>
 			<div className='flex items-center'>

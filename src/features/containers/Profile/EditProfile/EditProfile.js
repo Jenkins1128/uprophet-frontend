@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Userphoto from '../../Userphoto/Userphoto';
 import PleaseSignin from '../../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../../presentationals/Loading/Loading';
-import { getUserAsync, selectFirstRequestStatus } from '../../../presentationals/Header/getUserSlice';
-import { getCurrentUserInfoAsync, selectCurrentUserInfo, selectRequestStatus } from './currentUserInfoSlice';
-import { changeBioAsync, selectChangeBioStatus } from './editBioSlice';
-import { changePhotoAsync, selectChangePhotoStatus } from './editPhotoSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../../presentationals/Header/redux/getUserSlice';
+import { getCurrentUserInfoAsync, selectCurrentUserInfo, selectRequestStatus } from './redux/currentUserInfoSlice';
+import { changeBioAsync, selectChangeBioStatus } from './redux/editBioSlice';
+import { changePhotoAsync, selectChangePhotoStatus } from './redux/editPhotoSlice';
 import { url } from '../../../../domain';
 
 const EditProfile = () => {

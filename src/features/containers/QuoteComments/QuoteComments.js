@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import { useParams } from 'react-router-dom';
-import { getCommentsAsync, selectLatestComments, selectSecondRequestStatus, updateQuoteComment } from './quoteCommentsSlice';
 import CommentPoster from './CommentPoster/CommentPoster';
 import QuoteComment from './QuoteComment/QuoteComment';
 import QuotePost from '../QuotePost/QuotePost';
-import { clearAddedComment, postCommentAsync, selectAddedComment } from './postCommentSlice';
-import { getQuotePostAsync, selectQuotePost } from './getQuotePostSlice';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getCommentsAsync, selectLatestComments, selectSecondRequestStatus, updateQuoteComment } from './redux/quoteCommentsSlice';
+import { clearAddedComment, postCommentAsync, selectAddedComment } from './redux/postCommentSlice';
+import { getQuotePostAsync, selectQuotePost } from './redux/getQuotePostSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
 import { url } from '../../../domain';
 
 function QuoteComments() {

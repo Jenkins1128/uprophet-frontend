@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../../domain';
 import Loading from '../../presentationals/Loading/Loading';
-import { changePhotoStatusToIdle, selectChangePhotoStatus } from '../Profile/EditProfile/editPhotoSlice';
-import defaultProfilePic from './defaultProfilePic.png';
-import { userPhotoAsync } from './userPhotoSlice';
+import { changePhotoStatusToIdle, selectChangePhotoStatus } from '../Profile/EditProfile/redux/editPhotoSlice';
+import defaultProfilePic from '../../../images/defaultProfilePic.png';
+import { userPhotoAsync } from './redux/userPhotoThunk';
 
 const Userphoto = ({ size, username }) => {
 	const dispatch = useDispatch();

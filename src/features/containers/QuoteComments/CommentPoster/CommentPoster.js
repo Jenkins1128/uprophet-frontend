@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CommentPoster = ({ postComment, onCommentChange }) => {
 	return (
 		<article className=' br2 ba pa4-l pa3-m pa4-ns pt3 black-80 dark-gray b--black-10 br4 w-75 mw6 shadow-5 center'>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { changePasswordAsync, changePasswordSignInAsync } from './changePasswordSlice';
-import ChangePasswordForm from './ChangePasswordForm';
+import { changePasswordAsync, changePasswordSignInAsync } from './redux/changePasswordThunk';
+import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm';
 import { url } from '../../../domain';
 
 function ChangePassword() {

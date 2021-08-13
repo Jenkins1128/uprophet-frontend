@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteCard from './QuoteCard';
 import { UsersQuotes } from './UserQuotes.js';
 import FBLikeButton from '../FBLikeButton/FBLikeButton';

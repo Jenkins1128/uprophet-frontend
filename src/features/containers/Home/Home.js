@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Topquotes from '../../presentationals/Topquotes/Topquotes';
 import QuotePost from '../QuotePost/QuotePost';
 import QuotePoster from './QuotePoster/QuotePoster';
-import { homeAsync, selectLatestQuotes, selectSecondRequestStatus, updateLatestQuotes } from './homeSlice';
+import { homeAsync, selectLatestQuotes, selectSecondRequestStatus, updateLatestQuotes } from './redux/homeSlice';
 import Loading from '../../presentationals/Loading/Loading';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
-import { clearAddedQuote, postQuoteAsync, selectNewQuote } from './postQuoteSlice';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { clearAddedQuote, postQuoteAsync, selectNewQuote } from './redux/postQuoteSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
 import { url } from '../../../domain';
 
 function Home() {

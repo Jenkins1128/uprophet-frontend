@@ -1,16 +1,15 @@
-import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import Bell from './bell.png';
-import Compass from './compass.png';
-import Home from './home.png';
-import Logout from './logout.png';
+import Bell from '../../../images/bell.png';
+import Compass from '../../../images/compass.png';
+import Home from '../../../images/home.png';
+import Logout from '../../../images/logout.png';
 import Menu from './Menu/Menu';
 import { useDispatch } from 'react-redux';
-import { logoutAsync } from './navSlice';
+import { logoutAsync } from './redux/logoutThunk';
 import Userphoto from '../../containers/Userphoto/Userphoto';
 import { url } from '../../../domain';
-import { clearCurrentUser } from '../Header/getUserSlice';
+import { clearCurrentUser } from '../Header/redux/getUserSlice';
 import NotiDot from '../NotiDot/NotiDot';
 
 const Navigation = ({ hasNotifications, currentUser, isSignedIn }) => {

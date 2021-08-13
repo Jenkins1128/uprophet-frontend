@@ -1,1 +1,0 @@
-export const TestNotifications = [{ notification: 'Tester liked your quote.' }, { notification: 'Tester started following you.' }, { notification: 'Tester commented on your quote.' }, { notification: 'Tester liked your quote.' }];

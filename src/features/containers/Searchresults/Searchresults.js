@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { searchAsync, selectRequestStatus, selectResults } from './searchSlice';
+import { searchAsync, selectRequestStatus, selectResults } from './redux/searchSlice';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import ResultCard from './ResultCard/ResultCard';
 import Loading from '../../presentationals/Loading/Loading';
-import { getUserAsync } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync } from '../../presentationals/Header/redux/getUserSlice';
 import { url } from '../../../domain';
 
 const Searchresults = () => {

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { url } from '../../../domain';
 import Loading from '../../presentationals/Loading/Loading';
-import CheckEmailForm from './CheckEmailForm';
-import { forgotPasswordAsync } from './forgotPasswordSlice';
+import CheckEmailForm from './CheckEmailForm/CheckEmailForm';
+import { forgotPasswordAsync } from './redux/forgotPasswordThunk';
 
 function ForgotPassword() {
 	const dispatch = useDispatch();

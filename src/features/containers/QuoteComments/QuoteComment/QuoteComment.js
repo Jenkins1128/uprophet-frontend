@@ -1,4 +1,3 @@
-import React from 'react';
 import Userphoto from '../../Userphoto/Userphoto';
 import ReactTimeAgo from 'react-time-ago';
 import { Link } from 'react-router-dom';

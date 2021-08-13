@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import Like from './like.png';
-import { likeAsync, unlikeAsync } from './likeButtonSlice';
-import UnLike from './unlike.png';
+import Like from '../../../images/like.png';
+import { likeAsync, unlikeAsync } from './redux/likeButtonThunk';
+import UnLike from '../../../images/unlike.png';
 import { url } from '../../../domain';
 
 const LikeButton = ({ quoteId, likeCount, didLike }) => {

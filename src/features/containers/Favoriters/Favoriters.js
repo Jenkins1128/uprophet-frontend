@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import FavoritersCard from './FavoritersCard/FavoritersCard';
-import { favoritersAsync, selectFavoriters, selectRequestStatus } from './favoritersSlice';
+import { favoritersAsync, selectFavoriters, selectRequestStatus } from './redux/favoritersSlice';
 import { url } from '../../../domain';
-import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/getUserSlice';
+import { getUserAsync, selectFirstRequestStatus } from '../../presentationals/Header/redux/getUserSlice';
 import PleaseSignin from '../../presentationals/PleaseSignin/PleaseSignin';
 import Loading from '../../presentationals/Loading/Loading';
 

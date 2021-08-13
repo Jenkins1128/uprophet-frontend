@@ -1,4 +1,3 @@
-import React from 'react';
 import LikeButton from '../LikeButton/LikeButton';
 import Userphoto from '../Userphoto/Userphoto';
 import { Link } from 'react-router-dom';
